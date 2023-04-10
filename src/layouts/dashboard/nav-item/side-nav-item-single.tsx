@@ -1,22 +1,22 @@
 import NextLink from 'next/link';
-import PropTypes from 'prop-types';
 import { Box, ButtonBase } from '@mui/material';
+import { usePathname } from 'next/navigation';
+import { SideBarItem } from '../config';
 
-export function SideNavItem(props) {
-    const { active = false, disabled, external, icon, path, title } = props;
+export function SideNavItemSingle(props: SideBarItem) {
+    const pathname = usePathname();
+    const { disabled = false, external = false, icon, path, title } = props;
+    const active = pathname === path;
 
-    const linkProps = path
-        ? external
-            ? {
-                  component: 'a',
-                href: path,
-                target: '_blank',
-              }
-            : {
-                component: NextLink,
-                href: path,
-              }
-        : {};
+    let linkProps = {};
+
+    if (path) {
+        linkProps = {
+            component: external ? 'a' : NextLink,
+            href: path,
+            target: external ? '_blank' : undefined,
+        };
+    }
 
     return (
         <li>
@@ -81,12 +81,3 @@ export function SideNavItem(props) {
         </li>
     );
 }
-
-SideNavItem.propTypes = {
-    active: PropTypes.bool,
-    disabled: PropTypes.bool,
-    external: PropTypes.bool,
-    icon: PropTypes.node,
-    path: PropTypes.string,
-    title: PropTypes.string.isRequired,
-};

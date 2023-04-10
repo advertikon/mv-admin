@@ -1,26 +1,33 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Auth } from '../../types';
 import { RootState } from '../store';
-import { OauthInit } from '../../modules/oauth/ouath.js';
+import { OauthInit } from '../../modules/oauth/ouath';
 
-const { NEXT_PUBLIC_OAUTH_SERVER, NEXT_PUBLIC_CLIENT_ID, NEXT_PUBLIC_CLIENT_SECRET, NEXT_PUBLIC_REDIRECT_URL } =
-    process.env;
+type State = {
+    auth: Auth;
+    isLoading: boolean;
+    exchangeCodeError: Error | null;
+};
 
 OauthInit({
-    oauthServiceUrl: NEXT_PUBLIC_OAUTH_SERVER,
-    redirectUrl: NEXT_PUBLIC_REDIRECT_URL,
-    clientId: NEXT_PUBLIC_CLIENT_ID,
-    clientSecret: NEXT_PUBLIC_CLIENT_SECRET,
+    oauthServiceUrl: process.env.NEXT_PUBLIC_OAUTH_SERVER,
+    redirectUrl: process.env.NEXT_PUBLIC_REDIRECT_URL,
+    clientId: process.env.NEXT_PUBLIC_CLIENT_ID,
+    clientSecret: process.env.NEXT_PUBLIC_CLIENT_SECRET,
 });
 
-const initialState: Auth = {
-    sub: null,
-    uid: null,
-    active: false,
-    company: null,
-    permissions: [],
-    login: '',
-    roles: [],
+const initialState: State = {
+    auth: {
+        sub: null,
+        uid: null,
+        active: false,
+        company: null,
+        permissions: [],
+        login: '',
+        roles: [],
+    },
+    isLoading: false,
+    exchangeCodeError: null,
 };
 
 const slice = createSlice({
@@ -28,18 +35,28 @@ const slice = createSlice({
     initialState,
     reducers: {
         setAuth: (state, data: PayloadAction<Auth>) => {
-            return data.payload;
+            state.auth = data.payload;
+        },
+        setIsLoading: (state, data: PayloadAction<boolean>) => {
+            state.isLoading = data.payload;
+        },
+        setExchangeCodeError: (state, data: PayloadAction<Error>) => {
+            state.exchangeCodeError = data.payload;
         },
     },
 });
 
-export const { setAuth } = slice.actions;
+export const { setAuth, setIsLoading, setExchangeCodeError } = slice.actions;
 
-export const getCompany = (state: RootState) => state.auth.company;
-export const getPermissions = (state: RootState) => state.auth.permissions;
-export const getAuthUid = (state: RootState) => state.auth.uid;
-export const getLogin = (state: RootState) => state.auth.login;
-export const canAccessAdminArea = (status: RootState) => status.auth.roles.includes('shop_admin');
-export const isSuper = (status: RootState) => status.auth.roles.includes('super_admin');
+export const getCompany = (state: RootState) => state.auth.auth.company;
+export const getPermissions = (state: RootState) => state.auth.auth.permissions;
+export const getAuthUid = (state: RootState) => state.auth.auth.uid;
+export const getLogin = (state: RootState) => state.auth.auth.login;
+export const isAdmin = (status: RootState) =>
+    status.auth.auth.roles.includes('shop_admin') || status.auth.auth.roles.includes('super_admin');
+export const isSuperAdmin = (status: RootState) => status.auth.auth.roles.includes('super_admin');
+export const isLoading = (status: RootState) => status.auth.isLoading;
+export const exchangeCodeError = (status: RootState) => status.auth.exchangeCodeError;
+export const isLoggedIn = (status: RootState) => Boolean(status.auth.auth.uid);
 
 export default slice.reducer;

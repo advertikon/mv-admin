@@ -5,12 +5,12 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import 'simplebar-react/dist/simplebar.min.css';
+import { Provider } from 'react-redux';
 import { createEmotionCache } from '../utils/create-emotion-cache';
-import { AuthConsumer, AuthProvider } from '../contexts/auth-context';
 import { createTheme } from '../theme/index';
 import { useNProgress } from '../hooks/use-nprogress';
-import SplashScreen from '../components/splash-screen';
 import '../base.css';
+import store from '../store/store';
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -29,16 +29,14 @@ function App(props) {
                 <title>MV Admin</title>
                 <meta name="viewport" content="initial-scale=1, width=device-width" />
             </Head>
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <AuthProvider>
+            <Provider store={store}>
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <ThemeProvider theme={theme}>
                         <CssBaseline />
-                        <AuthConsumer>
-                            {auth => (true ? <SplashScreen /> : getLayout(<Component {...pageProps} />))}
-                        </AuthConsumer>
+                        {getLayout(<Component {...pageProps} />)}
                     </ThemeProvider>
-                </AuthProvider>
-            </LocalizationProvider>
+                </LocalizationProvider>
+            </Provider>
         </CacheProvider>
     );
 }

@@ -1,19 +1,17 @@
 import NextLink from 'next/link';
-import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
 import ArrowTopRightOnSquareIcon from '@heroicons/react/24/solid/ArrowTopRightOnSquareIcon';
 import ChevronUpDownIcon from '@heroicons/react/24/solid/ChevronUpDownIcon';
 import { Box, Button, Divider, Drawer, Stack, SvgIcon, Typography, useMediaQuery } from '@mui/material';
+import { Theme } from '@mui/material/styles/createTheme';
 import { items } from './config';
-import { SideNavItem } from './side-nav-item';
+import { SideNavItem } from './nav-item/side-nav-item';
 import { Scrollbar } from '../../components/scrollbar';
 import { Logo } from '../../components/logo';
 
 export function SideNav(props) {
     const { open, onClose } = props;
-    const pathname = usePathname();
-    // @ts-ignore
-    const lgUp = useMediaQuery(theme => theme.breakpoints.up('lg'));
+    const lgUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('lg'));
 
     const content = (
         <Scrollbar
@@ -60,7 +58,7 @@ export function SideNav(props) {
                     >
                         <div>
                             <Typography color="inherit" variant="subtitle1">
-                                Devias
+                                MaxVehicle
                             </Typography>
                             <Typography color="neutral.400" variant="body2">
                                 Production
@@ -90,19 +88,15 @@ export function SideNav(props) {
                         }}
                     >
                         {items.map(item => {
-                            const active = item.path ? pathname === item.path : false;
-
                             return (
                                 <SideNavItem
-                                    active={active}
-                                    // @ts-ignore
                                     disabled={item.disabled}
-                                    // @ts-ignore
                                     external={item.external}
                                     icon={item.icon}
                                     key={item.title}
                                     path={item.path}
                                     title={item.title}
+                                    subItems={item.subItems}
                                 />
                             );
                         })}

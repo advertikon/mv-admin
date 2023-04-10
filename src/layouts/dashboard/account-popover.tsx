@@ -11,9 +11,7 @@ export function AccountPopover(props) {
 
     const handleSignOut = useCallback(() => {
         onClose?.();
-        // @ts-ignore
-        auth.signOut();
-        router.push('/auth/login');
+        router.push(`${process.env.NEXT_PUBLIC_OAUTH_SERVER}/oauth/session/end`);
     }, [onClose, auth, router]);
 
     return (

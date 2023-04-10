@@ -1,18 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-
-export type Collection = {
-    handle: string;
-    title: string;
-    description: string;
-};
-
-export type CollectionsState = {
-    list: Collection[];
-    hasMore: boolean;
-    after: string | null;
-    isLoading: boolean;
-};
+import { Collection, CollectionsState } from '../types';
 
 const initialState: CollectionsState = {
     list: [],

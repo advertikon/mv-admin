@@ -1,22 +1,11 @@
-import AutorenewIcon from '@mui/icons-material/Autorenew';
-import { Container } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { useContext } from 'react';
+import { AuthContext } from '../contexts/auth-context';
+import { Loader } from './loader';
 
-const IconHolder = styled('div')({
-    display: 'flex',
-    height: '100vh',
-    alignItems: 'center',
-    justifyContent: 'center',
-});
-
-function SplashScreen(props) {
-    return (
-        <Container>
-            <IconHolder>
-                <AutorenewIcon sx={{ width: 100, height: 100, animation: 'rotation 2s infinite linear' }} />
-            </IconHolder>
-        </Container>
-    );
+function SplashScreen({ children }) {
+    const { loading, loggedIn, admin } = useContext(AuthContext);
+    // eslint-disable-next-line react/jsx-no-useless-fragment
+    return loading ? <Loader /> : <>{children}</>;
 }
 
 export default SplashScreen;

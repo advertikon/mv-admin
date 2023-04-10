@@ -1,13 +1,8 @@
-import { call, put, takeLeading, debounce } from 'redux-saga/effects';
+import { call, debounce, put, takeLeading } from 'redux-saga/effects';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { CollectionServiceGetAll } from '../../services/collection.service';
-import { CollectionsState, setCollections, setCollectionsIsLoading } from '../slice/collection.slice';
-
-export type GetCollectionsFilter = {
-    count: number;
-    after?: string;
-    title?: string;
-};
+import { setCollections, setCollectionsIsLoading } from '../slice/collection.slice';
+import { CollectionsState, GetCollectionsFilter } from '../types';
 
 function* fetchCollections(action: PayloadAction<GetCollectionsFilter>) {
     yield put(setCollectionsIsLoading(true));

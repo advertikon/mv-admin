@@ -14,8 +14,8 @@ import {
     TableRow,
     Typography,
 } from '@mui/material';
-import { Scrollbar } from '../../components/scrollbar.js';
-import { getInitials } from '../../utils/get-initials.js';
+import { Scrollbar } from '../../components/scrollbar';
+import { getInitials } from '../../utils/get-initials';
 
 export function CustomersTable(props) {
     const {

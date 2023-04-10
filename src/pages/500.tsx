@@ -7,7 +7,7 @@ function Page() {
     return (
         <>
             <Head>
-                <title>404 | MV Admin</title>
+                <title>Error | MV Admin</title>
             </Head>
             <Box
                 component="main"
@@ -34,7 +34,7 @@ function Page() {
                         >
                             <img
                                 alt="Under development"
-                                src="/assets/errors/error-404.png"
+                                src="/assets/errors/error-500.png"
                                 style={{
                                     display: 'inline-block',
                                     maxWidth: '100%',
@@ -43,12 +43,9 @@ function Page() {
                             />
                         </Box>
                         <Typography align="center" sx={{ mb: 3 }} variant="h3">
-                            404: The page you are looking for isn’t here
+                            Whoops, we have an error :(
                         </Typography>
-                        <Typography align="center" color="text.secondary" variant="body1">
-                            You either tried some shady route or you came here by mistake. Whichever it is, try using
-                            the navigation
-                        </Typography>
+                        <Typography align="center" color="text.secondary" variant="body1" />
                         <Button
                             component={NextLink}
                             href="/"

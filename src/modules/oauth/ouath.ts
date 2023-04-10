@@ -45,7 +45,7 @@ export async function exchangeCode(code: string) {
         redirect_uri: context.redirectUrl,
     };
 
-    fetch(`${context.oauthServiceUrl}/oauth/token`, {
+    return fetch(`${context.oauthServiceUrl}/oauth/token`, {
         body: encodeFormData(data),
         method: 'post',
         headers: {
@@ -62,7 +62,10 @@ export async function exchangeCode(code: string) {
             setToken(resp);
             redirectToPageBeforeAuth();
         })
-        .catch(error => logger.error(error));
+        .catch(error => {
+            logger.error(error);
+            throw error;
+        });
 }
 
 export async function refreshToken(): Promise<void> {

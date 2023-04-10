@@ -1,19 +1,23 @@
 {
-  "extends": "airbnb-typescript-prettier",
-  "rules": {
-    "indent": ["error", 4, { "SwitchCase": 1 }],
-    "import/prefer-default-export": "off",
-    "import/no-unresolved": "off",
-    "import/extensions": ["error", "never", { "ignorePackages": true } ],
-    "no-await-in-loop": "off",
-    "@typescript-eslint/no-use-before-define": "off",
-    "camelcase": "off",
-    "no-param-reassign": "off",
-    "import/no-extraneous-dependencies": "off",
-    "no-console": "error",
-    "class-methods-use-this": "off",
-    "react/destructuring-assignment": "off",
-    "react-hooks/exhaustive-deps": "off",
-    "react/react-in-jsx-scope": "off"
-  }
+    "extends": "airbnb-typescript-prettier",
+    "rules": {
+        "indent": ["error", 4, { "SwitchCase": 1, "offsetTernaryExpressions": false }],
+        "import/prefer-default-export": "off",
+        "import/no-unresolved": "off",
+        "import/extensions": ["error", "never", { "ignorePackages": true } ],
+        "no-await-in-loop": "off",
+        "@typescript-eslint/no-use-before-define": "off",
+        "camelcase": "off",
+        "no-param-reassign": "off",
+        "import/no-extraneous-dependencies": "off",
+        "no-console": "error",
+        "class-methods-use-this": "off",
+        "react/destructuring-assignment": "off",
+        "react-hooks/exhaustive-deps": "off",
+        "react/react-in-jsx-scope": "off",
+        "react/jsx-props-no-spreading": "off",
+        "react/require-default-props": "off",
+        "no-nested-ternary": "off",
+        "@typescript-eslint/no-empty-function": "off"
+    }
 }

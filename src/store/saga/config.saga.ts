@@ -13,7 +13,8 @@ import {
     setVehicleStack,
 } from '../slice/config.slice';
 import { CONFIG } from '../../enums';
-import { Collection } from '../slice/collection.slice';
+
+import { Collection } from '../types';
 
 function* fetchFilterableCollections() {
     yield put(setIsFilterableCollectionsLoading(true));

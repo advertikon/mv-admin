@@ -1,22 +1,22 @@
 import { call, put, takeLeading } from 'redux-saga/effects';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { exchangeCode, me } from '../../modules/oauth/ouath';
-import { setAuth } from '../slice/oauth.slice';
+import { setAuth, setExchangeCodeError, setIsLoading } from '../slice/oauth.slice';
 import { Auth } from '../../types';
 
-let exchangeCodeRun = 0;
-
 function* fetchMe() {
+    yield put(setIsLoading(true));
     const auth: Auth = yield call(me);
     yield put(setAuth(auth));
+    yield put(setIsLoading(false));
 }
 
 function* exchangeCodeSage(action: PayloadAction<string>) {
-    if (exchangeCodeRun === 0) {
+    try {
         yield call(exchangeCode, action.payload);
+    } catch (e) {
+        yield put(setExchangeCodeError(e));
     }
-
-    exchangeCodeRun += 1;
 }
 
 export function* SagaAuthGetMe() {

@@ -7,8 +7,20 @@ import UserPlusIcon from '@heroicons/react/24/solid/UserPlusIcon';
 import UsersIcon from '@heroicons/react/24/solid/UsersIcon';
 import XCircleIcon from '@heroicons/react/24/solid/XCircleIcon';
 import { SvgIcon } from '@mui/material';
+import { ReactElement } from 'react';
 
-export const items = [
+export type SideBarItem = {
+    disabled?: boolean;
+    external?: boolean;
+    icon: ReactElement;
+    iconRight?: ReactElement;
+    path?: string;
+    title: string;
+    subItems?: SideBarItem[] | null;
+    onClick?: () => void;
+};
+
+export const items: SideBarItem[] = [
     {
         title: 'Overview',
         path: '/',
@@ -17,6 +29,34 @@ export const items = [
                 <ChartBarIcon />
             </SvgIcon>
         ),
+    },
+    {
+        title: 'Layered search',
+        icon: (
+            <SvgIcon fontSize="small">
+                <ChartBarIcon />
+            </SvgIcon>
+        ),
+        subItems: [
+            {
+                title: 'Config',
+                path: '/layered-search/config',
+                icon: (
+                    <SvgIcon fontSize="small">
+                        <ChartBarIcon />
+                    </SvgIcon>
+                ),
+            },
+            {
+                title: 'Indexing',
+                path: '/layered-search/indexing',
+                icon: (
+                    <SvgIcon fontSize="small">
+                        <ChartBarIcon />
+                    </SvgIcon>
+                ),
+            },
+        ],
     },
     {
         title: 'Customers',
@@ -51,33 +91,6 @@ export const items = [
         icon: (
             <SvgIcon fontSize="small">
                 <CogIcon />
-            </SvgIcon>
-        ),
-    },
-    {
-        title: 'Login',
-        path: '/auth/login',
-        icon: (
-            <SvgIcon fontSize="small">
-                <LockClosedIcon />
-            </SvgIcon>
-        ),
-    },
-    {
-        title: 'Register',
-        path: '/auth/register',
-        icon: (
-            <SvgIcon fontSize="small">
-                <UserPlusIcon />
-            </SvgIcon>
-        ),
-    },
-    {
-        title: 'Error',
-        path: '/404',
-        icon: (
-            <SvgIcon fontSize="small">
-                <XCircleIcon />
             </SvgIcon>
         ),
     },

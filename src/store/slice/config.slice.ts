@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Collection } from './collection.slice';
 import { RootState } from '../store';
+import { Collection } from '../types';
 
 type Config = {
     filterableCollections: Collection[];

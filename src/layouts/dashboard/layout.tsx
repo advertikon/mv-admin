@@ -4,6 +4,8 @@ import { styled } from '@mui/material/styles';
 import { SideNav } from './side-nav';
 import { TopNav } from './top-nav';
 import { withAuthGuard } from '../../hocs/with-auth-guard';
+import SplashScreen from '../../components/splash-screen';
+import { AuthProvider } from '../../contexts/auth-context';
 
 const SIDE_NAV_WIDTH = 280;
 
@@ -43,12 +45,14 @@ export const Layout = withAuthGuard(props => {
     );
 
     return (
-        <>
-            <TopNav onNavOpen={() => setOpenNav(true)} />
-            <SideNav onClose={() => setOpenNav(false)} open={openNav} />
-            <LayoutRoot>
-                <LayoutContainer>{children}</LayoutContainer>
-            </LayoutRoot>
-        </>
+        <AuthProvider>
+            <SplashScreen>
+                <TopNav onNavOpen={() => setOpenNav(true)} />
+                <SideNav onClose={() => setOpenNav(false)} open={openNav} />
+                <LayoutRoot>
+                    <LayoutContainer>{children}</LayoutContainer>
+                </LayoutRoot>
+            </SplashScreen>
+        </AuthProvider>
     );
 });
