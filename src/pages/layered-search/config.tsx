@@ -1,9 +1,11 @@
 import Head from 'next/head';
 import { Box, Container, Stack, Typography } from '@mui/material';
-import { SettingsPassword } from '../../sections/settings/settings-password';
 import { Layout } from '../../layouts/dashboard/layout';
 import { LayeredSearchConfigCollections } from '../../sections/layered-search/config/config-collections';
 import { LayeredSearchConfigWebhooks } from '../../sections/layered-search/config/config-webhooks';
+import { LayeredSearchConfigApiKey } from '../../sections/layered-search/config/config-api-key';
+import { LayeredSearchConfigCompany } from '../../sections/layered-search/config/config-company';
+import StackComponent from '../../components/stackComponent';
 
 function Page() {
     return (
@@ -21,8 +23,11 @@ function Page() {
                 <Container maxWidth="lg">
                     <Stack spacing={3}>
                         <Typography variant="h4">Settings</Typography>
+                        <LayeredSearchConfigCompany />
+                        <LayeredSearchConfigApiKey />
                         <LayeredSearchConfigCollections />
                         <LayeredSearchConfigWebhooks />
+                        <StackComponent />
                     </Stack>
                 </Container>
             </Box>
