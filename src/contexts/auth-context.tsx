@@ -1,7 +1,7 @@
-import { createContext, useContext, useEffect, useMemo, useRef } from 'react';
+import { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { AUTH_GET_ME } from '../store/saga/oauth.saga';
-import { isAdmin, isLoading, isLoggedIn, isSuperAdmin } from '../store/slice/oauth.slice';
+import { getPermissions, isAdmin, isLoading, isLoggedIn, isSuperAdmin } from '../store/slice/oauth.slice';
 
 const initContext = {
     loading: false,
@@ -20,6 +20,7 @@ export function AuthProvider(props) {
     const loggedIn = useSelector(isLoggedIn);
     const admin = useSelector(isAdmin);
     const superAdmin = useSelector(isSuperAdmin);
+    const permissions = useSelector(getPermissions);
 
     const value = useMemo(
         () => ({
@@ -27,8 +28,10 @@ export function AuthProvider(props) {
             loggedIn,
             admin,
             superAdmin,
+            ensurePermissions: (perms: string[]) =>
+                Array.isArray(permissions) && perms.every(p => permissions.includes(p)),
         }),
-        [loading, loggedIn, admin, superAdmin]
+        [loading, loggedIn, admin, superAdmin, permissions]
     );
 
     useEffect(() => {

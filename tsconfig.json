@@ -18,8 +18,16 @@
     "isolatedModules": true,
     "jsx": "preserve",
       "paths": {
-          "@saga": ["./src/store/saga/*"],
-          "@slice": ["./src/store/slice/*"]
+          "@saga/*": ["./src/store/saga/*"],
+          "@slice/*": ["./src/store/slice/*"],
+          "@components/*": ["./src/components/*"],
+          "@context/*": ["./src/contexts/*"],
+          "@layout/*": ["./src/layouts/*"],
+          "@modules/*": ["./src/modules/*"],
+          "@pages/*": ["./src/pages/*"],
+          "@sections/*": ["./src/sections/*"],
+          "@services/*": ["./src/services/*"],
+          "@utils/*": ["./src/utils/*"],
       }
   },
   "include": [
