@@ -1,37 +1,40 @@
-import { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import { createContext, useContext, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { AUTH_GET_ME } from '../store/saga/oauth.saga';
-import { getPermissions, isAdmin, isLoading, isLoggedIn, isSuperAdmin } from '../store/slice/oauth.slice';
+import { AUTH_GET_ME } from '@saga/oauth.saga';
+import { getAuth, isAdmin, isLoggedIn, isSuperAdmin } from '@slice/oauth.slice';
 
 const initContext = {
     loading: false,
     loggedIn: false,
     admin: false,
     superAdmin: false,
+    uid: '',
 };
 
 export const AuthContext = createContext(initContext);
 
 export function AuthProvider(props) {
     const { children } = props;
-    const initialized = useRef(false);
     const dispatch = useDispatch();
-    const loading = useSelector(isLoading);
+    const {
+        auth: { uid, permissions },
+        isLoading,
+    } = useSelector(getAuth);
     const loggedIn = useSelector(isLoggedIn);
     const admin = useSelector(isAdmin);
     const superAdmin = useSelector(isSuperAdmin);
-    const permissions = useSelector(getPermissions);
 
     const value = useMemo(
         () => ({
-            loading,
+            loading: isLoading,
             loggedIn,
             admin,
             superAdmin,
+            uid,
             ensurePermissions: (perms: string[]) =>
                 Array.isArray(permissions) && perms.every(p => permissions.includes(p)),
         }),
-        [loading, loggedIn, admin, superAdmin, permissions]
+        [isLoading, loggedIn]
     );
 
     useEffect(() => {

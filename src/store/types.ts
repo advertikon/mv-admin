@@ -14,3 +14,7 @@ export type CollectionsState = {
     after: string | null;
     isLoading: boolean;
 };
+export type OauthServiceResponse = {
+    status: 'success' | 'error';
+    message?: string;
+};

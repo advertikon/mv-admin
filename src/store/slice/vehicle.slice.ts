@@ -16,7 +16,7 @@ const slice = createSlice({
     initialState,
     reducers: {
         setVehicleStacks: (state, data: PayloadAction<string[]>) => {
-            state.stacks = data.payload;
+            state.stacks = data.payload || [];
         },
         setIsVehicleStacksLoading: (state, data: PayloadAction<boolean>) => {
             state.isStacksLoading = data.payload;

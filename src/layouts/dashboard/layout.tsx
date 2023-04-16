@@ -1,11 +1,14 @@
 import { useCallback, useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { styled } from '@mui/material/styles';
+import { AuthProvider } from '@context/auth-context';
+import { ToastContainer } from 'react-toastify';
 import { SideNav } from './side-nav';
 import { TopNav } from './top-nav';
 import { withAuthGuard } from '../../hocs/with-auth-guard';
 import SplashScreen from '../../components/splash-screen';
-import { AuthProvider } from '../../contexts/auth-context';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 const SIDE_NAV_WIDTH = 280;
 
@@ -51,6 +54,7 @@ export const Layout = withAuthGuard(props => {
                 <SideNav onClose={() => setOpenNav(false)} open={openNav} />
                 <LayoutRoot>
                     <LayoutContainer>{children}</LayoutContainer>
+                    <ToastContainer />
                 </LayoutRoot>
             </SplashScreen>
         </AuthProvider>

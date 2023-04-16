@@ -1,10 +1,10 @@
 import Head from 'next/head';
 import { Box, Container, Stack, Typography } from '@mui/material';
-import { Layout } from '../../layouts/dashboard/layout';
-import { LayeredSearchConfigCollections } from '../../sections/layered-search/config/config-collections';
-import { LayeredSearchConfigWebhooks } from '../../sections/layered-search/config/config-webhooks';
-import { LayeredSearchConfigApiKey } from '../../sections/layered-search/config/config-api-key';
-import { LayeredSearchConfigCompany } from '../../sections/layered-search/config/config-company';
+import { Layout } from '@layout/dashboard/layout';
+import { LayeredSearchConfigCollections } from '@sections/layered-search/config/config-collections';
+import { LayeredSearchConfigWebhooks } from '@sections/layered-search/config/config-webhooks';
+import { LayeredSearchConfigApiKey } from '@sections/layered-search/config/config-api-key';
+import { LayeredSearchConfigCompany } from '@sections/layered-search/config/config-company';
 import StackComponent from '../../components/stackComponent';
 
 function Page() {

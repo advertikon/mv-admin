@@ -113,15 +113,15 @@ function Page() {
         timer.current = setTimeout(refreshStat, 10000);
     };
 
-    const statStartHandle = () => {
+    const startHandle = () => {
         dispatch({ type: INDEXING_START });
     };
 
-    const statStopHandle = () => {
+    const stopHandle = () => {
         dispatch({ type: INDEXING_STOP });
     };
 
-    const statResumeHandle = () => {
+    const resumeHandle = () => {
         dispatch({ type: INDEXING_RESUME });
     };
 
@@ -205,7 +205,17 @@ function Page() {
                     </Grid>
                     <Grid container spacing={3}>
                         <Grid xs={12} sm={6} lg={3}>
-                            <IndexControls />
+                            <IndexControls
+                                sx={{ height: '100%' }}
+                                start={startHandle}
+                                stop={stopHandle}
+                                resume={resumeHandle}
+                                isRunning={indexingStatus.isActive}
+                                isStopped={indexingStatus.isStuck || indexingStatus.isCancelled}
+                                isFinished={
+                                    !indexingStatus.isActive && !indexingStatus.isStuck && !indexingStatus.isCancelled
+                                }
+                            />
                         </Grid>
                         <Grid xs={12} sm={6} lg={3}>
                             <OverviewNumber

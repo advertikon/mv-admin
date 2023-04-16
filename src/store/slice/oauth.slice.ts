@@ -35,7 +35,7 @@ const slice = createSlice({
     initialState,
     reducers: {
         setAuth: (state, data: PayloadAction<Auth>) => {
-            state.auth = data.payload;
+            state.auth = data.payload || initialState.auth;
         },
         setIsLoading: (state, data: PayloadAction<boolean>) => {
             state.isLoading = data.payload;
@@ -58,5 +58,6 @@ export const isSuperAdmin = (status: RootState) => status.auth.auth.roles.includ
 export const isLoading = (status: RootState) => status.auth.isLoading;
 export const exchangeCodeError = (status: RootState) => status.auth.exchangeCodeError;
 export const isLoggedIn = (status: RootState) => Boolean(status.auth.auth.uid);
+export const getAuth = (status: RootState) => status.auth;
 
 export default slice.reducer;

@@ -1,14 +1,14 @@
 import Head from 'next/head';
 import { Box, Container, Stack, Typography } from '@mui/material';
-import { SettingsNotifications } from '../sections/settings/settings-notifications';
-import { SettingsPassword } from '../sections/settings/settings-password';
-import { Layout } from '../layouts/dashboard/layout';
+import { SettingsNotifications } from '@sections/settings/settings-notifications';
+import { Layout } from '@layout/dashboard/layout';
+import { SettingsPassword } from '@sections/settings/settings-password';
 
 function Page() {
     return (
         <>
             <Head>
-                <title>Settings | Devias Kit</title>
+                <title>Settings | MV Admin</title>
             </Head>
             <Box
                 component="main"
@@ -20,7 +20,7 @@ function Page() {
                 <Container maxWidth="lg">
                     <Stack spacing={3}>
                         <Typography variant="h4">Settings</Typography>
-                        <SettingsNotifications />
+                        {/* <SettingsNotifications /> */}
                         <SettingsPassword />
                     </Stack>
                 </Container>

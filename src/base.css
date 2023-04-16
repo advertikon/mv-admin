@@ -6,3 +6,7 @@
     transform: rotate(359deg);
   }
 }
+
+.hidden {
+    display: none!important;
+}

@@ -1,6 +1,6 @@
 import { call, put, takeLeading } from 'redux-saga/effects';
-import { setIsVehicleStacksLoading, setVehicleStacks } from '../slice/vehicle.slice';
-import { ServiceVehicleGetStack } from '../../services/vehicle.service';
+import { setIsVehicleStacksLoading, setVehicleStacks } from '@slice/vehicle.slice';
+import { ServiceVehicleGetStack } from '@services/vehicle.service';
 
 function* fetchStacks() {
     yield put(setIsVehicleStacksLoading(true));

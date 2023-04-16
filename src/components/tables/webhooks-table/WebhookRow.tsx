@@ -12,9 +12,9 @@ import {
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useDispatch, useSelector } from 'react-redux';
-import { getIsWebhookLoading, Webhook } from '../../../store/slice/webhook.slice';
-import { WEBHOOKS_DELETE } from '../../../store/saga/webhook.saga';
-import { usePermissions } from '../../../store/hooks/permission.hook';
+import { getIsWebhookLoading, Webhook } from '@slice/webhook.slice';
+import { WEBHOOKS_DELETE } from '@saga/webhook.saga';
+import { useAuthContext } from '@context/auth-context';
 
 type Props = { webhook: Webhook };
 
@@ -22,7 +22,8 @@ function WebhookRow({ webhook }: Props) {
     const dispatch = useDispatch();
     const [dialogOpen, setDialogOpen] = useState(false);
     const isLoading = useSelector(getIsWebhookLoading);
-    const [isSuperAdmin] = usePermissions();
+    const { superAdmin } = useAuthContext();
+
     const dialogCloseHandle = () => {
         setDialogOpen(false);
     };
@@ -47,7 +48,7 @@ function WebhookRow({ webhook }: Props) {
                         color="error"
                         onClick={dialogOpenHandle}
                         disabled={isLoading}
-                        sx={{ display: isSuperAdmin ? 'block' : 'none' }}
+                        sx={{ display: superAdmin ? 'block' : 'none' }}
                     >
                         <DeleteIcon />
                     </IconButton>

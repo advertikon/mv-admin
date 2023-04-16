@@ -1,4 +1,4 @@
-import { authFetchApi } from '../modules/oauth/ouath';
+import { authFetchApi } from '@modules/oauth/ouath';
 
 const backEndUrl = process.env.NEXT_PUBLIC_BACK_END;
 

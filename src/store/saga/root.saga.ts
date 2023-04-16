@@ -1,4 +1,5 @@
 import { all } from 'redux-saga/effects';
+import { SagaUserUpdatePassword } from '@saga/user.saga';
 import { SagaAuthExchangeCode, SagaAuthGetMe } from './oauth.saga';
 import {
     SagaConfigGetApiKey,
@@ -42,5 +43,6 @@ export function* RootSaga() {
         SagaVehicleGetStacks(),
         SagaConfigGetVehicleStack(),
         SagaConfigSetVehicleStack(),
+        SagaUserUpdatePassword(),
     ]);
 }

@@ -1,7 +1,7 @@
 import { call, put, takeLeading } from 'redux-saga/effects';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { exchangeCode, me } from '../../modules/oauth/ouath';
-import { setAuth, setExchangeCodeError, setIsLoading } from '../slice/oauth.slice';
+import { exchangeCode, me } from '@modules/oauth/ouath';
+import { setAuth, setExchangeCodeError, setIsLoading } from '@slice/oauth.slice';
 import { Auth } from '../../types';
 
 function* fetchMe() {

@@ -98,7 +98,7 @@ export function SideNavItemGroup(props: SideBarItem) {
                 <Collapse in={open}>
                     {subItems.map(item => {
                         return (
-                            <div style={{ paddingLeft: 10 }}>
+                            <div key={item.path} style={{ paddingLeft: 10 }}>
                                 <SideNavItemSingle
                                     disabled={item.disabled}
                                     external={item.external}

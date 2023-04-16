@@ -3,8 +3,18 @@ import PlayIcon from '@heroicons/react/24/solid/PlayIcon';
 import PlayPauseIcon from '@heroicons/react/24/solid/PlayPauseIcon';
 import StopIcon from '@heroicons/react/24/solid/StopIcon';
 
-export function IndexControls(props) {
-    const { sx } = props;
+type Props = {
+    sx: any;
+    start: () => void;
+    stop: () => void;
+    resume: () => void;
+    isRunning: boolean;
+    isStopped: boolean;
+    isFinished: boolean;
+};
+
+export function IndexControls(props: Props) {
+    const { sx, start, stop, resume, isRunning, isStopped, isFinished = true } = props;
 
     return (
         <Card sx={sx}>
@@ -16,17 +26,35 @@ export function IndexControls(props) {
                         </Typography>
                     </Stack>
                     <Stack flexDirection="row" justifyContent="space-evenly" sx={{ width: '100%' }}>
-                        <Button variant="contained" color="success">
+                        <Button
+                            variant="contained"
+                            color="success"
+                            onClick={start}
+                            className={isRunning ? 'hidden' : ''}
+                            title="Start"
+                        >
                             <SvgIcon>
                                 <PlayIcon />
                             </SvgIcon>
                         </Button>
-                        <Button variant="contained" color="info">
+                        <Button
+                            variant="contained"
+                            color="info"
+                            onClick={resume}
+                            className={isRunning || isFinished ? 'hidden' : ''}
+                            title="Resume"
+                        >
                             <SvgIcon>
                                 <PlayPauseIcon />
                             </SvgIcon>
                         </Button>
-                        <Button variant="contained" color="error">
+                        <Button
+                            variant="contained"
+                            color="error"
+                            onClick={stop}
+                            className={isStopped || isFinished ? 'hidden' : ''}
+                            title="Stop"
+                        >
                             <SvgIcon>
                                 <StopIcon />
                             </SvgIcon>

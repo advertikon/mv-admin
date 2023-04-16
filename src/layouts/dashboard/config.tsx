@@ -1,11 +1,11 @@
 import ChartBarIcon from '@heroicons/react/24/solid/ChartBarIcon';
 import CogIcon from '@heroicons/react/24/solid/CogIcon';
-import LockClosedIcon from '@heroicons/react/24/solid/LockClosedIcon';
+import DocumentMagnifyingGlassIcon from '@heroicons/react/24/solid/DocumentMagnifyingGlassIcon';
 import ShoppingBagIcon from '@heroicons/react/24/solid/ShoppingBagIcon';
 import UserIcon from '@heroicons/react/24/solid/UserIcon';
-import UserPlusIcon from '@heroicons/react/24/solid/UserPlusIcon';
+import WrenchIcon from '@heroicons/react/24/solid/WrenchIcon';
 import UsersIcon from '@heroicons/react/24/solid/UsersIcon';
-import XCircleIcon from '@heroicons/react/24/solid/XCircleIcon';
+import MagnifyingGlassCircleIcon from '@heroicons/react/24/solid/MagnifyingGlassCircleIcon';
 import { SvgIcon } from '@mui/material';
 import { ReactElement } from 'react';
 
@@ -34,7 +34,7 @@ export const items: SideBarItem[] = [
         title: 'Layered search',
         icon: (
             <SvgIcon fontSize="small">
-                <ChartBarIcon />
+                <MagnifyingGlassCircleIcon />
             </SvgIcon>
         ),
         subItems: [
@@ -43,7 +43,7 @@ export const items: SideBarItem[] = [
                 path: '/layered-search/config',
                 icon: (
                     <SvgIcon fontSize="small">
-                        <ChartBarIcon />
+                        <WrenchIcon />
                     </SvgIcon>
                 ),
             },
@@ -52,38 +52,11 @@ export const items: SideBarItem[] = [
                 path: '/layered-search/indexing',
                 icon: (
                     <SvgIcon fontSize="small">
-                        <ChartBarIcon />
+                        <DocumentMagnifyingGlassIcon />
                     </SvgIcon>
                 ),
             },
         ],
-    },
-    {
-        title: 'Customers',
-        path: '/customers',
-        icon: (
-            <SvgIcon fontSize="small">
-                <UsersIcon />
-            </SvgIcon>
-        ),
-    },
-    {
-        title: 'Companies',
-        path: '/companies',
-        icon: (
-            <SvgIcon fontSize="small">
-                <ShoppingBagIcon />
-            </SvgIcon>
-        ),
-    },
-    {
-        title: 'Account',
-        path: '/account',
-        icon: (
-            <SvgIcon fontSize="small">
-                <UserIcon />
-            </SvgIcon>
-        ),
     },
     {
         title: 'Settings',
