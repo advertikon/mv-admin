@@ -1,12 +1,11 @@
 import { Children } from 'react';
 import Document, { Head, Html, Main, NextScript } from 'next/document';
 import createEmotionServer from '@emotion/server/create-instance';
-import { createEmotionCache } from '../utils/create-emotion-cache';
+import { createEmotionCache } from '@utils/create-emotion-cache';
 
 function Favicon() {
     return (
         <>
-            <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
             <link rel="icon" href="/favicon.ico" />
             <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
             <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -59,6 +58,7 @@ CustomDocument.getInitialProps = async ctx => {
 
     ctx.renderPage = () =>
         originalRenderPage({
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             enhanceApp: App => props => <App emotionCache={cache} {...props} />,
         });

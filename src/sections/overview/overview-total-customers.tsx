@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import ArrowDownIcon from '@heroicons/react/24/solid/ArrowDownIcon';
 import ArrowUpIcon from '@heroicons/react/24/solid/ArrowUpIcon';
 import UsersIcon from '@heroicons/react/24/solid/UsersIcon';
@@ -48,10 +47,3 @@ export function OverviewTotalCustomers(props) {
         </Card>
     );
 }
-
-OverviewTotalCustomers.propTypes = {
-    difference: PropTypes.number,
-    positive: PropTypes.bool,
-    value: PropTypes.string.isRequired,
-    sx: PropTypes.object,
-};

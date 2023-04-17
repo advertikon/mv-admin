@@ -1,9 +1,8 @@
-import PropTypes from 'prop-types';
 import ArrowPathIcon from '@heroicons/react/24/solid/ArrowPathIcon';
 import ArrowRightIcon from '@heroicons/react/24/solid/ArrowRightIcon';
 import { Button, Card, CardActions, CardContent, CardHeader, Divider, SvgIcon } from '@mui/material';
 import { alpha, useTheme } from '@mui/material/styles';
-import { Chart } from '../../components/chart';
+import { Chart } from '@components/chart';
 
 const useChartOptions = () => {
     const theme = useTheme();
@@ -125,8 +124,3 @@ export function OverviewSales(props) {
         </Card>
     );
 }
-
-OverviewSales.protoTypes = {
-    chartSeries: PropTypes.array.isRequired,
-    sx: PropTypes.object,
-};

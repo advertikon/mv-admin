@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import ArrowDownOnSquareIcon from '@heroicons/react/24/solid/ArrowDownOnSquareIcon';
 import ClockIcon from '@heroicons/react/24/solid/ClockIcon';
 import { Avatar, Box, Card, CardContent, Divider, Stack, SvgIcon, Typography } from '@mui/material';
@@ -54,7 +53,3 @@ export function CompanyCard(props) {
         </Card>
     );
 }
-
-CompanyCard.propTypes = {
-    company: PropTypes.object.isRequired,
-};

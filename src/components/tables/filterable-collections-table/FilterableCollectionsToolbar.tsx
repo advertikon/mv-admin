@@ -1,13 +1,13 @@
 import Toolbar from '@mui/material/Toolbar';
-import { alpha, Autocomplete, AutocompleteChangeReason, FilterOptionsState, TextField } from '@mui/material';
+import { alpha, Autocomplete, AutocompleteChangeReason, TextField } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { GET_COLLECTIONS_AUTOCOMPLETE } from '../../../store/saga/collection.saga';
-import { getCollections, getCollectionsIsLoading } from '../../../store/slice/collection.slice';
+import { GET_COLLECTIONS_AUTOCOMPLETE } from '@saga/collection.saga';
+import { getCollections, getCollectionsIsLoading } from '@slice/collection.slice';
 import { Collection } from '../../../store/types';
 
 interface Props {
@@ -42,7 +42,7 @@ export function EnhancedTableToolbar({
         }
     };
 
-    const filterHandler = (collections: Collection[], state: FilterOptionsState<Collection>) => {
+    const filterHandler = (collections: Collection[]) => {
         return filterCollections(collections);
     };
 

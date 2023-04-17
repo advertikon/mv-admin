@@ -1,25 +1,11 @@
 import Head from 'next/head';
-import { subDays, subHours } from 'date-fns';
 import { Box, Container, SvgIcon, Unstable_Grid2 as Grid } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReactElement, useEffect, useRef, useState } from 'react';
-import { OverviewTotalCustomers } from '@sections/overview/overview-total-customers';
-import { OverviewTasksProgress } from '@sections/overview/overview-tasks-progress';
-import { OverviewTotalProfit } from '@sections/overview/overview-total-profit';
-import { OverviewSales } from '@sections/overview/overview-sales';
-import { OverviewTraffic } from '@sections/overview/overview-traffic';
-import { OverviewLatestProducts } from '@sections/overview/overview-latest-products';
-import { OverviewLatestOrders } from '@sections/overview/overview-latest-orders';
 import { Layout } from '@layout/dashboard/layout';
 import { OverviewNumber } from '@sections/overview/overview-number';
-import {
-    getIndexingStatus,
-    getIsIndexingResuming,
-    getIsIndexingStarting,
-    getIsIndexingStopping,
-} from '@slice/indexing.slice';
+import { getIndexingStatus } from '@slice/indexing.slice';
 import { INDEXING_GET_STATUS, INDEXING_RESUME, INDEXING_START, INDEXING_STOP } from '@saga/indexing.saga';
-import { useAuthContext } from '@context/auth-context';
 import RectangleStackIcon from '@heroicons/react/24/solid/RectangleStackIcon';
 import HashtagIcon from '@heroicons/react/24/solid/HashtagIcon';
 import PlayIcon from '@heroicons/react/24/solid/PlayIcon';
@@ -81,14 +67,8 @@ function getStatusOverviewProps(status: ProductIndexStatus): { icon: ReactElemen
 function Page() {
     const dispatch = useDispatch();
     const indexingStatus = useSelector(getIndexingStatus);
-    const isStatStarting = useSelector(getIsIndexingStarting);
-    const isStatStopping = useSelector(getIsIndexingStopping);
-    const isStatResuming = useSelector(getIsIndexingResuming);
     const [runUpdate, setRunUpdate] = useState(false);
-    let indexingStatusText;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const timer: any = useRef();
-    const { superAdmin } = useAuthContext();
 
     useEffect(() => {
         dispatch({ type: INDEXING_GET_STATUS });
@@ -125,25 +105,6 @@ function Page() {
         dispatch({ type: INDEXING_RESUME });
     };
 
-    if (indexingStatus.isActive) {
-        indexingStatusText = 'Running';
-    } else if (indexingStatus.isStuck) {
-        indexingStatusText = 'Stuck';
-    } else if (indexingStatus.isCancelled) {
-        indexingStatusText = 'Cancelled';
-    } else {
-        indexingStatusText = 'Inactive';
-    }
-
-    const indexedProgress = Math.ceil((indexingStatus.indexedProductsCount / indexingStatus.totalProductsCount) * 100);
-    const processedProgress =
-        indexingStatus.isActive || indexingStatus.isStuck || indexingStatus.isCancelled
-            ? Math.ceil((indexingStatus.processedProductsCount / indexingStatus.totalProductsCount) * 100)
-            : 0;
-    const timeToIndexFinish =
-        ((indexingStatus.totalProductsCount - indexingStatus.processedProductsCount) / indexingStatus.indexBunchSize) *
-        (indexingStatus.indexDelay / 1000);
-    console.log(indexingStatus);
     return (
         <>
             <Head>

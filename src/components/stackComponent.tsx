@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, CardHeader, Divider, Grid, Typography } from '@mui/material';
+import { Box, Card, CardContent, CardHeader, Divider, Grid } from '@mui/material';
 import StackSelector from './stack-selector';
 
 function StackComponent() {

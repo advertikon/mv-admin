@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 const SeverityPillRoot = styled('span')(({ theme, ownerState }) => {
     const backgroundColor = theme.palette[ownerState.color].alpha12;

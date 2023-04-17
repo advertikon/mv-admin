@@ -1,14 +1,15 @@
 import { createTheme as createMuiTheme } from '@mui/material';
+import { ThemeOptions } from '@mui/material/styles/createTheme';
 import { createPalette } from './create-palette';
 import { createComponents } from './create-components';
 import { createShadows } from './create-shadows';
 import { createTypography } from './create-typography';
 
 export function createTheme() {
-    const palette = createPalette();
-    const components = createComponents({ palette });
-    const shadows = createShadows();
-    const typography = createTypography();
+    const palette = createPalette() as ThemeOptions['palette'];
+    const components = createComponents({ palette }) as ThemeOptions['components'];
+    const shadows = createShadows() as ThemeOptions['shadows'];
+    const typography = createTypography() as ThemeOptions['typography'];
 
     return createMuiTheme({
         breakpoints: {
@@ -20,16 +21,12 @@ export function createTheme() {
                 xl: 1440,
             },
         },
-        // @ts-ignore
         components,
-        // @ts-ignore
         palette,
-        // @ts-ignore
         shadows,
         shape: {
             borderRadius: 8,
         },
-        // @ts-ignore
         typography,
     });
 }

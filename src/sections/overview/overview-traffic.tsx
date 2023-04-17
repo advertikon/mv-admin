@@ -1,9 +1,8 @@
-import PropTypes from 'prop-types';
 import ComputerDesktopIcon from '@heroicons/react/24/solid/ComputerDesktopIcon';
 import DeviceTabletIcon from '@heroicons/react/24/solid/DeviceTabletIcon';
 import PhoneIcon from '@heroicons/react/24/solid/PhoneIcon';
 import { Box, Card, CardContent, CardHeader, Stack, SvgIcon, Typography, useTheme } from '@mui/material';
-import { Chart } from '../../components/chart';
+import { Chart } from '@components/chart';
 
 const useChartOptions = labels => {
     const theme = useTheme();
@@ -104,9 +103,3 @@ export function OverviewTraffic(props) {
         </Card>
     );
 }
-
-OverviewTraffic.propTypes = {
-    chartSeries: PropTypes.array.isRequired,
-    labels: PropTypes.array.isRequired,
-    sx: PropTypes.object,
-};

@@ -1,6 +1,5 @@
 import { useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-import PropTypes from 'prop-types';
 import { Box, Divider, MenuItem, MenuList, Popover, Typography } from '@mui/material';
 import { useAuth } from '../../hooks/use-auth';
 
@@ -52,9 +51,3 @@ export function AccountPopover(props) {
         </Popover>
     );
 }
-
-AccountPopover.propTypes = {
-    anchorEl: PropTypes.any,
-    onClose: PropTypes.func,
-    open: PropTypes.bool.isRequired,
-};

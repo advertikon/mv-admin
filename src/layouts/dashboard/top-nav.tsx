@@ -5,6 +5,7 @@ import Bars3Icon from '@heroicons/react/24/solid/Bars3Icon';
 import MagnifyingGlassIcon from '@heroicons/react/24/solid/MagnifyingGlassIcon';
 import { Avatar, Badge, Box, IconButton, Stack, SvgIcon, Tooltip, useMediaQuery } from '@mui/material';
 import { alpha } from '@mui/material/styles';
+import { Theme } from '@mui/material/styles/createTheme';
 import { AccountPopover } from './account-popover';
 import { usePopover } from '../../hooks/use-popover';
 
@@ -13,8 +14,7 @@ const TOP_NAV_HEIGHT = 64;
 
 export function TopNav(props) {
     const { onNavOpen } = props;
-    // @ts-ignore
-    const lgUp = useMediaQuery(theme => theme.breakpoints.up('lg'));
+    const lgUp = useMediaQuery(theme => (theme as Theme).breakpoints.up('lg'));
     const accountPopover = usePopover();
 
     return (

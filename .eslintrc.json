@@ -18,6 +18,9 @@
         "react/jsx-props-no-spreading": "off",
         "react/require-default-props": "off",
         "no-nested-ternary": "off",
-        "@typescript-eslint/no-empty-function": "off"
+        "@typescript-eslint/no-empty-function": "off",
+        "import/no-cycle": "off",
+        "consistent-return": "off",
+        "@typescript-eslint/no-explicit-any": "off"
     }
 }

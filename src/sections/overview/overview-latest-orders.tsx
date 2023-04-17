@@ -1,5 +1,4 @@
 import { format } from 'date-fns';
-import PropTypes from 'prop-types';
 import ArrowRightIcon from '@heroicons/react/24/solid/ArrowRightIcon';
 import {
     Box,
@@ -15,8 +14,8 @@ import {
     TableHead,
     TableRow,
 } from '@mui/material';
-import { SeverityPill } from '../../components/severity-pill';
-import { Scrollbar } from '../../components/scrollbar';
+import { SeverityPill } from '@components/severity-pill';
+import { Scrollbar } from '@components/scrollbar';
 
 const statusMap = {
     pending: 'warning',
@@ -79,8 +78,3 @@ export function OverviewLatestOrders(props) {
         </Card>
     );
 }
-
-OverviewLatestOrders.prototype = {
-    orders: PropTypes.array,
-    sx: PropTypes.object,
-};

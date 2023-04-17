@@ -1,10 +1,7 @@
 import ChartBarIcon from '@heroicons/react/24/solid/ChartBarIcon';
 import CogIcon from '@heroicons/react/24/solid/CogIcon';
 import DocumentMagnifyingGlassIcon from '@heroicons/react/24/solid/DocumentMagnifyingGlassIcon';
-import ShoppingBagIcon from '@heroicons/react/24/solid/ShoppingBagIcon';
-import UserIcon from '@heroicons/react/24/solid/UserIcon';
 import WrenchIcon from '@heroicons/react/24/solid/WrenchIcon';
-import UsersIcon from '@heroicons/react/24/solid/UsersIcon';
 import MagnifyingGlassCircleIcon from '@heroicons/react/24/solid/MagnifyingGlassCircleIcon';
 import { SvgIcon } from '@mui/material';
 import { ReactElement } from 'react';

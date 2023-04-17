@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { Box, Container, Stack, Typography } from '@mui/material';
-import { SettingsNotifications } from '@sections/settings/settings-notifications';
 import { Layout } from '@layout/dashboard/layout';
 import { SettingsPassword } from '@sections/settings/settings-password';
 

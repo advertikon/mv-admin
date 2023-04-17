@@ -1,9 +1,7 @@
 import React from 'react';
 import { TableCell, TableHead, TableRow, Typography } from '@mui/material';
 
-type Props = {};
-
-function WebhookHead({}: Props) {
+function WebhookHead() {
     return (
         <TableHead>
             <TableRow>

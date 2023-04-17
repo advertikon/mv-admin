@@ -1,15 +1,13 @@
 import Paper from '@mui/material/Paper';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
 import { Box, Table, TableBody, TableContainer, TablePagination } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import _ from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
+import { CONFIG_ADD_FILTERABLE_COLLECTIONS, CONFIG_GET_FILTERABLE_COLLECTIONS } from '@saga/config.saga';
+import { getFilterableCollections, getIsFilterableCollectionsLoading } from '@slice/config.slice';
 import { EnhancedTableHead } from './FilterableCollectionsHead';
 import { EnhancedTableToolbar } from './FilterableCollectionsToolbar';
 import FilterableCollectionsRow from './FIlterableCollectionsRow';
-import { CONFIG_ADD_FILTERABLE_COLLECTIONS, CONFIG_GET_FILTERABLE_COLLECTIONS } from '../../../store/saga/config.saga';
-import { getFilterableCollections, getIsFilterableCollectionsLoading } from '../../../store/slice/config.slice';
 import { Collection } from '../../../store/types';
 
 export default function FilterableCollectionsTable() {

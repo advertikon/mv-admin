@@ -5,7 +5,6 @@ import { AuthProvider } from '@context/auth-context';
 import { ToastContainer } from 'react-toastify';
 import { SideNav } from './side-nav';
 import { TopNav } from './top-nav';
-import { withAuthGuard } from '../../hocs/with-auth-guard';
 import SplashScreen from '../../components/splash-screen';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -28,7 +27,7 @@ const LayoutContainer = styled('div')({
     width: '100%',
 });
 
-export const Layout = withAuthGuard(props => {
+export function Layout(props) {
     const { children } = props;
     const pathname = usePathname();
     const [openNav, setOpenNav] = useState(false);
@@ -59,4 +58,4 @@ export const Layout = withAuthGuard(props => {
             </SplashScreen>
         </AuthProvider>
     );
-});
+}
