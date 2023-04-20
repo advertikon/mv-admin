@@ -8,7 +8,6 @@ function* updatePassword(action: PayloadAction<{ uid: string; password: string }
     const { uid, password } = action.payload;
     yield put(setIsPasswordUpdating(true));
     const data: OauthServiceResponse = yield call(UserServiceUpdatePassword, uid, password);
-
     yield put(setIsPasswordUpdating(false));
 
     if (!data) {

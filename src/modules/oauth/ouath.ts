@@ -171,11 +171,14 @@ async function innerAuthFetch(url: string, options: RequestInit = {}): Promise<a
                     return res.json();
                 }
 
-                if (res.status === 401 && attempts <= 3) {
-                    return refreshToken().then(() => doFetch());
+                if (res.status === 401) {
+                    if (attempts <= 3) {
+                        return refreshToken().then(() => doFetch());
+                    }
+                    logger.error(`Error fetching url ${url}: ${res.statusText} (${res.status})`);
                 }
-                logger.error(`Error fetching url ${url}: ${res.statusText} (${res.status})`);
-                return null;
+
+                return res.json();
             })
             .catch(error => {
                 if (error.constructor?.name === RefreshTokenError.name) {
