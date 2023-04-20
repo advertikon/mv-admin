@@ -5,7 +5,7 @@ const backEndUrl = process.env.NEXT_PUBLIC_OAUTH_SERVER;
 
 export async function UserServiceUpdatePassword(uid: string, password: string): Promise<OauthServiceResponse> {
     return authFetchApi(`${backEndUrl}/user/${uid}/password`, {
-        method: 'patch',
+        method: 'post',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ password }),
     });

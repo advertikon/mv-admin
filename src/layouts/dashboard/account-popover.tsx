@@ -6,12 +6,12 @@ import { useAuth } from '../../hooks/use-auth';
 export function AccountPopover(props) {
     const { anchorEl, onClose, open } = props;
     const router = useRouter();
-    const auth = useAuth();
+    const { userName } = useAuth();
 
     const handleSignOut = useCallback(() => {
         onClose?.();
         router.push(`${process.env.NEXT_PUBLIC_OAUTH_SERVER}/oauth/session/end`);
-    }, [onClose, auth, router]);
+    }, []);
 
     return (
         <Popover
@@ -30,9 +30,9 @@ export function AccountPopover(props) {
                     px: 2,
                 }}
             >
-                <Typography variant="overline">Account</Typography>
+                <Typography variant="overline">Logged in as:</Typography>
                 <Typography color="text.secondary" variant="body2">
-                    Anika Visser
+                    {userName}
                 </Typography>
             </Box>
             <Divider />

@@ -9,6 +9,7 @@ const initContext = {
     admin: false,
     superAdmin: false,
     uid: '',
+    userName: '',
 };
 
 export const AuthContext = createContext(initContext);
@@ -17,7 +18,7 @@ export function AuthProvider(props) {
     const { children } = props;
     const dispatch = useDispatch();
     const {
-        auth: { uid, permissions },
+        auth: { uid, permissions, login },
         isLoading,
     } = useSelector(getAuth);
     const loggedIn = useSelector(isLoggedIn);
@@ -31,6 +32,7 @@ export function AuthProvider(props) {
             admin,
             superAdmin,
             uid,
+            userName: login,
             ensurePermissions: (perms: string[]) =>
                 Array.isArray(permissions) && perms.every(p => permissions.includes(p)),
         }),

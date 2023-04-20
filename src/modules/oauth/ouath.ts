@@ -70,7 +70,8 @@ export async function exchangeCode(code: string) {
 
 export async function refreshToken(): Promise<void> {
     const token = getToken();
-
+    console.log('refresh token');
+    console.log(token);
     if (!token?.refresh_token) {
         throw new RefreshTokenError('Refresh token missing');
     }
