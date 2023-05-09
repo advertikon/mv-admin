@@ -7,7 +7,7 @@ import { WebhookTopic } from '../../types';
 function* fetchWebhooksSaga() {
     yield put(setIsWebhookLoading(true));
     const data: Webhook[] = yield call(WebhookServiceGet);
-    yield put(setWebhooks(data));
+    yield put(setWebhooks((data as any).status !== 'error' ? data : []));
     yield put(setIsWebhookLoading(false));
 }
 
