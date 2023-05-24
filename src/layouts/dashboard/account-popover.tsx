@@ -6,7 +6,7 @@ import { useAuth } from '../../hooks/use-auth';
 export function AccountPopover(props) {
     const { anchorEl, onClose, open } = props;
     const router = useRouter();
-    const { userName } = useAuth();
+    const { userName, company, superAdmin } = useAuth();
 
     const handleSignOut = useCallback(() => {
         onClose?.();
@@ -30,10 +30,17 @@ export function AccountPopover(props) {
                     px: 2,
                 }}
             >
-                <Typography variant="overline">Logged in as:</Typography>
-                <Typography color="text.secondary" variant="body2">
+                <Typography variant="h6" textAlign="center">
+                    Logged in as:
+                </Typography>
+                <Typography color="text.secondary" variant="h6" textAlign="center">
                     {userName}
                 </Typography>
+                {superAdmin && (
+                    <Typography color="text.secondary" variant="caption">
+                        ({company})
+                    </Typography>
+                )}
             </Box>
             <Divider />
             <MenuList

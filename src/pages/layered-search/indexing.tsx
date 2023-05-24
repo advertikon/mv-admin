@@ -181,7 +181,7 @@ function Page() {
                         <Grid xs={12} sm={6} lg={3}>
                             <OverviewNumber
                                 sx={{ height: '100%' }}
-                                title="Butch size"
+                                title="Batch size"
                                 value={indexingStatus.indexBunchSize}
                             />
                         </Grid>
