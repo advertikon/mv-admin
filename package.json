@@ -1,11 +1,11 @@
 {
-  "name": "material-kit-react",
-  "version": "3.0.0",
-  "author": "Devias",
+  "name": "mv-admin-app",
+  "version": "1.0.0",
+  "author": "Maxim Bogochunas",
   "licence": "MIT",
   "type": "module",
-  "homepage": "https://devias.io",
-  "private": false,
+  "homepage": "",
+  "private": true,
   "scripts": {
     "dev": "next",
     "build": "next build",
@@ -43,6 +43,9 @@
     "yup": "1.0.0"
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
     "@types/node": "18.13.0",
     "@types/nprogress": "0.2.0",
     "@types/numeral": "2.0.2",
@@ -54,6 +57,8 @@
     "eslint-config-airbnb-typescript-prettier": "^5.0.0",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.7",
+    "semantic-release": "^21.0.6",
+    "semantic-release-slack-bot": "^4.0.2",
     "typescript": "^5.0.4"
   }
 }

@@ -1,7 +1,6 @@
 .next
 node_modules
 .editorconfig
-.env
 .eslintrc.json
 .gitattributes
 .gitignore

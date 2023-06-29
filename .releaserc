@@ -1,0 +1,35 @@
+{
+    "branches": ["master", "main"],
+    "repositoryUrl": "https://github.com/advertikon/mv-admin",
+    "plugins": [
+        "@semantic-release/commit-analyzer",
+        "@semantic-release/npm",
+        "@semantic-release/changelog",
+        "@semantic-release/release-notes-generator",
+        "@semantic-release/git",
+        "@semantic-release/github",
+        ["@semantic-release/exec", {
+            "publishCmd": "./scripts/publish.sh ${nextRelease.version} ${branch.name} ${commits.length} ${Date.now()}"
+        }],
+        ["semantic-release-slack-bot",
+            {
+                "notifyOnSuccess": false,
+                "notifyOnFail": false,
+                "packageName": "MV/Admin-front",
+                "markdownReleaseNotes": true,
+                "branchesConfig": [
+                    {
+                        "pattern": "master",
+                        "notifyOnSuccess": true,
+                        "notifyOnFail": true
+                    },
+                    {
+                        "pattern": "main",
+                        "notifyOnSuccess": true,
+                        "notifyOnFail": true
+                    }
+                ]
+            }
+        ]
+    ]
+}

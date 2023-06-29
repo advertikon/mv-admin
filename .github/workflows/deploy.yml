@@ -1,0 +1,75 @@
+name: Deploy to Amazon ECS
+
+permissions:
+    contents: write
+    issues: write
+    pull-requests: write
+
+on:
+    push:
+        branches:
+            - main
+            - master
+env:
+    CACHE_NAME: cache-node-modules
+    CLUSTER_NAME: mv-production-cluster
+    SERVICE_NAME: mv-production-admin-front
+    TASK_DEFINITION_NAME: mv-production-admin-front-family
+
+jobs:
+    deploy:
+        name: Deploy
+        runs-on: ubuntu-latest
+        environment: production
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+
+            - name: Configure AWS credentials
+              uses: aws-actions/configure-aws-credentials@0e613a0980cbf65ed5b322eb7a1e075d28913a83
+              with:
+                  aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                  aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                  aws-region: ${{ vars.AWS_REGION }}
+
+            - name: Login to Amazon ECR
+              id: login-ecr
+              uses: aws-actions/amazon-ecr-login@62f4f872db3836360b72999f4b87f1ff13310f3a
+
+            - name: Fetch cached node modules
+              id: cache-npm
+              uses: actions/cache@v3
+              with:
+                  path: ~/.npm
+                  key: ${{ runner.os }}-build-${{ env.CACHE_NAME }}-${{ hashFiles('package-lock.json') }}
+                  restore-keys: |
+                      ${{ runner.os }}-build-${{ env.cache-name }}-
+                      ${{ runner.os }}-build-
+                      ${{ runner.os }}-
+
+            - name: Install dependencies
+              run: npm ci
+
+            - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+              name: Cache node modules
+              continue-on-error: true
+              uses: actions/cache/save@v3
+              with:
+                  path: ~/.npm
+                  key: ${{ runner.os }}-build-${{ env.CACHE_NAME }}-${{ hashFiles('package-lock.json') }}
+
+            - name: Create .env
+              run: |
+                  echo '${{ secrets.ENV }}' > .env
+
+            - name: Semantic Release
+              id: semantic
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+                  IMAGE: "${{ steps.login-ecr.outputs.registry }}/${{ vars.ECR_REPO }}"
+              run: npx semantic-release
+
+            - name: New version
+              run: echo ${{ steps.semantic.nextRelease.version }}

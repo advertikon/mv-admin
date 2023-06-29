@@ -1,0 +1,31 @@
+{
+    "containerDefinitions": [
+        {
+            "name": "mv-production-admin-front-container",
+            "image": "124862800015.dkr.ecr.us-east-1.amazonaws.com/mv/admin-front:VERSION",
+            "memory": 200,
+            "portMappings": [
+                {
+                    "containerPort": 3000,
+                    "hostPort": 3000,
+                    "protocol": "tcp"
+                }
+            ],
+            "cpu": 0,
+            "essential": true,
+            "entryPoint": [],
+            "environment": [],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "mv-production-cluster",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "mv-production-admin-front"
+                }
+            }
+        }
+    ],
+    "family": "mv-production-admin-front-family"
+}
