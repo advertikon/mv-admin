@@ -1,0 +1,11 @@
+# 1.0.0 (2023-06-29)
+
+
+### Bug Fixes
+
+* **config:** fig available stock endpoint ([cb6ce14](https://github.com/advertikon/mv-admin/commit/cb6ce146d695d597b107958208657261844493af))
+* deploy ([a9b53c4](https://github.com/advertikon/mv-admin/commit/a9b53c4a81fa81fdedf29ca39ac14f60d4ec4867))
+* fix update password service ([b8a3119](https://github.com/advertikon/mv-admin/commit/b8a3119dd1953214711468049169a9e511d05306))
+* fix value returned by fetch on error ([9afa3e0](https://github.com/advertikon/mv-admin/commit/9afa3e05402892bdf9f345036a0edc2a7a0c7bc6))
+* small fixes ([e8314ce](https://github.com/advertikon/mv-admin/commit/e8314ceeff12999be05c389c972cbbfc8da55db4))
+* **webhook:** fix bug when error is returned as webhooks list ([57f17e1](https://github.com/advertikon/mv-admin/commit/57f17e1d116ffb848943f6dbaf6ddfb81caf2ff2))
