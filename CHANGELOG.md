@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/advertikon/mv-admin/compare/v1.0.0...v1.0.1) (2023-07-02)
+
+
+### Bug Fixes
+
+* change td host port ([9a72e15](https://github.com/advertikon/mv-admin/commit/9a72e15cc56c823fbe0eea69aceb633cc01223b9))
+
 # 1.0.0 (2023-06-29)
 
 
