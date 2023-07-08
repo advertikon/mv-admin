@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/advertikon/mv-admin/compare/v1.0.1...v1.0.2) (2023-07-08)
+
+
+### Bug Fixes
+
+* new infra ([4106fea](https://github.com/advertikon/mv-admin/commit/4106feae27a3a3e78223a6684ac6307bd42f7cbc))
+
 ## [1.0.1](https://github.com/advertikon/mv-admin/compare/v1.0.0...v1.0.1) (2023-07-02)
 
 
