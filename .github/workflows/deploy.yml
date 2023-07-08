@@ -70,6 +70,3 @@ jobs:
                   SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
                   IMAGE: "${{ steps.login-ecr.outputs.registry }}/${{ vars.ECR_REPO }}"
               run: npx semantic-release
-
-            - name: New version
-              run: echo ${{ steps.semantic.nextRelease.version }}
