@@ -3,7 +3,7 @@
         {
             "name": "mv-production-admin-front-container",
             "image": "124862800015.dkr.ecr.us-east-1.amazonaws.com/mv/admin-front:VERSION",
-            "memory": 100,
+            "memory": 150,
             "portMappings": [
                 {
                     "containerPort": 3000,
