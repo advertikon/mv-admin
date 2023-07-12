@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/advertikon/mv-admin/compare/v1.0.4...v1.0.5) (2023-07-12)
+
+
+### Bug Fixes
+
+* change docker memory limit to 150MB ([2215b85](https://github.com/advertikon/mv-admin/commit/2215b85611f3a80cdb6c6d9187e5e9e4975892a8))
+
 ## [1.0.4](https://github.com/advertikon/mv-admin/compare/v1.0.3...v1.0.4) (2023-07-11)
 
 
