@@ -1,3 +1,10 @@
+## [1.0.6](https://github.com/advertikon/mv-admin/compare/v1.0.5...v1.0.6) (2023-07-16)
+
+
+### Bug Fixes
+
+* add memoryReservation to task definition (220/300) ([0108089](https://github.com/advertikon/mv-admin/commit/0108089f08158e0d86adeddad73e0707e6074c28))
+
 ## [1.0.5](https://github.com/advertikon/mv-admin/compare/v1.0.4...v1.0.5) (2023-07-12)
 
 
