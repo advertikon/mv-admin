@@ -16,6 +16,8 @@ import CalendarIcon from '@heroicons/react/24/solid/CalendarIcon';
 import { OverviewProgress } from '@sections/overview/overview-progress';
 import { OverviewText } from '@sections/overview/overview-text';
 import { IndexControls } from '@sections/overview/index-controls';
+import { formatDistance } from 'date-fns';
+import { OverviewSyncStatus } from '@sections/overview/overview-sync-status';
 import { ProductIndexStatus } from '../../types';
 
 function getStatusOverviewProps(status: ProductIndexStatus): { icon: ReactElement; iconColor: string; text: string } {
@@ -68,6 +70,7 @@ function Page() {
     const dispatch = useDispatch();
     const indexingStatus = useSelector(getIndexingStatus);
     const [runUpdate, setRunUpdate] = useState(false);
+    const [estimation, setEstimation] = useState('');
     const timer: any = useRef();
 
     useEffect(() => {
@@ -76,6 +79,13 @@ function Page() {
 
     useEffect(() => {
         setRunUpdate(indexingStatus.isActive);
+        if (indexingStatus) {
+            const estDuration =
+                ((indexingStatus.totalProductsCount - indexingStatus.processedProductsCount) /
+                    indexingStatus.indexBunchSize) *
+                indexingStatus.indexDelay;
+            setEstimation(indexingStatus.isActive ? formatDistance(Date.now(), Date.now() + estDuration) : '');
+        }
     }, [indexingStatus]);
 
     useEffect(() => {
@@ -198,6 +208,14 @@ function Page() {
                                 title="Current progress"
                                 value={indexingStatus.processedProductsCount}
                             />
+                        </Grid>
+                    </Grid>
+                    <Grid container spacing={3}>
+                        <Grid xs={12} sm={6} lg={3}>
+                            <OverviewText sx={{ height: '100%' }} title="Indexing estimation" text={estimation} />
+                        </Grid>
+                        <Grid xs={12} sm={6} lg={3}>
+                            <OverviewSyncStatus />
                         </Grid>
                     </Grid>
                 </Container>

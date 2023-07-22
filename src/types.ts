@@ -28,3 +28,11 @@ export type ProductIndexStatus = {
     totalProductsCount: number;
     indexedProductsCount: number;
 };
+
+export type ProductSyncStatus = {
+    status: boolean;
+    total?: number;
+    processed?: number;
+    deleted?: number;
+    required?: boolean;
+};

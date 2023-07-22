@@ -18,6 +18,8 @@ import {
     SagaIndexingGetIndexingStart,
     SagaIndexingGetIndexingStatus,
     SagaIndexingGetIndexingStop,
+    SagaIndexingStartSync,
+    SagaIndexingSyncStatus,
 } from './indexing.saga';
 import { SagaVehicleGetStacks } from './vehicle.saga';
 
@@ -44,5 +46,7 @@ export function* RootSaga() {
         SagaConfigGetVehicleStack(),
         SagaConfigSetVehicleStack(),
         SagaUserUpdatePassword(),
+        SagaIndexingStartSync(),
+        SagaIndexingSyncStatus(),
     ]);
 }
