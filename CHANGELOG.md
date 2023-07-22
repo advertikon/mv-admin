@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/advertikon/mv-admin/compare/v1.0.6...v1.1.0) (2023-07-22)
+
+
+### Features
+
+* porducts sync feature ([7af01e5](https://github.com/advertikon/mv-admin/commit/7af01e5e1875267f83e69cf05d5b10f65e15d44d))
+
 ## [1.0.6](https://github.com/advertikon/mv-admin/compare/v1.0.5...v1.0.6) (2023-07-16)
 
 
