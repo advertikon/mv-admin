@@ -36,3 +36,39 @@ export type ProductSyncStatus = {
     deleted?: number;
     required?: boolean;
 };
+
+export type ShopifyCategoryStat = {
+    freeCount: number;
+    freeSum: number;
+    paidCount: number;
+    paidSum: number;
+    stdDev: number;
+    name: string;
+    avgFree: string | number;
+    avgPaid: string | number;
+};
+
+export type ShopifyProductStat = {
+    _id: string;
+    url: string;
+    developer: string;
+    name: string;
+    created_at: string;
+    last_visit: string;
+    has_new_content: boolean;
+    categories: string[];
+    has_new_stats: boolean;
+    avgReviews: number;
+    past2MonthReviews: number;
+    past3MonthReviews: number;
+    pastMonthReviews: number;
+    stats: {
+        _id: string;
+        rating: number;
+        reviews: number;
+        date: string;
+        product_id: string;
+        price?: string;
+        pricing_plans?: string[];
+    }[];
+};

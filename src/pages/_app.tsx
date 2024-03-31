@@ -6,11 +6,13 @@ import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import 'simplebar-react/dist/simplebar.min.css';
 import { Provider } from 'react-redux';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { createEmotionCache } from '../utils/create-emotion-cache';
 import { createTheme } from '../theme/index';
 import { useNProgress } from '../hooks/use-nprogress';
 import '../base.css';
 import store from '../store/store';
+import { queryClient } from '../components/query/query-client';
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -24,20 +26,22 @@ function App(props) {
     const theme = createTheme();
 
     return (
-        <CacheProvider value={emotionCache}>
-            <Head>
-                <title>MV Admin</title>
-                <meta name="viewport" content="initial-scale=1, width=device-width" />
-            </Head>
-            <Provider store={store}>
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <ThemeProvider theme={theme}>
-                        <CssBaseline />
-                        {getLayout(<Component {...pageProps} />)}
-                    </ThemeProvider>
-                </LocalizationProvider>
-            </Provider>
-        </CacheProvider>
+        <QueryClientProvider client={queryClient}>
+            <CacheProvider value={emotionCache}>
+                <Head>
+                    <title>MV Admin</title>
+                    <meta name="viewport" content="initial-scale=1, width=device-width" />
+                </Head>
+                <Provider store={store}>
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <ThemeProvider theme={theme}>
+                            <CssBaseline />
+                            {getLayout(<Component {...pageProps} />)}
+                        </ThemeProvider>
+                    </LocalizationProvider>
+                </Provider>
+            </CacheProvider>
+        </QueryClientProvider>
     );
 }
 

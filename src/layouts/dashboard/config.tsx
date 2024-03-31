@@ -66,8 +66,8 @@ export const items: SideBarItem[] = [
         ),
         subItems: [
             {
-                title: 'Stats',
-                path: '/shopify/stats',
+                title: 'Categories',
+                path: '/shopify/categories',
                 icon: (
                     <SvgIcon fontSize="small">
                         <BoltIcon />
