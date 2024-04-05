@@ -5,6 +5,7 @@ import WrenchIcon from '@heroicons/react/24/solid/WrenchIcon';
 import MagnifyingGlassCircleIcon from '@heroicons/react/24/solid/MagnifyingGlassCircleIcon';
 import BeakerIcon from '@heroicons/react/24/solid/BeakerIcon';
 import BoltIcon from '@heroicons/react/24/solid/BoltIcon';
+import RectangleStackIcon from '@heroicons/react/24/solid/RectangleStackIcon';
 import { SvgIcon } from '@mui/material';
 import { ReactElement } from 'react';
 
@@ -71,6 +72,15 @@ export const items: SideBarItem[] = [
                 icon: (
                     <SvgIcon fontSize="small">
                         <BoltIcon />
+                    </SvgIcon>
+                ),
+            },
+            {
+                title: 'Products',
+                path: '/shopify/products',
+                icon: (
+                    <SvgIcon fontSize="small">
+                        <RectangleStackIcon />
                     </SvgIcon>
                 ),
             },

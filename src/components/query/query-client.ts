@@ -6,6 +6,7 @@ import { processResponse } from '../../utils/query';
 export enum Queries {
     SHOPIFY_GET_PRODUCT_STAT = 'shopify/getProductStat',
     SHOPIFY_GET_CATEGORIES_STAT = 'shopify/getCategoriesStat',
+    SHOPIFY_GET_CATEGORIES_LIST = 'shopify/getCategoriesList',
     FOO = 'foo',
 }
 
