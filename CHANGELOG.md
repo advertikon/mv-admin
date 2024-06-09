@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/advertikon/mv-admin/compare/v1.1.0...v1.2.0) (2024-06-09)
+
+
+### Features
+
+* add re-fetch page stats feature ([9394daf](https://github.com/advertikon/mv-admin/commit/9394daf05eaa3bff796b5ed3a4f7952fe2390836))
+
 # [1.1.0](https://github.com/advertikon/mv-admin/compare/v1.0.6...v1.1.0) (2023-07-22)
 
 
