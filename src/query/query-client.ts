@@ -1,17 +1,16 @@
 import { QueryClient } from '@tanstack/react-query';
 import { addShopifyMutations } from './mutations/shopify.mutation';
 import { addShopifyQueries } from './queries/shopify.queries';
-import { processResponse } from '../../utils/query';
+import { processResponse } from '../utils/query';
 
 export enum Queries {
     SHOPIFY_GET_PRODUCT_STAT = 'shopify/getProductStat',
     SHOPIFY_GET_CATEGORIES_STAT = 'shopify/getCategoriesStat',
     SHOPIFY_GET_CATEGORIES_LIST = 'shopify/getCategoriesList',
-    FOO = 'foo',
 }
 
 export enum Mutations {
-    FOO = 'foo',
+    SYNC_PRODUCT = 'shopify/syncProduct',
 }
 
 const defaultQueryFn = async ({ queryKey }: { queryKey: string[] }) => {

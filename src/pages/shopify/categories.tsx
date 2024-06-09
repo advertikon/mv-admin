@@ -4,10 +4,11 @@ import { Container } from '@mui/system';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { Layout } from '../../layouts/dashboard/layout';
-import { Queries } from '../../components/query/query-client';
+
 import { ShopifyCategoryStat, ShopifyProductStat } from '../../types';
 import { CategoriesTable } from '../../sections/shopify/categories-table';
 import { ProductsChart } from '../../sections/shopify/product-chart';
+import { Queries } from '../../query/query-client';
 
 function Page() {
     const [category, setCategory] = useState('');

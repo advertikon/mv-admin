@@ -8,7 +8,13 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import IconButton from '@mui/material/IconButton';
+import ReplayIcon from '@mui/icons-material/Replay';
+import { useMutation } from '@tanstack/react-query';
+import Snackbar from '@mui/material/Snackbar';
+import { useEffect } from 'react';
 import { ShopifyProductStat } from '../../types';
+import { Mutations } from '../../query/query-client';
 
 type Props = {
     data: ShopifyProductStat[];
@@ -29,6 +35,16 @@ function round(value: number | string): number | string {
 }
 
 export function ProductsTable({ data = [], setProduct, activeProduct }: Readonly<Props>) {
+    const [toastText, setToastText] = React.useState('');
+    const [statusToastShown, setStatusToastShown] = React.useState(true);
+    const {
+        mutate,
+        isPending,
+        data: { status: resyncStatus } = {},
+    } = useMutation<{ status: boolean }, unknown, string>({
+        mutationKey: [Mutations.SYNC_PRODUCT],
+    });
+
     const handleProductsSelection = (product: string) => {
         if (activeProduct.includes(product)) {
             setProduct(activeProduct.filter(item => item !== product));
@@ -36,6 +52,25 @@ export function ProductsTable({ data = [], setProduct, activeProduct }: Readonly
             setProduct([...activeProduct, product]);
         }
     };
+
+    const resyncHandler = (productId: string) => {
+        mutate(productId);
+    };
+
+    const handleClose = () => {
+        setStatusToastShown(false);
+        setToastText('');
+    };
+
+    useEffect(() => {
+        if (!isPending) {
+            if (resyncStatus === true) {
+                setToastText('Product stats re-synced');
+            } else if (resyncStatus === false) {
+                setToastText('Failed to re-sync product stat');
+            }
+        }
+    }, [resyncStatus, isPending]);
 
     return (
         <Paper sx={{ width: '100%' }}>
@@ -48,10 +83,12 @@ export function ProductsTable({ data = [], setProduct, activeProduct }: Readonly
                             <TableCell align="center">Avg 1month</TableCell>
                             <TableCell align="center">Avg 2month</TableCell>
                             <TableCell align="center">Avg 3month</TableCell>
+                            <TableCell align="center">Total reviews</TableCell>
                             <TableCell align="center">Created</TableCell>
                             <TableCell align="center">Developer</TableCell>
                             <TableCell align="center">Price</TableCell>
                             <TableCell align="center">Store</TableCell>
+                            <TableCell align="center">Actions</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -63,12 +100,13 @@ export function ProductsTable({ data = [], setProduct, activeProduct }: Readonly
                                 sx={{ backgroundColor: activeProduct.includes(row.name) ? '#79b3ff' : 'inherit' }}
                             >
                                 <TableCell sx={{ fontWeight: activeProduct.includes(row.name) ? 600 : 400 }}>
-                                    {row.name}
+                                    {row.name} {row._id}
                                 </TableCell>
                                 <TableCell>{round(row.avgReviews)}</TableCell>
                                 <TableCell>{round(row.pastMonthReviews)}</TableCell>
                                 <TableCell>{round(row.past2MonthReviews)}</TableCell>
                                 <TableCell>{round(row.past3MonthReviews)}</TableCell>
+                                <TableCell>{row.stats[row.stats.length - 1].reviews}</TableCell>
                                 <TableCell>{row.created_at}</TableCell>
                                 <TableCell>{row.developer}</TableCell>
                                 <TableCell>
@@ -79,11 +117,25 @@ export function ProductsTable({ data = [], setProduct, activeProduct }: Readonly
                                         Open
                                     </a>
                                 </TableCell>
+                                <TableCell>
+                                    <IconButton
+                                        aria-label="refetch"
+                                        color="success"
+                                        disabled={isPending}
+                                        onClick={event => {
+                                            event.stopPropagation();
+                                            resyncHandler(row._id);
+                                        }}
+                                    >
+                                        <ReplayIcon />
+                                    </IconButton>
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
             </TableContainer>
+            <Snackbar open={Boolean(toastText)} autoHideDuration={6000} onClose={handleClose} message={toastText} />
         </Paper>
     );
 }

@@ -12,7 +12,7 @@ import { createTheme } from '../theme/index';
 import { useNProgress } from '../hooks/use-nprogress';
 import '../base.css';
 import store from '../store/store';
-import { queryClient } from '../components/query/query-client';
+import { queryClient } from '../query/query-client';
 
 const clientSideEmotionCache = createEmotionCache();
 

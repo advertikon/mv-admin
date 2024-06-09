@@ -1,12 +1,12 @@
 /* eslint-disable no-console */
 import { QueryClient, QueryKey } from '@tanstack/react-query';
 import { Queries } from '../query-client';
-import { makeQueryString, processResponse } from '../../../utils/query';
+import { makeQueryString, processResponse } from '../../utils/query';
 
 const HOST = process.env.NEXT_PUBLIC_SHOPIFY_STATS_HOST;
 
 function GetProductStats({ queryKey }: { queryKey: QueryKey }) {
-    const [, category, id] = queryKey;
+    const [, category] = queryKey;
 
     return fetch(`${HOST}/products-stats?${makeQueryString({ category })}`, {
         method: 'get',
