@@ -70,8 +70,7 @@ export async function exchangeCode(code: string) {
 
 export async function refreshToken(): Promise<void> {
     const token = getToken();
-    console.log('refresh token');
-    console.log(token);
+
     if (!token?.refresh_token) {
         throw new RefreshTokenError('Refresh token missing');
     }
@@ -202,4 +201,22 @@ function redirectToPageBeforeAuth() {
     const refPage = window.localStorage.getItem(REF_PAGE);
     const returnPage = refPage && !doNotRedirectRegexps.find(r => r.test(refPage)) ? refPage : '/';
     window.location.assign(returnPage);
+}
+
+export async function revokeToken(): Promise<any> {
+    const token = await getAccessToken();
+
+    if (!token) {
+        console.error('No token to revoke');
+        return;
+    }
+
+    return fetch(`${context.oauthServiceUrl}/oauth/token/revocation`, {
+        headers: {
+            authorization: `Basic ${Buffer.from(`${context.clientId}:${context.clientSecret}`).toString('base64')}`,
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        },
+        body: `token=${token}`,
+        method: 'post',
+    });
 }

@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { AUTH_GET_ME } from '@saga/oauth.saga';
+import { AUTH_GET_ME, AUTH_LOGOUT } from '@saga/oauth.saga';
 import { getAuth, isAdmin, isLoggedIn, isSuperAdmin } from '@slice/oauth.slice';
 
 const initContext = {
@@ -50,6 +50,12 @@ export function AuthProvider(props) {
             throw new Error('Not permitted');
         }
     }, [loggedIn, admin]);
+
+    useEffect(() => {
+        if (!loggedIn && !isLoading && uid) {
+            dispatch({ type: AUTH_LOGOUT });
+        }
+    }, [loggedIn, isLoading, uid]);
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

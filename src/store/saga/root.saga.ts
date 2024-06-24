@@ -1,6 +1,6 @@
 import { all } from 'redux-saga/effects';
 import { SagaUserUpdatePassword } from '@saga/user.saga';
-import { SagaAuthExchangeCode, SagaAuthGetMe } from './oauth.saga';
+import { SagaAuthExchangeCode, SagaAuthGetMe, SagaAuthLogout } from './oauth.saga';
 import {
     SagaConfigGetApiKey,
     SagaConfigGetFilterableCollections,
@@ -48,5 +48,6 @@ export function* RootSaga() {
         SagaUserUpdatePassword(),
         SagaIndexingStartSync(),
         SagaIndexingSyncStatus(),
+        SagaAuthLogout(),
     ]);
 }

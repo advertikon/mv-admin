@@ -16,6 +16,7 @@
     "deploy": "./scripts/build.sh && ./scripts/deploy.sh && scripts/deploy-remote.sh"
   },
   "dependencies": {
+    "@bogochunas/oauth": "^1.2.0",
     "@emotion/cache": "11.10.5",
     "@emotion/react": "11.10.6",
     "@emotion/server": "11.10.0",

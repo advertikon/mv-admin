@@ -1,4 +1,4 @@
-import { FormControl, Grid, InputLabel, MenuItem, OutlinedInput, Select, SelectChangeEvent } from '@mui/material';
+import { FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
@@ -159,12 +159,12 @@ export function AppHandlerStat() {
                             </MenuItem>
                         ))}
                     </Select>
-                    <OutlinedInput
+                    <TextField
+                        type="text"
                         id="extract-keywords-list"
                         label="Extract keywords for app"
                         value={extractedKeywords?.join('\n') ?? []}
                         multiline
-                        readOnly
                     />
                 </FormControl>
             </Grid>
