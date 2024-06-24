@@ -1,3 +1,10 @@
+## [1.2.5](https://github.com/advertikon/mv-admin/compare/v1.2.4...v1.2.5) (2024-06-24)
+
+
+### Bug Fixes
+
+* toSorted issue ([30b1878](https://github.com/advertikon/mv-admin/commit/30b18784b3730ef411407b38e39bd2874a9c9d6d))
+
 ## [1.2.4](https://github.com/advertikon/mv-admin/compare/v1.2.3...v1.2.4) (2024-06-24)
 
 
