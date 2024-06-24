@@ -86,9 +86,11 @@ export function AppHandlerStat() {
     }, [statsLatest]);
 
     useEffect(() => {
-        const sorted = handlersStat[radarHandler]?.toSorted(sortRadarItems) ?? [];
-        setRadarLabels(sorted.map(d => d.keyword));
-        setRadarSeries([{ data: sorted.map(d => d.position), name: findAppTitle(radarHandler) }]);
+        handlersStat[radarHandler]?.sort(sortRadarItems);
+        setRadarLabels(handlersStat[radarHandler]?.map(d => d.keyword) ?? []);
+        setRadarSeries([
+            { data: handlersStat[radarHandler]?.map(d => d.position) ?? [], name: findAppTitle(radarHandler) },
+        ]);
     }, [radarHandler]);
 
     useEffect(() => {
