@@ -31,6 +31,48 @@ function GetCategoriesStats() {
         .catch(console.log);
 }
 
+function GetKeywordsList() {
+    return fetch(`${HOST}/keyword/keywords`, {
+        method: 'get',
+    })
+        .then(processResponse)
+        .catch(console.log);
+}
+
+function GetAppHandlersList() {
+    return fetch(`${HOST}/keyword/handlers`, {
+        method: 'get',
+    })
+        .then(processResponse)
+        .catch(console.log);
+}
+
+function GetLatestKeywordsStats() {
+    return fetch(`${HOST}/keyword/latest`, {
+        method: 'get',
+    })
+        .then(processResponse)
+        .catch(console.log);
+}
+
+function GetKeywordsHistoryStats({ queryKey }: { queryKey: QueryKey }) {
+    const [, appHandler] = queryKey;
+    return fetch(`${HOST}/keyword/history?${makeQueryString({ appHandler })}`, {
+        method: 'get',
+    })
+        .then(processResponse)
+        .catch(console.log);
+}
+
+function ExtractKeywords({ queryKey }: { queryKey: QueryKey }) {
+    const [, appHandler] = queryKey;
+    return fetch(`${HOST}/keyword/extract?${makeQueryString({ appHandler })}`, {
+        method: 'get',
+    })
+        .then(processResponse)
+        .catch(console.log);
+}
+
 export function addShopifyQueries(queryClient: QueryClient) {
     queryClient.setQueryDefaults([Queries.SHOPIFY_GET_PRODUCT_STAT], {
         queryFn: GetProductStats,
@@ -42,5 +84,25 @@ export function addShopifyQueries(queryClient: QueryClient) {
 
     queryClient.setQueryDefaults([Queries.SHOPIFY_GET_CATEGORIES_STAT], {
         queryFn: GetCategoriesStats,
+    });
+
+    queryClient.setQueryDefaults([Queries.SHOPIFY_GET_KEYWORDS_LIST], {
+        queryFn: GetKeywordsList,
+    });
+
+    queryClient.setQueryDefaults([Queries.SHOPIFY_GET_APP_HANDLERS_LIST], {
+        queryFn: GetAppHandlersList,
+    });
+
+    queryClient.setQueryDefaults([Queries.SHOPIFY_GET_KEYWORDS_STATS_LATEST], {
+        queryFn: GetLatestKeywordsStats,
+    });
+
+    queryClient.setQueryDefaults([Queries.SHOPIFY_GET_KEYWORDS_STATS_HISTORY], {
+        queryFn: GetKeywordsHistoryStats,
+    });
+
+    queryClient.setQueryDefaults([Queries.SHOPIFY_EXTRACT_KEYWORDS], {
+        queryFn: ExtractKeywords,
     });
 }

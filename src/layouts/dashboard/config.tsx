@@ -6,6 +6,7 @@ import MagnifyingGlassCircleIcon from '@heroicons/react/24/solid/MagnifyingGlass
 import BeakerIcon from '@heroicons/react/24/solid/BeakerIcon';
 import BoltIcon from '@heroicons/react/24/solid/BoltIcon';
 import RectangleStackIcon from '@heroicons/react/24/solid/RectangleStackIcon';
+import KeyIcon from '@heroicons/react/24/solid/KeyIcon';
 import { SvgIcon } from '@mui/material';
 import { ReactElement } from 'react';
 
@@ -81,6 +82,15 @@ export const items: SideBarItem[] = [
                 icon: (
                     <SvgIcon fontSize="small">
                         <RectangleStackIcon />
+                    </SvgIcon>
+                ),
+            },
+            {
+                title: 'Keywords',
+                path: '/shopify/keywords',
+                icon: (
+                    <SvgIcon fontSize="small">
+                        <KeyIcon />
                     </SvgIcon>
                 ),
             },

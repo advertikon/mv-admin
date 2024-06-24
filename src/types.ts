@@ -72,3 +72,11 @@ export type ShopifyProductStat = {
         pricing_plans?: string[];
     }[];
 };
+
+export type KeywordLatestStat = {
+    keyword: string;
+    appHandler: string;
+    position: number;
+    pageNumber: number;
+    appTitle: string;
+};
