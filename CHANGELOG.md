@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/advertikon/mv-admin/compare/v1.2.1...v1.2.2) (2024-06-24)
+
+
+### Bug Fixes
+
+* fix issue when auth user is missing ([2ea91c6](https://github.com/advertikon/mv-admin/commit/2ea91c688b0b88ef8bd07fd795a1e92c5e6d7e07))
+
 ## [1.2.1](https://github.com/advertikon/mv-admin/compare/v1.2.0...v1.2.1) (2024-06-09)
 
 
