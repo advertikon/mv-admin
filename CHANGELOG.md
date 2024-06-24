@@ -1,3 +1,10 @@
+## [1.2.7](https://github.com/advertikon/mv-admin/compare/v1.2.6...v1.2.7) (2024-06-24)
+
+
+### Bug Fixes
+
+* logout on missing user ([59112cf](https://github.com/advertikon/mv-admin/commit/59112cfcf7b61450efad3e07765de8980703537e))
+
 ## [1.2.6](https://github.com/advertikon/mv-admin/compare/v1.2.5...v1.2.6) (2024-06-24)
 
 
