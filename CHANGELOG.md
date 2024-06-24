@@ -1,3 +1,10 @@
+## [1.2.9](https://github.com/advertikon/mv-admin/compare/v1.2.8...v1.2.9) (2024-06-24)
+
+
+### Bug Fixes
+
+* fix outh logout ([3db3bd4](https://github.com/advertikon/mv-admin/commit/3db3bd4b1801034f25abc37e52075438e7c9616c))
+
 ## [1.2.8](https://github.com/advertikon/mv-admin/compare/v1.2.7...v1.2.8) (2024-06-24)
 
 
