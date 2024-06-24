@@ -1,6 +1,6 @@
 import { call, put, takeLeading } from 'redux-saga/effects';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { exchangeCode, me, revokeToken } from '@modules/oauth/ouath';
+import { RedirectToLoginPage, exchangeCode, me, revokeToken } from '@modules/oauth/ouath';
 import { setAuth, setExchangeCodeError, setIsLoading } from '@slice/oauth.slice';
 import { Auth } from '../../types';
 
@@ -21,7 +21,7 @@ function* exchangeCodeSage(action: PayloadAction<string>) {
 
 function* logout() {
     yield call(revokeToken);
-    yield window.location.reload();
+    yield RedirectToLoginPage();
 }
 
 export function* SagaAuthGetMe() {

@@ -52,7 +52,6 @@ export function AuthProvider(props) {
     }, [loggedIn, admin]);
 
     useEffect(() => {
-        console.log('loggerIn', loggedIn, 'isLoading', isLoading, 'sub', sub);
         if (!loggedIn && !isLoading && sub) {
             dispatch({ type: AUTH_LOGOUT });
         }
