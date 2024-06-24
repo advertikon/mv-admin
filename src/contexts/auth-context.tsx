@@ -19,7 +19,7 @@ export function AuthProvider(props) {
     const { children } = props;
     const dispatch = useDispatch();
     const {
-        auth: { uid, permissions, login, company },
+        auth: { uid, permissions, login, company, sub },
         isLoading,
     } = useSelector(getAuth);
     const loggedIn = useSelector(isLoggedIn);
@@ -52,8 +52,8 @@ export function AuthProvider(props) {
     }, [loggedIn, admin]);
 
     useEffect(() => {
-        console.log('loggerIn', loggedIn, 'isLoading', isLoading, 'uid', uid);
-        if (!loggedIn && !isLoading && uid) {
+        console.log('loggerIn', loggedIn, 'isLoading', isLoading, 'sub', sub);
+        if (!loggedIn && !isLoading && sub) {
             dispatch({ type: AUTH_LOGOUT });
         }
     }, [loggedIn, isLoading, uid]);
