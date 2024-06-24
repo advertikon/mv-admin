@@ -52,6 +52,7 @@ export function AuthProvider(props) {
     }, [loggedIn, admin]);
 
     useEffect(() => {
+        console.log('loggerIn', loggedIn, 'isLoading', isLoading, 'uid', uid);
         if (!loggedIn && !isLoading && uid) {
             dispatch({ type: AUTH_LOGOUT });
         }
