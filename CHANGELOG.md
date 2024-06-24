@@ -1,3 +1,10 @@
+## [1.2.6](https://github.com/advertikon/mv-admin/compare/v1.2.5...v1.2.6) (2024-06-24)
+
+
+### Bug Fixes
+
+* empty ([60d5962](https://github.com/advertikon/mv-admin/commit/60d5962c922c625e94310072036bfeaf48dc2428))
+
 ## [1.2.5](https://github.com/advertikon/mv-admin/compare/v1.2.4...v1.2.5) (2024-06-24)
 
 
