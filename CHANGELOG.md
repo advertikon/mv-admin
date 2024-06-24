@@ -1,3 +1,10 @@
+## [1.2.8](https://github.com/advertikon/mv-admin/compare/v1.2.7...v1.2.8) (2024-06-24)
+
+
+### Bug Fixes
+
+* add debug statement ([9d4c226](https://github.com/advertikon/mv-admin/commit/9d4c226821c886bbcb1e8784725051e3e00af86d))
+
 ## [1.2.7](https://github.com/advertikon/mv-admin/compare/v1.2.6...v1.2.7) (2024-06-24)
 
 
