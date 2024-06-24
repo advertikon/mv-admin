@@ -26,6 +26,11 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v3
 
+            - name: Use Node.js 20.x
+              uses: actions/setup-node@v3
+              with:
+                node-version: 20.x
+
             - name: Configure AWS credentials
               uses: aws-actions/configure-aws-credentials@0e613a0980cbf65ed5b322eb7a1e075d28913a83
               with:
