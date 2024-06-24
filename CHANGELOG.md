@@ -1,3 +1,10 @@
+## [1.2.4](https://github.com/advertikon/mv-admin/compare/v1.2.3...v1.2.4) (2024-06-24)
+
+
+### Bug Fixes
+
+* update Dockerfile to Node v20 ([e8483f0](https://github.com/advertikon/mv-admin/commit/e8483f00d189e98b24d64b60f2bb066c468b6f34))
+
 ## [1.2.3](https://github.com/advertikon/mv-admin/compare/v1.2.2...v1.2.3) (2024-06-24)
 
 
