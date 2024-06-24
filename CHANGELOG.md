@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/advertikon/mv-admin/compare/v1.2.2...v1.2.3) (2024-06-24)
+
+
+### Bug Fixes
+
+* switch to Node v20 in CI ([6f29cf7](https://github.com/advertikon/mv-admin/commit/6f29cf7d36ad4103cacadbbb2e047f18362e9172))
+
 ## [1.2.2](https://github.com/advertikon/mv-admin/compare/v1.2.1...v1.2.2) (2024-06-24)
 
 
