@@ -1,7 +1,8 @@
 import { createContext, useContext, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { AUTH_GET_ME, AUTH_LOGOUT } from '@saga/oauth.saga';
+import { AUTH_GET_ME } from '@saga/oauth.saga';
 import { getAuth, isAdmin, isLoggedIn, isSuperAdmin } from '@slice/oauth.slice';
+import { useRouter } from 'next/router';
 
 const initContext = {
     loading: false,
@@ -16,6 +17,7 @@ const initContext = {
 export const AuthContext = createContext(initContext);
 
 export function AuthProvider(props) {
+    const router = useRouter();
     const { children } = props;
     const dispatch = useDispatch();
     const {
@@ -53,7 +55,8 @@ export function AuthProvider(props) {
 
     useEffect(() => {
         if (!loggedIn && !isLoading && sub) {
-            dispatch({ type: AUTH_LOGOUT });
+            // dispatch({ type: AUTH_LOGOUT });
+            router.push(`${process.env.NEXT_PUBLIC_OAUTH_SERVER}/oauth/session/end`);
         }
     }, [loggedIn, isLoading, uid]);
 

@@ -38,7 +38,7 @@ export function AccountPopover(props) {
                 </Typography>
                 {superAdmin && (
                     <Typography color="text.secondary" variant="caption">
-                        ({company})
+                        ({company || 'No company'})
                     </Typography>
                 )}
             </Box>
