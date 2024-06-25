@@ -1,3 +1,10 @@
+## [1.2.11](https://github.com/advertikon/mv-admin/compare/v1.2.10...v1.2.11) (2024-06-25)
+
+
+### Bug Fixes
+
+* fix logout ([2168085](https://github.com/advertikon/mv-admin/commit/216808504a755b5d7c8763d41b2d085a2445618f))
+
 ## [1.2.10](https://github.com/advertikon/mv-admin/compare/v1.2.9...v1.2.10) (2024-06-24)
 
 
