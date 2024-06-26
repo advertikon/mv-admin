@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/advertikon/mv-admin/compare/v1.2.11...v1.3.0) (2024-06-26)
+
+
+### Features
+
+* keyword refetch feature ([aa2e73f](https://github.com/advertikon/mv-admin/commit/aa2e73f3d746da32ab3bc170425274abcdb3b8a3))
+
 ## [1.2.11](https://github.com/advertikon/mv-admin/compare/v1.2.10...v1.2.11) (2024-06-25)
 
 
