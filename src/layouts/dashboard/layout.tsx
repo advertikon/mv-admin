@@ -8,6 +8,7 @@ import { TopNav } from './top-nav';
 import SplashScreen from '../../components/splash-screen';
 
 import 'react-toastify/dist/ReactToastify.css';
+import { SseProvider } from '../../contexts/sse-context';
 
 const SIDE_NAV_WIDTH = 280;
 
@@ -48,14 +49,16 @@ export function Layout(props) {
 
     return (
         <AuthProvider>
-            <SplashScreen>
-                <TopNav onNavOpen={() => setOpenNav(true)} />
-                <SideNav onClose={() => setOpenNav(false)} open={openNav} />
-                <LayoutRoot>
-                    <LayoutContainer>{children}</LayoutContainer>
-                    <ToastContainer />
-                </LayoutRoot>
-            </SplashScreen>
+            <SseProvider>
+                <SplashScreen>
+                    <TopNav onNavOpen={() => setOpenNav(true)} />
+                    <SideNav onClose={() => setOpenNav(false)} open={openNav} />
+                    <LayoutRoot>
+                        <LayoutContainer>{children}</LayoutContainer>
+                        <ToastContainer />
+                    </LayoutRoot>
+                </SplashScreen>
+            </SseProvider>
         </AuthProvider>
     );
 }

@@ -18,6 +18,7 @@ export enum Mutations {
     SYNC_PRODUCT = 'shopify/syncProduct',
     SHOPIFY_SET_KEYWORDS_LIST = 'shopify/setKeywordsList',
     SHOPIFY_SET_APP_HANDLERS_LIST = 'shopify/setAppHandlersList',
+    SHOPIFY_REFETCH_KEYWORDS = 'shopify/refetchKeywords',
 }
 
 const defaultQueryFn = async ({ queryKey }: { queryKey: string[] }) => {

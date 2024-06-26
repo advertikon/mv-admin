@@ -24,6 +24,12 @@ function setAppHandlersList(list: string[]) {
     }).then(processResponse);
 }
 
+function RefetchKeywords() {
+    return fetch(`${HOST}/keyword/assess`, {
+        method: 'get',
+    }).then(processResponse);
+}
+
 export function addShopifyMutations(queryClient: QueryClient) {
     queryClient.setMutationDefaults([Mutations.SYNC_PRODUCT], {
         mutationFn: syncProduct,
@@ -44,5 +50,9 @@ export function addShopifyMutations(queryClient: QueryClient) {
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: [Queries.SHOPIFY_GET_APP_HANDLERS_LIST] });
         },
+    });
+
+    queryClient.setMutationDefaults([Mutations.SHOPIFY_REFETCH_KEYWORDS], {
+        mutationFn: RefetchKeywords,
     });
 }
