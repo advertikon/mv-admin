@@ -1,3 +1,15 @@
+# [1.4.0](https://github.com/advertikon/mv-admin/compare/v1.3.1...v1.4.0) (2024-09-17)
+
+
+### Bug Fixes
+
+* **products:** fix products table ([82a2544](https://github.com/advertikon/mv-admin/commit/82a2544e09ef41b48b4f5a296625ac9417ac5002))
+
+
+### Features
+
+* **product:** add product filtering to product table ([fe51fcc](https://github.com/advertikon/mv-admin/commit/fe51fcc028d63c592f134e8736aa0588b0fa8314))
+
 ## [1.3.1](https://github.com/advertikon/mv-admin/compare/v1.3.0...v1.3.1) (2024-09-17)
 
 
