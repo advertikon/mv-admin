@@ -69,11 +69,11 @@ export function ProductsTable({ data = [], setProduct, activeProduct }: Readonly
             }
         }
     }, [resyncStatus, isPending]);
-
+    console.log(data);
     return (
         <Paper sx={{ width: '100%' }}>
-            <TableContainer sx={{ maxHeight: 440 }}>
-                <Table stickyHeader aria-label="sticky table">
+            <TableContainer sx={{ height: 800 }}>
+                <Table stickyHeader aria-label="sticky table" size="medium">
                     <TableHead>
                         <TableRow>
                             <TableCell align="center">Name</TableCell>
@@ -92,13 +92,18 @@ export function ProductsTable({ data = [], setProduct, activeProduct }: Readonly
                     <TableBody>
                         {data.map(row => (
                             <TableRow
-                                hover
                                 key={row._id}
                                 onClick={() => handleProductsSelection(row.name)}
-                                sx={{ backgroundColor: activeProduct.includes(row.name) ? '#79b3ff' : 'inherit' }}
+                                sx={{
+                                    backgroundColor: activeProduct.includes(row.name) ? '#79b3ff' : 'inherit',
+                                    '&:last-child td, &:last-child th': { border: 0 },
+                                }}
                             >
-                                <TableCell sx={{ fontWeight: activeProduct.includes(row.name) ? 600 : 400 }}>
-                                    {row.name} {row._id}
+                                <TableCell
+                                    sx={{ fontWeight: activeProduct.includes(row.name) ? 600 : 400 }}
+                                    title={row._id}
+                                >
+                                    {row.name}
                                 </TableCell>
                                 <TableCell>{round(row.avgReviews)}</TableCell>
                                 <TableCell>{round(row.pastMonthReviews)}</TableCell>
@@ -108,7 +113,9 @@ export function ProductsTable({ data = [], setProduct, activeProduct }: Readonly
                                 <TableCell>{row.created_at}</TableCell>
                                 <TableCell>{row.developer}</TableCell>
                                 <TableCell>
-                                    {row.stats[row.stats.length - 1]?.pricing_plans?.join(', ') ?? ''}
+                                    {row.stats[row.stats.length - 1]?.pricing_plans?.join(', ') ||
+                                        row.stats[row.stats.length - 1]?.price ||
+                                        'N/A'}
                                 </TableCell>
                                 <TableCell>
                                     <a href={row.url} target="_blank" rel="noreferrer">
