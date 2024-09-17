@@ -13,6 +13,7 @@ import ReplayIcon from '@mui/icons-material/Replay';
 import { useMutation } from '@tanstack/react-query';
 import Snackbar from '@mui/material/Snackbar';
 import { useEffect } from 'react';
+import { TextField } from '@mui/material';
 import { ShopifyProductStat } from '../../types';
 import { Mutations } from '../../query/query-client';
 
@@ -36,6 +37,7 @@ function round(value: number | string): number | string {
 
 export function ProductsTable({ data = [], setProduct, activeProduct }: Readonly<Props>) {
     const [toastText, setToastText] = React.useState('');
+    const [productFilter, setProductFilter] = React.useState('');
     const {
         mutate,
         isPending,
@@ -60,6 +62,10 @@ export function ProductsTable({ data = [], setProduct, activeProduct }: Readonly
         setToastText('');
     };
 
+    const setProductFilterHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setProductFilter(event.currentTarget.value);
+    };
+
     useEffect(() => {
         if (!isPending) {
             if (resyncStatus === true) {
@@ -69,9 +75,19 @@ export function ProductsTable({ data = [], setProduct, activeProduct }: Readonly
             }
         }
     }, [resyncStatus, isPending]);
-    console.log(data);
+
     return (
         <Paper sx={{ width: '100%' }}>
+            <div style={{ border: 'solid 2px indigo', padding: 1, borderRadius: 5 }}>
+                <TextField
+                    variant="filled"
+                    color="error"
+                    placeholder="Filter products"
+                    size="small"
+                    fullWidth
+                    onChange={setProductFilterHandler}
+                />
+            </div>
             <TableContainer sx={{ height: 800 }}>
                 <Table stickyHeader aria-label="sticky table" size="medium">
                     <TableHead>
@@ -90,53 +106,55 @@ export function ProductsTable({ data = [], setProduct, activeProduct }: Readonly
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {data.map(row => (
-                            <TableRow
-                                key={row._id}
-                                onClick={() => handleProductsSelection(row.name)}
-                                sx={{
-                                    backgroundColor: activeProduct.includes(row.name) ? '#79b3ff' : 'inherit',
-                                    '&:last-child td, &:last-child th': { border: 0 },
-                                }}
-                            >
-                                <TableCell
-                                    sx={{ fontWeight: activeProduct.includes(row.name) ? 600 : 400 }}
-                                    title={row._id}
+                        {data
+                            .filter(v => !productFilter || v.name.toLowerCase().startsWith(productFilter.toLowerCase()))
+                            .map(row => (
+                                <TableRow
+                                    key={row._id}
+                                    onClick={() => handleProductsSelection(row.name)}
+                                    sx={{
+                                        backgroundColor: activeProduct.includes(row.name) ? '#79b3ff' : 'inherit',
+                                        '&:last-child td, &:last-child th': { border: 0 },
+                                    }}
                                 >
-                                    {row.name}
-                                </TableCell>
-                                <TableCell>{round(row.avgReviews)}</TableCell>
-                                <TableCell>{round(row.pastMonthReviews)}</TableCell>
-                                <TableCell>{round(row.past2MonthReviews)}</TableCell>
-                                <TableCell>{round(row.past3MonthReviews)}</TableCell>
-                                <TableCell>{row.stats[row.stats.length - 1].reviews}</TableCell>
-                                <TableCell>{row.created_at}</TableCell>
-                                <TableCell>{row.developer}</TableCell>
-                                <TableCell>
-                                    {row.stats[row.stats.length - 1]?.pricing_plans?.join(', ') ||
-                                        row.stats[row.stats.length - 1]?.price ||
-                                        'N/A'}
-                                </TableCell>
-                                <TableCell>
-                                    <a href={row.url} target="_blank" rel="noreferrer">
-                                        Open
-                                    </a>
-                                </TableCell>
-                                <TableCell>
-                                    <IconButton
-                                        aria-label="refetch"
-                                        color="success"
-                                        disabled={isPending}
-                                        onClick={event => {
-                                            event.stopPropagation();
-                                            resyncHandler(row._id);
-                                        }}
+                                    <TableCell
+                                        sx={{ fontWeight: activeProduct.includes(row.name) ? 600 : 400 }}
+                                        title={row._id}
                                     >
-                                        <ReplayIcon />
-                                    </IconButton>
-                                </TableCell>
-                            </TableRow>
-                        ))}
+                                        {row.name}
+                                    </TableCell>
+                                    <TableCell>{round(row.avgReviews)}</TableCell>
+                                    <TableCell>{round(row.pastMonthReviews)}</TableCell>
+                                    <TableCell>{round(row.past2MonthReviews)}</TableCell>
+                                    <TableCell>{round(row.past3MonthReviews)}</TableCell>
+                                    <TableCell>{row.stats[row.stats.length - 1].reviews}</TableCell>
+                                    <TableCell>{row.created_at}</TableCell>
+                                    <TableCell>{row.developer}</TableCell>
+                                    <TableCell>
+                                        {row.stats[row.stats.length - 1]?.pricing_plans?.join(', ') ||
+                                            row.stats[row.stats.length - 1]?.price ||
+                                            'N/A'}
+                                    </TableCell>
+                                    <TableCell>
+                                        <a href={row.url} target="_blank" rel="noreferrer">
+                                            Open
+                                        </a>
+                                    </TableCell>
+                                    <TableCell>
+                                        <IconButton
+                                            aria-label="refetch"
+                                            color="success"
+                                            disabled={isPending}
+                                            onClick={event => {
+                                                event.stopPropagation();
+                                                resyncHandler(row._id);
+                                            }}
+                                        >
+                                            <ReplayIcon />
+                                        </IconButton>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
                     </TableBody>
                 </Table>
             </TableContainer>
