@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/advertikon/mv-admin/compare/v1.3.0...v1.3.1) (2024-09-17)
+
+
+### Bug Fixes
+
+* **keyword:** chage keyword timeline graph ([a76b07c](https://github.com/advertikon/mv-admin/commit/a76b07c75e376cae97ea247e6a18cc5787dd2521))
+
 # [1.3.0](https://github.com/advertikon/mv-admin/compare/v1.2.11...v1.3.0) (2024-06-26)
 
 
