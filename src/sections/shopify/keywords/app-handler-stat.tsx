@@ -142,7 +142,27 @@ export function AppHandlerStat() {
                 />
             </Grid>
             <Grid item minWidth="100%" style={{ border: 'solid 1px #ccc', borderRadius: 5 }}>
-                <ApexChart options={{}} series={lineSeries} type="line" width="100%" height="auto" />
+                <ApexChart
+                    options={{
+                        xaxis: { type: 'datetime' },
+                        colors: [
+                            '#ff0000',
+                            '#00ff00',
+                            '#0000ff',
+                            '#ffff00',
+                            '#ff00ff',
+                            '#00ffff',
+                            '#ff8000',
+                            '#8000ff',
+                            '#00ff80',
+                            '#ff0080',
+                        ],
+                    }}
+                    series={lineSeries}
+                    type="line"
+                    width="100%"
+                    height="auto"
+                />
             </Grid>
             <Grid item textAlign="center" style={{ border: 'solid 1px #ccc', borderRadius: 5 }}>
                 <FormControl sx={{ m: 1, minWidth: 300 }}>

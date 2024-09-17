@@ -207,7 +207,7 @@ export async function revokeToken(): Promise<any> {
     const token = await getAccessToken();
 
     if (!token) {
-        console.error('No token to revoke');
+        // console.error('No token to revoke');
         return;
     }
 

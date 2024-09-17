@@ -36,7 +36,6 @@ function round(value: number | string): number | string {
 
 export function ProductsTable({ data = [], setProduct, activeProduct }: Readonly<Props>) {
     const [toastText, setToastText] = React.useState('');
-    const [statusToastShown, setStatusToastShown] = React.useState(true);
     const {
         mutate,
         isPending,
@@ -58,7 +57,6 @@ export function ProductsTable({ data = [], setProduct, activeProduct }: Readonly
     };
 
     const handleClose = () => {
-        setStatusToastShown(false);
         setToastText('');
     };
 
