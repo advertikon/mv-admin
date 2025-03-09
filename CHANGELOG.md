@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/advertikon/mv-admin/compare/v1.4.0...v1.5.0) (2025-03-09)
+
+
+### Features
+
+* extend product search capabilities ([c6697bd](https://github.com/advertikon/mv-admin/commit/c6697bde14fe61f8caf96699054a415b31ce8c07))
+
 # [1.4.0](https://github.com/advertikon/mv-admin/compare/v1.3.1...v1.4.0) (2024-09-17)
 
 
