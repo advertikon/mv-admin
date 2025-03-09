@@ -127,7 +127,7 @@ export function ProductsTable({ data = [], setProduct, activeProduct }: Readonly
                                     <TableCell>{round(row.pastMonthReviews)}</TableCell>
                                     <TableCell>{round(row.past2MonthReviews)}</TableCell>
                                     <TableCell>{round(row.past3MonthReviews)}</TableCell>
-                                    <TableCell>{row.stats[row.stats.length - 1].reviews}</TableCell>
+                                    <TableCell>{row.stats[row.stats.length - 1]?.reviews ?? 'n/a'}</TableCell>
                                     <TableCell>{row.created_at}</TableCell>
                                     <TableCell>{row.developer}</TableCell>
                                     <TableCell>
