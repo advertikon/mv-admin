@@ -10,7 +10,16 @@ type KeywordFetchEvent = {
     finished: boolean;
 };
 
+type KeywordFetchError = {
+    type: EventType.Keyword;
+    error: string;
+};
+
 export function isKeywordFetchEvent(event: any): event is KeywordFetchEvent {
+    return event?.type === EventType.Keyword;
+}
+
+export function isKeywordFetchError(event: any): event is KeywordFetchError {
     return event?.type === EventType.Keyword;
 }
 
@@ -66,7 +75,7 @@ export function SseProvider({ children }) {
         } else if (error) {
             setErrorListeners(list =>
                 list.map(listener => {
-                    listener(error);
+                    listener(safeJsonParse(error) ?? error);
                     return listener;
                 })
             );

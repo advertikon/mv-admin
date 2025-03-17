@@ -7,7 +7,7 @@ import { Layout } from '../../layouts/dashboard/layout';
 import { Mutations, Queries, queryClient } from '../../query/query-client';
 import MultipleSelectChip from '../../sections/shopify/keywords/multiselect-chip';
 import { AppHandlerStat } from '../../sections/shopify/keywords/app-handler-stat';
-import { isKeywordFetchEvent, SseContext } from '../../contexts/sse-context';
+import { isKeywordFetchError, isKeywordFetchEvent, SseContext } from '../../contexts/sse-context';
 
 function compareLists(list1?: string[], list2?: string[]): boolean {
     if (!list1 || !list2) {
@@ -83,8 +83,8 @@ function Page() {
     }, []);
 
     const sseErrorListener = useCallback(message => {
-        if (message.startsWith('Error processing keywords:')) {
-            const error = message.split(':')[1].trim();
+        if (isKeywordFetchError(message)) {
+            const { error } = message;
             toast.update(refetchKeywordsToastId.current, {
                 render: `Error: ${error}`,
                 type: 'error',
