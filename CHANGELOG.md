@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/advertikon/mv-admin/compare/v1.5.0...v1.5.1) (2025-03-17)
+
+
+### Bug Fixes
+
+* fix keyword events displaying ([8e5bb8f](https://github.com/advertikon/mv-admin/commit/8e5bb8fecaffe3c5bc295041e6bf99da85f241fb))
+
 # [1.5.0](https://github.com/advertikon/mv-admin/compare/v1.4.0...v1.5.0) (2025-03-09)
 
 
