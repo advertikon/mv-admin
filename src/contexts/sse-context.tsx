@@ -1,6 +1,22 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import { safeJsonParse } from '../utils/common';
 
 type Listener = (message: any) => void;
+
+type KeywordFetchEvent = {
+    type: EventType.Keyword;
+    keyword: string;
+    progress: number;
+    finished: boolean;
+};
+
+export function isKeywordFetchEvent(event: any): event is KeywordFetchEvent {
+    return event?.type === EventType.Keyword;
+}
+
+enum EventType {
+    Keyword = 'keyword',
+}
 
 const initContext = {
     onMessage: (() => {}) as Listener,
@@ -43,7 +59,7 @@ export function SseProvider({ children }) {
         if (message) {
             setMessageListeners(list =>
                 list.map(listener => {
-                    listener(message);
+                    listener(safeJsonParse(message) ?? message);
                     return listener;
                 })
             );

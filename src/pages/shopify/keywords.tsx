@@ -7,7 +7,7 @@ import { Layout } from '../../layouts/dashboard/layout';
 import { Mutations, Queries, queryClient } from '../../query/query-client';
 import MultipleSelectChip from '../../sections/shopify/keywords/multiselect-chip';
 import { AppHandlerStat } from '../../sections/shopify/keywords/app-handler-stat';
-import { SseContext } from '../../contexts/sse-context';
+import { isKeywordFetchEvent, SseContext } from '../../contexts/sse-context';
 
 function compareLists(list1?: string[], list2?: string[]): boolean {
     if (!list1 || !list2) {
@@ -63,29 +63,22 @@ function Page() {
     });
 
     const sseEventsListener = useCallback(message => {
-        if (message.startsWith('Processing keyword:')) {
-            const keyword = message.split(':')[1].trim();
-            toast.update(refetchKeywordsToastId.current, { render: `Processing: ${keyword}` });
-        } else if (message === 'Finished processing keywords') {
-            toast.update(refetchKeywordsToastId.current, {
-                render: 'Keywords re-fetched',
-                type: 'success',
-                isLoading: false,
-                autoClose: 2000,
-            });
-
-            queryClient.invalidateQueries({ queryKey: [Queries.SHOPIFY_GET_KEYWORDS_STATS_HISTORY] });
-            queryClient.invalidateQueries({ queryKey: [Queries.SHOPIFY_GET_KEYWORDS_STATS_LATEST] });
-            setRefetchInProgress(false);
-        } else if (message.startsWith('Error processing keywords:')) {
-            const error = message.split(':')[1].trim();
-            toast.update(refetchKeywordsToastId.current, {
-                render: `Error: ${error}`,
-                type: 'error',
-                isLoading: false,
-                autoClose: 10000,
-            });
-            setRefetchInProgress(false);
+        if (isKeywordFetchEvent(message)) {
+            const { finished, keyword, progress } = message;
+            if (finished) {
+                toast.update(refetchKeywordsToastId.current, {
+                    render: 'Keywords re-fetched',
+                    type: 'success',
+                    isLoading: false,
+                    autoClose: 2000,
+                    progress: 1,
+                });
+                queryClient.invalidateQueries({ queryKey: [Queries.SHOPIFY_GET_KEYWORDS_STATS_HISTORY] });
+                queryClient.invalidateQueries({ queryKey: [Queries.SHOPIFY_GET_KEYWORDS_STATS_LATEST] });
+                setRefetchInProgress(false);
+            } else {
+                toast.update(refetchKeywordsToastId.current, { render: `Processing: ${keyword}`, progress });
+            }
         }
     }, []);
 
@@ -194,7 +187,7 @@ function Page() {
     };
 
     const refetchKeywordsHandler = () => {
-        refetchKeywordsToastId.current = toast.loading('Refetching keywords...');
+        refetchKeywordsToastId.current = toast.loading('Refetching keywords...', { type: 'info' });
         refetchKeywords();
         setRefetchInProgress(true);
     };
