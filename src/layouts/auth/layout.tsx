@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import NextLink from 'next/link';
-import { Box, Typography, Unstable_Grid2 as Grid } from '@mui/material';
+import { Box, Typography, Grid } from '@mui/material';
 import { Logo } from '../../components/logo';
 
 // TODO: Change subtitle text
@@ -18,8 +18,7 @@ export function Layout(props) {
         >
             <Grid container sx={{ flex: '1 1 auto' }}>
                 <Grid
-                    xs={12}
-                    lg={6}
+                    size={{ lg: 12, sm: 12, xs: 12 }}
                     sx={{
                         backgroundColor: 'background.paper',
                         display: 'flex',
@@ -52,8 +51,7 @@ export function Layout(props) {
                     {children}
                 </Grid>
                 <Grid
-                    xs={12}
-                    lg={6}
+                    size={{ xs: 12, lg: 6 }}
                     sx={{
                         alignItems: 'center',
                         background: 'radial-gradient(50% 50% at 50% 50%, #122647 0%, #090E23 100%)',

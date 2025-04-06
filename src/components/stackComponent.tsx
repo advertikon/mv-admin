@@ -9,7 +9,7 @@ function StackComponent() {
             <CardContent>
                 <Box sx={{ padding: 4 }}>
                     <Grid container spacing={2} marginBottom={2} alignItems="top">
-                        <Grid xs={12} item>
+                        <Grid size={{ xs: 12 }}>
                             <StackSelector />
                         </Grid>
                     </Grid>

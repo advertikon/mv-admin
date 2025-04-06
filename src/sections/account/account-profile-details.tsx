@@ -1,15 +1,5 @@
 import { useCallback, useState } from 'react';
-import {
-    Box,
-    Button,
-    Card,
-    CardActions,
-    CardContent,
-    CardHeader,
-    Divider,
-    TextField,
-    Unstable_Grid2 as Grid,
-} from '@mui/material';
+import { Box, Button, Card, CardActions, CardContent, CardHeader, Divider, TextField, Grid } from '@mui/material';
 
 const states = [
     {
@@ -58,7 +48,7 @@ export function AccountProfileDetails() {
                 <CardContent sx={{ pt: 0 }}>
                     <Box sx={{ m: -1.5 }}>
                         <Grid container spacing={3}>
-                            <Grid xs={12} md={6}>
+                            <Grid size={{ xs: 12, md: 6 }}>
                                 <TextField
                                     fullWidth
                                     helperText="Please specify the first name"
@@ -69,7 +59,7 @@ export function AccountProfileDetails() {
                                     value={values.firstName}
                                 />
                             </Grid>
-                            <Grid xs={12} md={6}>
+                            <Grid size={{ xs: 12, md: 6 }}>
                                 <TextField
                                     fullWidth
                                     label="Last name"
@@ -79,7 +69,7 @@ export function AccountProfileDetails() {
                                     value={values.lastName}
                                 />
                             </Grid>
-                            <Grid xs={12} md={6}>
+                            <Grid size={{ xs: 12, md: 6 }}>
                                 <TextField
                                     fullWidth
                                     label="Email Address"
@@ -89,7 +79,7 @@ export function AccountProfileDetails() {
                                     value={values.email}
                                 />
                             </Grid>
-                            <Grid xs={12} md={6}>
+                            <Grid size={{ xs: 12, md: 6 }}>
                                 <TextField
                                     fullWidth
                                     label="Phone Number"
@@ -99,7 +89,7 @@ export function AccountProfileDetails() {
                                     value={values.phone}
                                 />
                             </Grid>
-                            <Grid xs={12} md={6}>
+                            <Grid size={{ xs: 12, md: 6 }}>
                                 <TextField
                                     fullWidth
                                     label="Country"
@@ -109,7 +99,7 @@ export function AccountProfileDetails() {
                                     value={values.country}
                                 />
                             </Grid>
-                            <Grid xs={12} md={6}>
+                            <Grid size={{ xs: 12, md: 6 }}>
                                 <TextField
                                     fullWidth
                                     label="Select State"

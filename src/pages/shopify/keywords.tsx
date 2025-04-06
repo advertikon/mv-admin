@@ -199,7 +199,7 @@ function Page() {
             </Head>
             <Container style={{ border: 'solid 0px black' }} maxWidth="xl" disableGutters>
                 <Grid container spacing={2}>
-                    <Grid item xs={12}>
+                    <Grid size={12}>
                         <Box sx={{ display: 'flex', justifyContent: 'center', padding: '20px' }}>
                             <Stack direction="row" spacing={2}>
                                 <Button
@@ -228,7 +228,7 @@ function Page() {
                             </Stack>
                         </Box>
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid size={12}>
                         <Box sx={{ display: 'flex', justifyContent: 'center', padding: '20px' }}>
                             <AppHandlerStat />
                         </Box>

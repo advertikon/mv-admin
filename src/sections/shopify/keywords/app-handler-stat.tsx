@@ -115,7 +115,7 @@ export function AppHandlerStat() {
 
     return (
         <Grid container alignContent="center" direction="column" rowGap={3}>
-            <Grid item textAlign="center" style={{ border: 'solid 1px #ccc', borderRadius: 5 }}>
+            <Grid textAlign="center" style={{ border: 'solid 1px #ccc', borderRadius: 5 }}>
                 <FormControl sx={{ m: 1, minWidth: 120 }}>
                     <InputLabel id="app-handle-select-label">Select App</InputLabel>
                     <Select
@@ -132,7 +132,7 @@ export function AppHandlerStat() {
                     </Select>
                 </FormControl>
             </Grid>
-            <Grid item minWidth="100%" style={{ border: 'solid 1px #ccc', borderRadius: 5 }}>
+            <Grid minWidth="100%" style={{ border: 'solid 1px #ccc', borderRadius: 5 }}>
                 <ApexChart
                     options={{ ...radarOptions, labels: radarLabels }}
                     series={radarSeries}
@@ -141,7 +141,7 @@ export function AppHandlerStat() {
                     height="auto"
                 />
             </Grid>
-            <Grid item minWidth="100%" style={{ border: 'solid 1px #ccc', borderRadius: 5 }}>
+            <Grid minWidth="100%" style={{ border: 'solid 1px #ccc', borderRadius: 5 }}>
                 <ApexChart
                     options={{
                         xaxis: { type: 'datetime' },
@@ -164,7 +164,7 @@ export function AppHandlerStat() {
                     height="auto"
                 />
             </Grid>
-            <Grid item textAlign="center" style={{ border: 'solid 1px #ccc', borderRadius: 5 }}>
+            <Grid textAlign="center" style={{ border: 'solid 1px #ccc', borderRadius: 5 }}>
                 <FormControl sx={{ m: 1, minWidth: 300 }}>
                     <InputLabel id="extract-app-handle-select-label">Extract keywords for app</InputLabel>
                     <Select

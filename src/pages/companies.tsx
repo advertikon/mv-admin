@@ -2,7 +2,7 @@ import Head from 'next/head';
 import ArrowUpOnSquareIcon from '@heroicons/react/24/solid/ArrowUpOnSquareIcon';
 import ArrowDownOnSquareIcon from '@heroicons/react/24/solid/ArrowDownOnSquareIcon';
 import PlusIcon from '@heroicons/react/24/solid/PlusIcon';
-import { Box, Button, Container, Pagination, Stack, SvgIcon, Typography, Unstable_Grid2 as Grid } from '@mui/material';
+import { Box, Button, Container, Pagination, Stack, SvgIcon, Typography, Grid } from '@mui/material';
 import { CompaniesSearch } from '../sections/companies/companies-search';
 import { CompanyCard } from '../sections/companies/company-card';
 import { Layout } from '../layouts/dashboard/layout';
@@ -118,7 +118,7 @@ function Page() {
                         <CompaniesSearch />
                         <Grid container spacing={3}>
                             {companies.map(company => (
-                                <Grid xs={12} md={6} lg={4} key={company.id}>
+                                <Grid size={{ xs: 12, md: 6, lg: 4 }} key={company.id}>
                                     <CompanyCard company={company} />
                                 </Grid>
                             ))}

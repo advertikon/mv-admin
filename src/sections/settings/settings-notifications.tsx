@@ -10,7 +10,7 @@ import {
     FormControlLabel,
     Stack,
     Typography,
-    Unstable_Grid2 as Grid,
+    Grid,
 } from '@mui/material';
 
 export function SettingsNotifications() {
@@ -25,7 +25,7 @@ export function SettingsNotifications() {
                 <Divider />
                 <CardContent>
                     <Grid container spacing={6} wrap="wrap">
-                        <Grid xs={12} sm={6} md={4}>
+                        <Grid size={{ xs: 12, sm: 6, md: 4 }}>
                             <Stack spacing={1}>
                                 <Typography variant="h6">Notifications</Typography>
                                 <Stack>
@@ -39,7 +39,7 @@ export function SettingsNotifications() {
                                 </Stack>
                             </Stack>
                         </Grid>
-                        <Grid md={4} sm={6} xs={12}>
+                        <Grid size={{ xs: 12, sm: 6, md: 4 }}>
                             <Stack spacing={1}>
                                 <Typography variant="h6" />
                             </Stack>

@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { Box, Container, SvgIcon, Unstable_Grid2 as Grid } from '@mui/material';
+import { Box, Container, SvgIcon, Grid } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReactElement, useEffect, useRef, useState } from 'react';
 import { Layout } from '@layout/dashboard/layout';
@@ -129,7 +129,7 @@ function Page() {
             >
                 <Container maxWidth="xl">
                     <Grid container spacing={3}>
-                        <Grid xs={12} sm={6} lg={3}>
+                        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
                             <OverviewNumber
                                 sx={{ height: '100%' }}
                                 value={indexingStatus.totalProductsCount}
@@ -141,7 +141,7 @@ function Page() {
                                 }
                             />
                         </Grid>
-                        <Grid xs={12} sm={6} lg={3}>
+                        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
                             <OverviewProgress
                                 sx={{ height: '100%' }}
                                 value={(indexingStatus.indexedProductsCount / indexingStatus.totalProductsCount) * 100}
@@ -154,14 +154,14 @@ function Page() {
                                 iconColor="success.main"
                             />
                         </Grid>
-                        <Grid xs={12} sm={6} lg={3}>
+                        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
                             <OverviewText
                                 sx={{ height: '100%' }}
                                 title="Status"
                                 {...getStatusOverviewProps(indexingStatus)}
                             />
                         </Grid>
-                        <Grid xs={12} sm={6} lg={3}>
+                        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
                             <OverviewText
                                 sx={{ height: '100%' }}
                                 title="Last run date"
@@ -175,7 +175,7 @@ function Page() {
                         </Grid>
                     </Grid>
                     <Grid container spacing={3}>
-                        <Grid xs={12} sm={6} lg={3}>
+                        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
                             <IndexControls
                                 sx={{ height: '100%' }}
                                 start={startHandle}
@@ -188,21 +188,21 @@ function Page() {
                                 }
                             />
                         </Grid>
-                        <Grid xs={12} sm={6} lg={3}>
+                        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
                             <OverviewNumber
                                 sx={{ height: '100%' }}
                                 title="Batch size"
                                 value={indexingStatus.indexBunchSize}
                             />
                         </Grid>
-                        <Grid xs={12} sm={6} lg={3}>
+                        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
                             <OverviewText
                                 sx={{ height: '100%' }}
                                 title="Delay"
                                 text={`${indexingStatus.indexDelay / 1000} sec`}
                             />
                         </Grid>
-                        <Grid xs={12} sm={6} lg={3}>
+                        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
                             <OverviewNumber
                                 sx={{ height: '100%' }}
                                 title="Current progress"
@@ -211,10 +211,10 @@ function Page() {
                         </Grid>
                     </Grid>
                     <Grid container spacing={3}>
-                        <Grid xs={12} sm={6} lg={3}>
+                        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
                             <OverviewText sx={{ height: '100%' }} title="Indexing estimation" text={estimation} />
                         </Grid>
-                        <Grid xs={12} sm={6} lg={3}>
+                        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
                             <OverviewSyncStatus />
                         </Grid>
                     </Grid>

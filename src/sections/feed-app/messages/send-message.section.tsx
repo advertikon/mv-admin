@@ -1,22 +1,8 @@
-import {
-    Button,
-    ButtonGroup,
-    Popper,
-    TextField,
-    ClickAwayListener,
-    Paper,
-    MenuList,
-    MenuItem,
-    Grow,
-    Select,
-    FormControl,
-    InputLabel,
-} from '@mui/material';
-import { useEffect, useRef, useState } from 'react';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { TextField, Paper, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
+import { useState } from 'react';
 import { Box, styled } from '@mui/system';
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { Mutations, Queries } from '../../../query/query-client';
+import { useMutation } from '@tanstack/react-query';
+import { Mutations } from '../../../query/query-client';
 import SearchCompanyInput from './search-company-select';
 import { SendMessageButton, SendMessageType } from './send-message-button';
 
@@ -53,9 +39,7 @@ export function SendMessage() {
     const {
         mutate: sendMessage,
         isError,
-        isIdle,
         failureReason,
-        data: sendMessageResponse,
     } = useMutation<unknown, unknown, { text: string; shops: string; type: string }>({
         mutationKey: [Mutations.FEED_APP_SEND_MESSAGE],
     });

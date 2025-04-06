@@ -55,7 +55,7 @@ export function LayeredSearchConfigApiKey() {
             <CardContent>
                 <Box sx={{ padding: 4 }}>
                     <Grid container spacing={2} marginBottom={2} alignItems="top">
-                        <Grid item xs={12}>
+                        <Grid size={12}>
                             <TextField
                                 error={Boolean(apiKeyErrorMessage)}
                                 helperText={apiKeyErrorMessage}

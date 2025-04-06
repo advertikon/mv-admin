@@ -112,7 +112,7 @@ export default function StackSelector() {
                     const labelId = `transfer-list-item-${value}-label`;
 
                     return (
-                        <ListItem key={value} role="listitem" button onClick={handleToggle(value)}>
+                        <ListItem key={value} role="listitem" onClick={handleToggle(value)}>
                             <ListItemIcon sx={{ display: auth.superAdmin ? 'block' : 'none' }}>
                                 <Checkbox
                                     checked={checked.indexOf(value) !== -1}
@@ -135,15 +135,15 @@ export default function StackSelector() {
     return (
         <Grid container spacing={2} justifyContent="center" alignItems="center">
             {error && (
-                <Grid item xs={12}>
+                <Grid size={{ xs: 12 }}>
                     <Alert severity="error">{error}</Alert>
                 </Grid>
             )}
-            <Grid item sx={{ position: 'relative', display: auth.superAdmin ? 'block' : 'none' }}>
+            <Grid sx={{ position: 'relative', display: auth.superAdmin ? 'block' : 'none' }}>
                 {customList(left)}
                 {isAvailableStackLoading && <ProgressOverlay />}
             </Grid>
-            <Grid item sx={{ display: auth.superAdmin ? 'block' : 'none' }}>
+            <Grid sx={{ display: auth.superAdmin ? 'block' : 'none' }}>
                 <Grid container direction="column" alignItems="center">
                     <Button
                         sx={{ my: 0.5 }}
@@ -187,7 +187,7 @@ export default function StackSelector() {
                     </Button>
                 </Grid>
             </Grid>
-            <Grid item sx={{ position: 'relative' }}>
+            <Grid sx={{ position: 'relative' }}>
                 {customList(right)}
                 {isConfigStackLoading && <ProgressOverlay />}
             </Grid>

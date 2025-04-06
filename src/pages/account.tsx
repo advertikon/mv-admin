@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { Box, Container, Stack, Typography, Unstable_Grid2 as Grid } from '@mui/material';
+import { Box, Container, Stack, Typography, Grid } from '@mui/material';
 import { AccountProfile } from '@sections/account/account-profile';
 import { AccountProfileDetails } from '@sections/account/account-profile-details';
 import { Layout } from '@layout/dashboard/layout';
@@ -24,10 +24,10 @@ function Page() {
                         </div>
                         <div>
                             <Grid container spacing={3}>
-                                <Grid xs={12} md={6} lg={4}>
+                                <Grid size={{ xs: 12, lg: 4, md: 6 }}>
                                     <AccountProfile />
                                 </Grid>
-                                <Grid xs={12} md={6} lg={8}>
+                                <Grid size={{ xs: 12, md: 6, lg: 8 }}>
                                     <AccountProfileDetails />
                                 </Grid>
                             </Grid>

@@ -12,7 +12,7 @@ export function LayeredSearchConfigCompany() {
             <CardContent>
                 <Box sx={{ padding: 4 }}>
                     <Grid container spacing={2} marginBottom={2} alignItems="top">
-                        <Grid padding={1} item xs={12}>
+                        <Grid padding={1} size={12}>
                             <TextField disabled label="Store" value={company || ''} fullWidth />
                         </Grid>
                     </Grid>
