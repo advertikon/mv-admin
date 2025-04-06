@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/advertikon/mv-admin/compare/v1.5.2...v1.6.0) (2025-04-06)
+
+
+### Features
+
+* add FeedApp page ([fd1e04d](https://github.com/advertikon/mv-admin/commit/fd1e04d6af8ef8da6a3c3596b0d7bc23f782ba99))
+
 ## [1.5.2](https://github.com/advertikon/mv-admin/compare/v1.5.1...v1.5.2) (2025-03-17)
 
 
