@@ -20,8 +20,10 @@ export async function processResponse<T>(response: Response, defaultValue?: T): 
     throw new Error(response.statusText);
 }
 
-async function getBody<T>(response: Response): Promise<T> {
-    return response.headers.get('Content-Type')?.includes('application/json') ? response.json() : response.text();
+export async function getBody<T>(response: Response): Promise<T> {
+    return response.headers.get('Content-Type')?.includes('application/json')
+        ? response.json()
+        : (response.text() as any);
 }
 
 export function makeQueryString(query: Record<string, any>, asArray = true) {

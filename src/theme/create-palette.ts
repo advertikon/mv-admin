@@ -1,6 +1,6 @@
 import { common } from '@mui/material/colors';
 import { alpha } from '@mui/material/styles';
-import { error, indigo, info, neutral, success, warning } from './colors';
+import { error, indigo, info, neutral, success, warning, blue } from './colors';
 
 export function createPalette() {
     return {
@@ -29,5 +29,6 @@ export function createPalette() {
             disabled: alpha(neutral[900], 0.38),
         },
         warning,
+        blue,
     };
 }

@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { subDays, subHours } from 'date-fns';
-import { Box, Container, Unstable_Grid2 as Grid } from '@mui/material';
+import { Box, Container, Grid } from '@mui/material';
 import { Layout } from '../layouts/dashboard/layout';
 import { OverviewBudget } from '../sections/overview/overview-budget';
 import { OverviewTotalCustomers } from '../sections/overview/overview-total-customers';
@@ -28,10 +28,10 @@ function Page() {
             >
                 <Container maxWidth="xl">
                     <Grid container spacing={3}>
-                        <Grid xs={12} sm={6} lg={3}>
+                        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
                             <OverviewBudget difference={12} positive sx={{ height: '100%' }} value="$24k" />
                         </Grid>
-                        <Grid xs={12} sm={6} lg={3}>
+                        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
                             <OverviewTotalCustomers
                                 difference={16}
                                 positive={false}
@@ -39,13 +39,13 @@ function Page() {
                                 value="1.6k"
                             />
                         </Grid>
-                        <Grid xs={12} sm={6} lg={3}>
+                        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
                             <OverviewTasksProgress sx={{ height: '100%' }} value={75.5} />
                         </Grid>
-                        <Grid xs={12} sm={6} lg={3}>
+                        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
                             <OverviewTotalProfit sx={{ height: '100%' }} value="$15k" />
                         </Grid>
-                        <Grid xs={12} lg={8}>
+                        <Grid size={{ xs: 12, lg: 8 }}>
                             <OverviewSales
                                 chartSeries={[
                                     {
@@ -60,14 +60,14 @@ function Page() {
                                 sx={{ height: '100%' }}
                             />
                         </Grid>
-                        <Grid xs={12} md={6} lg={4}>
+                        <Grid size={{ xs: 12, md: 6, lg: 4 }}>
                             <OverviewTraffic
                                 chartSeries={[63, 15, 22]}
                                 labels={['Desktop', 'Tablet', 'Phone']}
                                 sx={{ height: '100%' }}
                             />
                         </Grid>
-                        <Grid xs={12} md={6} lg={4}>
+                        <Grid size={{ xs: 12, md: 6, lg: 4 }}>
                             <OverviewLatestProducts
                                 products={[
                                     {
@@ -104,7 +104,7 @@ function Page() {
                                 sx={{ height: '100%' }}
                             />
                         </Grid>
-                        <Grid xs={12} md={12} lg={8}>
+                        <Grid size={{ xs: 12, md: 12, lg: 8 }}>
                             <OverviewLatestOrders
                                 orders={[
                                     {
