@@ -1,3 +1,15 @@
+# [1.7.0](https://github.com/advertikon/mv-admin/compare/v1.6.1...v1.7.0) (2025-04-29)
+
+
+### Bug Fixes
+
+* fix deploy ([4329715](https://github.com/advertikon/mv-admin/commit/43297158a8f66dfae78c02a54985d75414255010))
+
+
+### Features
+
+* deploy to cluster ([7800fa6](https://github.com/advertikon/mv-admin/commit/7800fa61511222e6e218b3d99904e0bfbfd64ea9))
+
 ## [1.6.1](https://github.com/advertikon/mv-admin/compare/v1.6.0...v1.6.1) (2025-04-06)
 
 
