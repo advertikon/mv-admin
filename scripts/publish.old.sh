@@ -23,12 +23,14 @@ echo " ✔ Package version: ${PACKAGE_VERSION}"
 echo " ✔ Building versioned image ${TAGGED}";
 docker build -t "${TAGGED}" .
 echo " ✔ Building latest image ${LATEST}";
-docker tag "${TAGGED}" "${LATEST}"
+docker build -t "${LATEST}" .
 
 echo " ✔ Deploying image to ECR"
 docker push "$TAGGED"
 docker push "$LATEST"
 
-echo " ✔ Updating image in Kubernetes"
-kubectl --insecure-skip-tls-verify set image -n prod deployment/mv-admin mv-admin=registry.staging.maxvehicle.com/mv-admin:"$PACKAGE_VERSION"
-kubectl --insecure-skip-tls-verify rollout status deployment/mv-admin -n prod
+echo " ✔ Registering new task definition"
+SED_REPLACEMENT="s/VERSION/$PACKAGE_VERSION/"
+aws ecs register-task-definition --cli-input-json "$(sed $SED_REPLACEMENT task-definition.json)"
+echo " ✔ Updating service $SERVICE_NAME inside cluster $CLUSTER_NAME to use new latest version of task definition family $TASK_DEFINITION_NAME"
+aws ecs update-service --cluster "$CLUSTER_NAME" --service "$SERVICE_NAME" --task-definition "$TASK_DEFINITION_NAME"

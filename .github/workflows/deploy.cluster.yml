@@ -1,0 +1,74 @@
+name: Deploy to Cluster
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+on:
+  push:
+    branches:
+      - master
+env:
+  CACHE_NAME: cache-node-modules
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+
+      - name: Install kubectl
+        run: |
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+          kubectl version --client
+          mkdir -p ~/.kube
+          echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config
+
+      - name: Login to docker registry
+        run: |
+          docker login -u registry -p '${{ secrets.DOCKER_PASSWORD }}' registry.staging.maxvehicle.com
+
+      - name: Fetch cached node modules
+        id: cache-npm
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.CACHE_NAME }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+        name: Cache node modules
+        continue-on-error: true
+        uses: actions/cache/save@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.CACHE_NAME }}-${{ hashFiles('package-lock.json') }}
+
+      - name: Create .env
+        run: |
+          echo '${{ secrets.ENV }}' > .env
+
+      - name: Semantic Release
+        id: semantic
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          IMAGE: "registry.staging.maxvehicle.com/mv-admin"
+        run: npx semantic-release

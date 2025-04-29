@@ -8,8 +8,7 @@ permissions:
 on:
     push:
         branches:
-            - main
-            - master
+            - foo-bar-baz
 env:
     CACHE_NAME: cache-node-modules
     CLUSTER_NAME: mv-production-cluster
