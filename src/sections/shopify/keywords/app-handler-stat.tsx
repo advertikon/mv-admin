@@ -114,7 +114,7 @@ export function AppHandlerStat() {
     };
 
     return (
-        <Grid container alignContent="center" direction="column" rowGap={3}>
+        <Grid container alignContent="center" direction="column" rowGap={3} size={12}>
             <Grid textAlign="center" style={{ border: 'solid 1px #ccc', borderRadius: 5 }}>
                 <FormControl sx={{ m: 1, minWidth: 120 }}>
                     <InputLabel id="app-handle-select-label">Select App</InputLabel>
@@ -164,7 +164,7 @@ export function AppHandlerStat() {
                     height="auto"
                 />
             </Grid>
-            <Grid textAlign="center" style={{ border: 'solid 1px #ccc', borderRadius: 5 }}>
+            <Grid textAlign="center" style={{ border: 'solid 1px #ccc', borderRadius: 5 }} size={12}>
                 <FormControl sx={{ m: 1, minWidth: 300 }}>
                     <InputLabel id="extract-app-handle-select-label">Extract keywords for app</InputLabel>
                     <Select
