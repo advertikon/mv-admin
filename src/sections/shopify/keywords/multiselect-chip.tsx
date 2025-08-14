@@ -80,12 +80,16 @@ export default function MultipleSelectChip({ items = [], setParentList }: Readon
                     labelId={`${id}-select-label`}
                     id={`${id}-select`}
                     multiple
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-ignore
                     value={selectedItems}
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-ignore
                     onChange={handleChange}
                     input={<OutlinedInput id={`${id}-chip`} label="Selected items" />}
                     renderValue={selected => (
                         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                            {selected.map(value => (
+                            {(selected as unknown as string[]).map(value => (
                                 <Chip key={value} label={value} />
                             ))}
                         </Box>
