@@ -11,6 +11,7 @@ import KeyIcon from '@heroicons/react/24/solid/KeyIcon';
 import { SvgIcon } from '@mui/material';
 import { ReactElement } from 'react';
 import MegaphoneIcon from '@heroicons/react/24/solid/MegaphoneIcon';
+import BuildingStorefront from '@heroicons/react/24/solid/BuildingStorefrontIcon';
 
 export type SideBarItem = {
     disabled?: boolean;
@@ -106,6 +107,15 @@ export const items: SideBarItem[] = [
             </SvgIcon>
         ),
         subItems: [
+            {
+                title: 'Companies',
+                path: '/feed-app/companies',
+                icon: (
+                    <SvgIcon fontSize="small">
+                        <BuildingStorefront />
+                    </SvgIcon>
+                ),
+            },
             {
                 title: 'Messages',
                 path: '/feed-app/messages',

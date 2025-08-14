@@ -1,6 +1,6 @@
 import { QueryClient, QueryKey } from '@tanstack/react-query';
 import { Queries } from '../query-client';
-import { getBody } from '../../utils/query';
+import { getBody, makeQueryString } from '../../utils/query';
 
 const HOST = process.env.NEXT_PUBLIC_FEED_AP_BE;
 const AUTH_TOKEN = process.env.NEXT_FEED_APP_BE_ROOT_PASSWORD;
@@ -34,8 +34,26 @@ function SearchShops({ queryKey }: { queryKey: QueryKey }) {
     }).then(processResponse);
 }
 
+function GetCompanies({ queryKey }: { queryKey: QueryKey }) {
+    const [, limit, offset, sort, order, filter, search] = queryKey;
+
+    return fetch(
+        `${HOST}/api/admin/companies-list?${makeQueryString({ limit, offset, sort, order, filter, search })}`,
+        {
+            method: 'get',
+            headers: {
+                ...getAuthHeader(),
+            },
+        }
+    ).then(processResponse);
+}
+
 export function addFeeAppQueries(queryClient: QueryClient) {
     queryClient.setQueryDefaults([Queries.FEED_APP_SEARCH_SHOP], {
         queryFn: SearchShops,
+    });
+
+    queryClient.setQueryDefaults([Queries.FEED_APP_GET_COMPANIES], {
+        queryFn: GetCompanies,
     });
 }

@@ -32,7 +32,7 @@ export function makeQueryString(query: Record<string, any>, asArray = true) {
         .map(([key, value]) => {
             if (Array.isArray(value)) {
                 if (asArray) {
-                    return value.map(v => `${key}=${encodeURIComponent(v)}`);
+                    return value.map(v => `${key}[]=${encodeURIComponent(v)}`);
                 }
 
                 return `${key}=${value.map(encodeURIComponent).join(',')}`;

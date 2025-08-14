@@ -14,6 +14,7 @@ export enum Queries {
     SHOPIFY_GET_KEYWORDS_STATS_LATEST = 'shopify/getKeywordsStatsLatest',
     SHOPIFY_GET_KEYWORDS_STATS_HISTORY = 'shopify/getKeywordsStatsHistory',
     SHOPIFY_EXTRACT_KEYWORDS = 'shopify/extractKeywords',
+    FEED_APP_GET_COMPANIES = 'feedApp/getCompanies',
     FEED_APP_SEARCH_SHOP = 'feedApp/searchShop',
 }
 
