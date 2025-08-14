@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/advertikon/mv-admin/compare/v1.7.1...v1.8.0) (2025-08-14)
+
+
+### Features
+
+* add page to a list of the companies installed  maxify-feed ([bac96db](https://github.com/advertikon/mv-admin/commit/bac96db959474b42068b070f8646f0bcc68d02d4))
+
 ## [1.7.1](https://github.com/advertikon/mv-admin/compare/v1.7.0...v1.7.1) (2025-05-02)
 
 
