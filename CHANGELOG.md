@@ -1,3 +1,10 @@
+## [1.8.3](https://github.com/advertikon/mv-admin/compare/v1.8.2...v1.8.3) (2025-08-14)
+
+
+### Bug Fixes
+
+* remove styles from companies page ([b1ace59](https://github.com/advertikon/mv-admin/commit/b1ace590c748f86f94f363300ee2dbad1c94a983))
+
 ## [1.8.2](https://github.com/advertikon/mv-admin/compare/v1.8.1...v1.8.2) (2025-08-14)
 
 
