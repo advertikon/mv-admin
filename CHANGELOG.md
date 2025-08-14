@@ -1,3 +1,10 @@
+## [1.8.2](https://github.com/advertikon/mv-admin/compare/v1.8.1...v1.8.2) (2025-08-14)
+
+
+### Bug Fixes
+
+* redeploy ([1983859](https://github.com/advertikon/mv-admin/commit/198385939dad72e38e4f66a7963a476f5fca20df))
+
 ## [1.8.1](https://github.com/advertikon/mv-admin/compare/v1.8.0...v1.8.1) (2025-08-14)
 
 
