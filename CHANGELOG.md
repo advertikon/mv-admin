@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/advertikon/mv-admin/compare/v1.8.0...v1.8.1) (2025-08-14)
+
+
+### Bug Fixes
+
+* fix ts errors ([bf6ace8](https://github.com/advertikon/mv-admin/commit/bf6ace8203c367048441cfd9ac1a876d248e9fbf))
+
 # [1.8.0](https://github.com/advertikon/mv-admin/compare/v1.7.1...v1.8.0) (2025-08-14)
 
 
