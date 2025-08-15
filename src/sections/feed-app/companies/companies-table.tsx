@@ -280,7 +280,7 @@ export function CompaniesTable() {
                             ))}
                         </TableRow>
                     </TableHead>
-                    <TableBody>
+                    {/* <TableBody>
                         {list?.map(row => (
                             <TableRow hover key={row.name} onClick={() => {}} sx={{ backgroundColor: 'inherit' }}>
                                 <TableCell>{row.name}</TableCell>
@@ -306,7 +306,7 @@ export function CompaniesTable() {
                                 </TableCell>
                             </TableRow>
                         ))}
-                    </TableBody>
+                    </TableBody> */}
                 </Table>
             </TableContainer>
             {/* <TablePagination
