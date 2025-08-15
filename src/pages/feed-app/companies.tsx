@@ -16,7 +16,7 @@ function Page() {
                     py: 8,
                 }}
             >
-                <Container>
+                <Container maxWidth="xl">
                     <Stack spacing={3}>
                         <CompaniesListSection />
                     </Stack>
