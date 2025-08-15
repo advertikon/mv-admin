@@ -1,3 +1,10 @@
+## [1.10.11](https://github.com/advertikon/mv-admin/compare/v1.10.10...v1.10.11) (2025-08-15)
+
+
+### Bug Fixes
+
+* fix companies table component ([e523776](https://github.com/advertikon/mv-admin/commit/e523776df8c82d462c29e33996edcf750465d584))
+
 ## [1.10.10](https://github.com/advertikon/mv-admin/compare/v1.10.9...v1.10.10) (2025-08-15)
 
 
