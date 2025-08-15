@@ -282,29 +282,29 @@ export function CompaniesTable() {
                     </TableHead>
                     <TableBody>
                         {list?.map(row => (
-                            // <TableRow hover key={row.name} onClick={() => {}} sx={{ backgroundColor: 'inherit' }}>
-                            //     <TableCell>{row.name}</TableCell>
-                            //     <TableCell>{dateFormatter.format(new Date(row.installed_at))}</TableCell>
-                            //     <TableCell>
-                            //         {row.uninstalled_at && dateFormatter.format(new Date(row.uninstalled_at))}
-                            //     </TableCell>
-                            //     <TableCell>{dateFormatter.format(new Date(row.last_visited_at))}</TableCell>
-                            //     <TableCell>
-                            //         {row.review_pop_up_shown_at &&
-                            //             dateFormatter.format(new Date(row.review_pop_up_shown_at))}
-                            //     </TableCell>
-                            //     <TableCell>{row.variants_count}</TableCell>
-                            //     <TableCell style={{ color: row.xml_feed_active ? 'green' : 'red' }}>
-                            //         {row.xml_feeds_count}
-                            //     </TableCell>
-                            //     <TableCell style={{ color: row.gmc_api_profiles_count ? 'green' : 'red' }}>
-                            //         {row.gmc_api_profiles_count}
-                            //     </TableCell>
+                            <TableRow hover key={row.name} onClick={() => {}} sx={{ backgroundColor: 'inherit' }}>
+                                {/* <TableCell>{row.name}</TableCell>
+                                <TableCell>{dateFormatter.format(new Date(row.installed_at))}</TableCell>
+                                <TableCell>
+                                    {row.uninstalled_at && dateFormatter.format(new Date(row.uninstalled_at))}
+                                </TableCell>
+                                <TableCell>{dateFormatter.format(new Date(row.last_visited_at))}</TableCell>
+                                <TableCell>
+                                    {row.review_pop_up_shown_at &&
+                                        dateFormatter.format(new Date(row.review_pop_up_shown_at))}
+                                </TableCell>
+                                <TableCell>{row.variants_count}</TableCell>
+                                <TableCell style={{ color: row.xml_feed_active ? 'green' : 'red' }}>
+                                    {row.xml_feeds_count}
+                                </TableCell>
+                                <TableCell style={{ color: row.gmc_api_profiles_count ? 'green' : 'red' }}>
+                                    {row.gmc_api_profiles_count}
+                                </TableCell>
 
-                            //     <TableCell style={{ color: gmcStatus(row).status ? 'green' : 'red' }} align="center">
-                            //         {gmcStatus(row).status ? 'Yes' : gmcStatus(row).issue}
-                            //     </TableCell>
-                            // </TableRow>
+                                <TableCell style={{ color: gmcStatus(row).status ? 'green' : 'red' }} align="center">
+                                    {gmcStatus(row).status ? 'Yes' : gmcStatus(row).issue}
+                                </TableCell> */}
+                            </TableRow>
                         ))}
                     </TableBody>
                 </Table>
