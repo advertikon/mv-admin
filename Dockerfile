@@ -1,12 +1,12 @@
-FROM node:20-alpine as build
+FROM node:22-alpine AS build
 COPY . .
 
 RUN npm ci
 RUN npm run build
 
-FROM node:20-alpine
+FROM node:22-alpine
 
-WORKDIR app
+WORKDIR /app
 
 COPY --from=build .next .next
 COPY public public
@@ -15,6 +15,6 @@ COPY package.json package-lock.json next.config.js .env ./
 
 RUN npm ci --omit=dev
 
-CMD npm run start
+CMD ["npm", "run", "start"]
 
 EXPOSE 3000
