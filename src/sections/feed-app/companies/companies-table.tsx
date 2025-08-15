@@ -44,6 +44,7 @@ type CompanyType = {
 
 export enum CompanyListFilter {
     UNINSTALLED = 'uninstalled',
+    NOT_UNINSTALLED = 'not_uninstalled',
     REVIEW_SHOWN = 'review_shown',
     REVIEW_NOT_SHOWN = 'review_not_shown',
     HAS_FEED = 'has_feed',
@@ -159,6 +160,17 @@ export function CompaniesTable() {
                         <FormControlLabel
                             control={
                                 <Checkbox
+                                    defaultChecked={filter.includes(CompanyListFilter.NOT_UNINSTALLED)}
+                                    onChange={e => {
+                                        handleFilterChange(CompanyListFilter.NOT_UNINSTALLED, e.target.checked);
+                                    }}
+                                />
+                            }
+                            label="Not Uninstalled"
+                        />
+                        <FormControlLabel
+                            control={
+                                <Checkbox
                                     defaultChecked={filter.includes(CompanyListFilter.REVIEW_SHOWN)}
                                     onChange={e => {
                                         handleFilterChange(CompanyListFilter.REVIEW_SHOWN, e.target.checked);
@@ -247,7 +259,7 @@ export function CompaniesTable() {
                     </Grid>
                 </Grid>
             </Box>
-            <TableContainer sx={{ maxHeight: 440 }}>
+            <TableContainer sx={{ minHeight: '60vh' }}>
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
                         <TableRow>
@@ -276,24 +288,17 @@ export function CompaniesTable() {
                             <TableRow hover key={row.name} onClick={() => {}} sx={{ backgroundColor: 'inherit' }}>
                                 <TableCell>{row.name}</TableCell>
                                 <TableCell>
-                                    {dayjs(row.installed_at).isValid()
-                                        ? dayjs(row.installed_at).format('YYYY-MM-DD')
-                                        : row.installed_at}
+                                    {row.installed_at && dayjs(row.installed_at).format('YYYY-MM-DD')}
                                 </TableCell>
                                 <TableCell>
-                                    {dayjs(row.uninstalled_at).isValid()
-                                        ? dayjs(row.uninstalled_at).format('YYYY-MM-DD')
-                                        : row.uninstalled_at}
+                                    {row.uninstalled_at && dayjs(row.uninstalled_at).format('YYYY-MM-DD')}
                                 </TableCell>
                                 <TableCell>
-                                    {dayjs(row.last_visited_at).isValid()
-                                        ? dayjs(row.last_visited_at).format('YYYY-MM-DD')
-                                        : row.last_visited_at}
+                                    {row.last_visited_at && dayjs(row.last_visited_at).format('YYYY-MM-DD')}
                                 </TableCell>
                                 <TableCell>
-                                    {dayjs(row.review_pop_up_shown_at).isValid()
-                                        ? dayjs(row.review_pop_up_shown_at).format('YYYY-MM-DD')
-                                        : row.review_pop_up_shown_at}
+                                    {row.review_pop_up_shown_at &&
+                                        dayjs(row.review_pop_up_shown_at).format('YYYY-MM-DD')}
                                 </TableCell>
                                 <TableCell>{row.variants_count}</TableCell>
                                 <TableCell style={{ color: row.xml_feed_active ? 'green' : 'red' }}>
