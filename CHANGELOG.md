@@ -1,3 +1,10 @@
+## [1.10.6](https://github.com/advertikon/mv-admin/compare/v1.10.5...v1.10.6) (2025-08-15)
+
+
+### Bug Fixes
+
+* debug ([badbcbc](https://github.com/advertikon/mv-admin/commit/badbcbcd201e16aaaf37ceca5ed4c0a90f39f54f))
+
 ## [1.10.5](https://github.com/advertikon/mv-admin/compare/v1.10.4...v1.10.5) (2025-08-15)
 
 
