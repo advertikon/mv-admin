@@ -1,3 +1,10 @@
+## [1.10.12](https://github.com/advertikon/mv-admin/compare/v1.10.11...v1.10.12) (2025-08-15)
+
+
+### Bug Fixes
+
+* change compaines page container width ([08e5796](https://github.com/advertikon/mv-admin/commit/08e5796e76cbbc0026e3349415685a33ee931ba2))
+
 ## [1.10.11](https://github.com/advertikon/mv-admin/compare/v1.10.10...v1.10.11) (2025-08-15)
 
 
