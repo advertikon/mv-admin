@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/advertikon/mv-admin/compare/v1.8.3...v1.9.0) (2025-08-15)
+
+
+### Features
+
+* update node to v22 ([1ff6b3f](https://github.com/advertikon/mv-admin/commit/1ff6b3f5ebe76869aeb238387dff7dc4eb845698))
+
 ## [1.8.3](https://github.com/advertikon/mv-admin/compare/v1.8.2...v1.8.3) (2025-08-14)
 
 
