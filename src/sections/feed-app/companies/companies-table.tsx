@@ -262,7 +262,7 @@ export function CompaniesTable() {
                         <TableRow>
                             {Object.entries(headerLabels).map(([key, label]) => (
                                 <TableCell key={key} align="center">
-                                    {false && key !== 'google_credentials' ? (
+                                    {/* {key !== 'google_credentials' ? (
                                         <TableSortLabel
                                             active={sort === key}
                                             direction={sortDirection}
@@ -275,7 +275,7 @@ export function CompaniesTable() {
                                         </TableSortLabel>
                                     ) : (
                                         label
-                                    )}
+                                    )} */}
                                 </TableCell>
                             ))}
                         </TableRow>
@@ -309,7 +309,7 @@ export function CompaniesTable() {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <TablePagination
+            {/* <TablePagination
                 rowsPerPageOptions={[1, 10, 25, 100]}
                 rowsPerPage={limit}
                 component="div"
@@ -325,7 +325,7 @@ export function CompaniesTable() {
                     setOffset(0);
                     setLimit(newLimit);
                 }}
-            />
+            /> */}
         </Paper>
     );
 }
