@@ -77,16 +77,6 @@ export function CompaniesTable() {
     const [total, setTotal] = useState(0);
     const [filter, setFilter] = useState<CompanyListFilter[]>([]);
 
-    const dateFormatter = React.useMemo(
-        () =>
-            new Intl.DateTimeFormat(navigator.language, {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-            }),
-        []
-    );
-
     const { data } = useQuery<{ list: CompanyType[]; total: number }>({
         queryKey: [Queries.FEED_APP_GET_COMPANIES, limit, offset, sort, sortDirection, filter, search],
     });
@@ -287,22 +277,22 @@ export function CompaniesTable() {
                                 <TableCell>{row.name}</TableCell>
                                 <TableCell>
                                     {dayjs(row.installed_at).isValid()
-                                        ? dateFormatter.format(new Date(row.installed_at))
+                                        ? dayjs(row.installed_at).format('YYYY-MM-DD')
                                         : row.installed_at}
                                 </TableCell>
                                 <TableCell>
                                     {dayjs(row.uninstalled_at).isValid()
-                                        ? dateFormatter.format(new Date(row.uninstalled_at))
+                                        ? dayjs(row.uninstalled_at).format('YYYY-MM-DD')
                                         : row.uninstalled_at}
                                 </TableCell>
                                 <TableCell>
                                     {dayjs(row.last_visited_at).isValid()
-                                        ? dateFormatter.format(new Date(row.last_visited_at))
+                                        ? dayjs(row.last_visited_at).format('YYYY-MM-DD')
                                         : row.last_visited_at}
                                 </TableCell>
                                 <TableCell>
                                     {dayjs(row.review_pop_up_shown_at).isValid()
-                                        ? dateFormatter.format(new Date(row.review_pop_up_shown_at))
+                                        ? dayjs(row.review_pop_up_shown_at).format('YYYY-MM-DD')
                                         : row.review_pop_up_shown_at}
                                 </TableCell>
                                 <TableCell>{row.variants_count}</TableCell>
