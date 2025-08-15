@@ -262,7 +262,7 @@ export function CompaniesTable() {
                         <TableRow>
                             {Object.entries(headerLabels).map(([key, label]) => (
                                 <TableCell key={key} align="center">
-                                    {key !== 'google_credentials' ? (
+                                    {false && key !== 'google_credentials' ? (
                                         <TableSortLabel
                                             active={sort === key}
                                             direction={sortDirection}
