@@ -17,6 +17,7 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/system/Grid';
+import dayjs from 'dayjs';
 import { Queries } from '../../../query/query-client';
 
 type CompanyType = {
@@ -283,15 +284,26 @@ export function CompaniesTable() {
                     <TableBody>
                         {list?.map(row => (
                             <TableRow hover key={row.name} onClick={() => {}} sx={{ backgroundColor: 'inherit' }}>
-                                {/* <TableCell>{row.name}</TableCell>
-                                <TableCell>{dateFormatter.format(new Date(row.installed_at))}</TableCell> */}
+                                <TableCell>{row.name}</TableCell>
                                 <TableCell>
-                                    {row.uninstalled_at && dateFormatter.format(new Date(row.uninstalled_at))}
+                                    {dayjs(row.installed_at).isValid()
+                                        ? dateFormatter.format(new Date(row.installed_at))
+                                        : row.installed_at}
                                 </TableCell>
-                                <TableCell>{dateFormatter.format(new Date(row.last_visited_at))}</TableCell>
                                 <TableCell>
-                                    {row.review_pop_up_shown_at &&
-                                        dateFormatter.format(new Date(row.review_pop_up_shown_at))}
+                                    {dayjs(row.uninstalled_at).isValid()
+                                        ? dateFormatter.format(new Date(row.uninstalled_at))
+                                        : row.uninstalled_at}
+                                </TableCell>
+                                <TableCell>
+                                    {dayjs(row.last_visited_at).isValid()
+                                        ? dateFormatter.format(new Date(row.last_visited_at))
+                                        : row.last_visited_at}
+                                </TableCell>
+                                <TableCell>
+                                    {dayjs(row.review_pop_up_shown_at).isValid()
+                                        ? dateFormatter.format(new Date(row.review_pop_up_shown_at))
+                                        : row.review_pop_up_shown_at}
                                 </TableCell>
                                 <TableCell>{row.variants_count}</TableCell>
                                 <TableCell style={{ color: row.xml_feed_active ? 'green' : 'red' }}>
