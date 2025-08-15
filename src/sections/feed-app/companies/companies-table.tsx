@@ -288,7 +288,7 @@ export function CompaniesTable() {
                                 <TableCell>
                                     {row.uninstalled_at && dateFormatter.format(new Date(row.uninstalled_at))}
                                 </TableCell>
-                                <TableCell>{dateFormatter.format(new Date(row.last_visited_at))}</TableCell>
+                                <TableCell>{dateFormatter.format(new Date(row.last_visited_at))}</TableCell> */}
                                 <TableCell>
                                     {row.review_pop_up_shown_at &&
                                         dateFormatter.format(new Date(row.review_pop_up_shown_at))}
@@ -303,7 +303,7 @@ export function CompaniesTable() {
 
                                 <TableCell style={{ color: gmcStatus(row).status ? 'green' : 'red' }} align="center">
                                     {gmcStatus(row).status ? 'Yes' : gmcStatus(row).issue}
-                                </TableCell> */}
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
