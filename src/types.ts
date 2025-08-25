@@ -62,6 +62,8 @@ export type ShopifyProductStat = {
     past2MonthReviews: number;
     past3MonthReviews: number;
     pastMonthReviews: number;
+    is_404?: boolean;
+    is_unavailable?: boolean;
     stats: {
         _id: string;
         rating: number;

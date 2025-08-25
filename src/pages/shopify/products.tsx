@@ -1,11 +1,21 @@
 import Head from 'next/head';
-import { Box, Button, CircularProgress, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import {
+    Box,
+    Button,
+    Checkbox,
+    CircularProgress,
+    FormControl,
+    FormControlLabel,
+    InputLabel,
+    MenuItem,
+    Select,
+    TextField,
+} from '@mui/material';
 import { Container } from '@mui/system';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import _ from 'lodash';
 import { Layout } from '../../layouts/dashboard/layout';
-
 import { ProductsChart } from '../../sections/shopify/product-chart';
 import { ProductsTable } from '../../sections/shopify/products-table';
 import { ShopifyProductStat } from '../../types';
@@ -18,14 +28,25 @@ function Page() {
     const [productFilterValue, setProductFilterValue] = useState('');
     const [searchString, setSearchString] = useState('');
     const [searchStringValue, setSearchStringValue] = useState('');
+    const [limit, setLimit] = useState(50);
+    const [offset, setOffset] = useState(0);
+    const [filterFree, setFilterFree] = useState(false);
+    const [filterPaid, setFilterPaid] = useState(false);
+    const [sortBy, setSortBy] = useState<'1month' | '2month' | '3month' | 'avg'>('3month');
+    const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
 
     const { data: categories, isLoading: loadingCategories } = useQuery<string[]>({
         queryKey: [Queries.SHOPIFY_GET_CATEGORIES_LIST],
     });
 
-    const { data: products, isLoading: productsLoading } = useQuery<ShopifyProductStat[]>({
-        queryKey: [Queries.SHOPIFY_GET_PRODUCT_STAT, [category, productFilter, searchString]],
-        enabled: Boolean(category) || Boolean(productFilter) || Boolean(searchString),
+    const { data: products, isLoading: productsLoading } = useQuery<{
+        products: ShopifyProductStat[];
+        totalCount: number;
+    }>({
+        queryKey: [
+            Queries.SHOPIFY_GET_PRODUCT_STAT,
+            [category, productFilter, searchString, limit, offset, filterFree, filterPaid, sortBy, sortOrder],
+        ],
     });
 
     const changeCategoryHandler = (event: any) => {
@@ -34,7 +55,7 @@ function Page() {
     };
 
     const changeProductHandler = (productNames: string[]) => {
-        setChartsProducts(products?.filter(p => productNames.includes(p.name)) || []);
+        setChartsProducts(products?.products?.filter(p => productNames.includes(p.name)) || []);
     };
 
     const changeProductFilterHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,9 +90,31 @@ function Page() {
                         border: 'solid 1px #000',
                     }}
                 >
-                    <FormControl sx={{ minWidth: 120 }}>
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '10px' }}>
+                    <div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                             <div>
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            defaultChecked={filterPaid}
+                                            onChange={e => setFilterPaid(e.target.checked)}
+                                        />
+                                    }
+                                    label="Paid"
+                                />
+                            </div>
+                            <div>
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            defaultChecked={filterFree}
+                                            onChange={e => setFilterFree(e.target.checked)}
+                                        />
+                                    }
+                                    label="Free"
+                                />
+                            </div>
+                            <FormControl sx={{ minWidth: 200 }}>
                                 <InputLabel
                                     id="demo-simple-select-helper-label"
                                     style={{ fontWeight: 'bold', color: '#000' }}
@@ -93,7 +136,7 @@ function Page() {
                                         </MenuItem>
                                     ))}
                                 </Select>
-                            </div>
+                            </FormControl>
                             <div style={{ display: 'flex', alignContent: 'center', justifyContent: 'center' }}>
                                 <TextField
                                     id="filter-products"
@@ -134,9 +177,9 @@ function Page() {
                                 </Button>
                             </div>
                         </div>
-                    </FormControl>
+                    </div>
                 </Box>
-                <Box sx={{ py: 3 }} style={{ border: 'solid 0px green', minHeight: '440px', position: 'relative' }}>
+                <Box sx={{ py: 3 }} style={{ border: 'solid 0px green', minHeight: '300px', position: 'relative' }}>
                     <div
                         style={{
                             position: 'absolute',
@@ -155,9 +198,18 @@ function Page() {
                     </div>
                     {products && (
                         <ProductsTable
-                            data={products}
+                            data={products.products}
+                            totalCount={products.totalCount}
                             setProduct={changeProductHandler}
                             activeProduct={chartProducts.map(p => p.name)}
+                            limit={limit}
+                            offset={offset}
+                            setLimit={setLimit}
+                            setOffset={setOffset}
+                            sortOrder={sortOrder}
+                            sortBy={sortBy}
+                            setSortOrder={setSortOrder}
+                            setSortBy={setSortBy}
                         />
                     )}
                 </Box>

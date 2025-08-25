@@ -13,7 +13,8 @@ import ReplayIcon from '@mui/icons-material/Replay';
 import { useMutation } from '@tanstack/react-query';
 import Snackbar from '@mui/material/Snackbar';
 import { useEffect } from 'react';
-import { TextField } from '@mui/material';
+import { TablePagination, TableSortLabel, TextField } from '@mui/material';
+import dayjs from 'dayjs';
 import { ShopifyProductStat } from '../../types';
 import { Mutations } from '../../query/query-client';
 
@@ -21,6 +22,15 @@ type Props = {
     data: ShopifyProductStat[];
     setProduct: (product: string[]) => void;
     activeProduct?: string[];
+    limit: number;
+    offset: number;
+    setLimit: (limit: number) => void;
+    setOffset: (offset: number) => void;
+    totalCount: number;
+    sortOrder: 'asc' | 'desc';
+    sortBy: '1month' | '2month' | '3month' | 'avg';
+    setSortOrder: (order: 'asc' | 'desc') => void;
+    setSortBy: (by: '1month' | '2month' | '3month' | 'avg') => void;
 };
 
 function round(value: number | string): number | string {
@@ -35,7 +45,46 @@ function round(value: number | string): number | string {
     return 'N/A';
 }
 
-export function ProductsTable({ data = [], setProduct, activeProduct }: Readonly<Props>) {
+function getRowBackgroundColor(product: ShopifyProductStat) {
+    const lastStat = product.stats[product.stats.length - 1];
+
+    if (product.is_404) {
+        return 'rgba(114, 114, 114, 1)';
+    }
+
+    if (product.is_unavailable) {
+        return 'rgba(156, 163, 114, 1)';
+    }
+
+    if (dayjs().diff(lastStat.date, 'day') > 60) {
+        return 'rgba(255, 74, 74, 1)';
+    }
+
+    if (dayjs().diff(lastStat.date, 'day') > 31) {
+        return 'rgba(255, 136, 0, 1)';
+    }
+
+    if (dayjs().diff(lastStat.date, 'day') > 16) {
+        return 'rgba(253, 255, 113, 0.86)';
+    }
+
+    return 'inherit';
+}
+
+export function ProductsTable({
+    data = [],
+    setProduct,
+    activeProduct,
+    limit,
+    offset,
+    setLimit,
+    setOffset,
+    totalCount,
+    sortOrder,
+    sortBy,
+    setSortOrder,
+    setSortBy,
+}: Readonly<Props>) {
     const [toastText, setToastText] = React.useState('');
     const [productFilter, setProductFilter] = React.useState('');
     const {
@@ -88,18 +137,78 @@ export function ProductsTable({ data = [], setProduct, activeProduct }: Readonly
                     onChange={setProductFilterHandler}
                 />
             </div>
-            <TableContainer sx={{ height: 800 }}>
-                <Table stickyHeader aria-label="sticky table" size="medium">
+            <TableContainer sx={{ height: 650 }}>
+                <Table stickyHeader aria-label="sticky table" size="small">
                     <TableHead>
                         <TableRow>
                             <TableCell align="center">Name</TableCell>
-                            <TableCell align="center">Avg Total</TableCell>
-                            <TableCell align="center">Avg 1month</TableCell>
-                            <TableCell align="center">Avg 2month</TableCell>
-                            <TableCell align="center">Avg 3month</TableCell>
+                            <TableCell align="center">
+                                <TableSortLabel
+                                    active={sortBy === 'avg'}
+                                    direction={sortOrder}
+                                    onClick={() => {
+                                        if (sortBy !== 'avg') {
+                                            setSortBy('avg');
+                                            setSortOrder('desc');
+                                        } else {
+                                            setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+                                        }
+                                    }}
+                                >
+                                    Avg Total
+                                </TableSortLabel>
+                            </TableCell>
+                            <TableCell align="center">
+                                <TableSortLabel
+                                    active={sortBy === '1month'}
+                                    direction={sortOrder}
+                                    onClick={() => {
+                                        if (sortBy !== '1month') {
+                                            setSortBy('1month');
+                                            setSortOrder('desc');
+                                        } else {
+                                            setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+                                        }
+                                    }}
+                                >
+                                    Avg 1month
+                                </TableSortLabel>
+                            </TableCell>
+                            <TableCell align="center">
+                                <TableSortLabel
+                                    active={sortBy === '2month'}
+                                    direction={sortOrder}
+                                    onClick={() => {
+                                        if (sortBy !== '2month') {
+                                            setSortBy('2month');
+                                            setSortOrder('desc');
+                                        } else {
+                                            setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+                                        }
+                                    }}
+                                >
+                                    Avg 2month
+                                </TableSortLabel>
+                            </TableCell>
+                            <TableCell align="center">
+                                <TableSortLabel
+                                    active={sortBy === '3month'}
+                                    direction={sortOrder}
+                                    onClick={() => {
+                                        if (sortBy !== '3month') {
+                                            setSortBy('3month');
+                                            setSortOrder('desc');
+                                        } else {
+                                            setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+                                        }
+                                    }}
+                                >
+                                    Avg 3month
+                                </TableSortLabel>
+                            </TableCell>
                             <TableCell align="center">Total reviews</TableCell>
                             <TableCell align="center">Created</TableCell>
-                            <TableCell align="center">Developer</TableCell>
+                            <TableCell>Developer</TableCell>
                             <TableCell align="center">Price</TableCell>
                             <TableCell align="center">Store</TableCell>
                             <TableCell align="center">Actions</TableCell>
@@ -111,36 +220,45 @@ export function ProductsTable({ data = [], setProduct, activeProduct }: Readonly
                             .map(row => (
                                 <TableRow
                                     key={row._id}
-                                    onClick={() => handleProductsSelection(row.name)}
+                                    onClick={e => {
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        handleProductsSelection(row.name);
+                                    }}
                                     sx={{
-                                        backgroundColor: activeProduct.includes(row.name) ? '#79b3ff' : 'inherit',
+                                        backgroundColor: activeProduct.includes(row.name)
+                                            ? '#79b3ff'
+                                            : getRowBackgroundColor(row),
                                         '&:last-child td, &:last-child th': { border: 0 },
                                     }}
                                 >
                                     <TableCell
                                         sx={{ fontWeight: activeProduct.includes(row.name) ? 600 : 400 }}
                                         title={row._id}
+                                        padding="none"
                                     >
                                         {row.name}
                                     </TableCell>
-                                    <TableCell>{round(row.avgReviews)}</TableCell>
-                                    <TableCell>{round(row.pastMonthReviews)}</TableCell>
-                                    <TableCell>{round(row.past2MonthReviews)}</TableCell>
-                                    <TableCell>{round(row.past3MonthReviews)}</TableCell>
-                                    <TableCell>{row.stats[row.stats.length - 1]?.reviews ?? 'n/a'}</TableCell>
-                                    <TableCell>{row.created_at}</TableCell>
-                                    <TableCell>{row.developer}</TableCell>
-                                    <TableCell>
+                                    <TableCell padding="none">{round(row.avgReviews)}</TableCell>
+                                    <TableCell padding="none">{round(row.pastMonthReviews)}</TableCell>
+                                    <TableCell padding="none">{round(row.past2MonthReviews)}</TableCell>
+                                    <TableCell padding="none">{round(row.past3MonthReviews)}</TableCell>
+                                    <TableCell padding="none">
+                                        {row.stats[row.stats.length - 1]?.reviews ?? 'n/a'}
+                                    </TableCell>
+                                    <TableCell padding="none">{row.created_at}</TableCell>
+                                    <TableCell padding="none">{row.developer}</TableCell>
+                                    <TableCell padding="none">
                                         {row.stats[row.stats.length - 1]?.pricing_plans?.join(', ') ||
                                             row.stats[row.stats.length - 1]?.price ||
                                             'N/A'}
                                     </TableCell>
-                                    <TableCell>
+                                    <TableCell padding="none" onClick={e => e.stopPropagation()}>
                                         <a href={row.url} target="_blank" rel="noreferrer">
                                             Open
                                         </a>
                                     </TableCell>
-                                    <TableCell>
+                                    <TableCell padding="none">
                                         <IconButton
                                             aria-label="refetch"
                                             color="success"
@@ -158,6 +276,20 @@ export function ProductsTable({ data = [], setProduct, activeProduct }: Readonly
                     </TableBody>
                 </Table>
             </TableContainer>
+            <TablePagination
+                rowsPerPageOptions={[5, 10, 25, 50, 100, 200]}
+                component="div"
+                count={totalCount}
+                rowsPerPage={limit}
+                page={Math.floor(offset / limit)}
+                onPageChange={(e, page) => {
+                    setOffset(page * limit);
+                }}
+                onRowsPerPageChange={event => {
+                    setLimit(Number(event.target.value) || 1);
+                    setOffset(0);
+                }}
+            />
             <Snackbar open={Boolean(toastText)} autoHideDuration={6000} onClose={handleClose} message={toastText} />
         </Paper>
     );

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable indent */
 import dynamic from 'next/dynamic';
 import { ShopifyProductStat } from '../../types';
 
@@ -36,6 +37,9 @@ export function ProductsChart({ products = [], detailedStats = true }: Readonly<
                     <tr><td>avg 3month</td><td>${Math.round(product?.past3MonthReviews ?? 0)}</td></tr>
                     <tr><td colspan="1">${product?.created_at ?? ''}</td></tr>
                     <tr><td colspan="1">${product?.developer ?? ''}</td></tr>
+                    <tr><td colspan="1">${
+                        product?.stats?.length ? product.stats[product.stats.length - 1].price ?? '' : ''
+                    }</td></tr>
                 </table>`;
     };
 

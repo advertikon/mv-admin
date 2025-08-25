@@ -7,11 +7,24 @@ const HOST = process.env.NEXT_PUBLIC_SHOPIFY_STATS_HOST;
 
 function GetProductStats({ queryKey }: { queryKey: QueryKey }) {
     const [, queryParams = []] = queryKey;
-    const [category, filter, search] = queryParams as string[];
+    const [category, filter, search, limit, offset, free, paid, sortBy, sortOrder] = queryParams as string[];
 
-    return fetch(`${HOST}/products-stats?${makeQueryString({ category, filter, search })}`, {
-        method: 'get',
-    })
+    return fetch(
+        `${HOST}/products-stats?${makeQueryString({
+            category,
+            filter,
+            search,
+            limit,
+            offset,
+            free,
+            paid,
+            sortBy,
+            sortOrder,
+        })}`,
+        {
+            method: 'get',
+        }
+    )
         .then(processResponse)
         .catch(console.log);
 }
