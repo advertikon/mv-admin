@@ -1,3 +1,10 @@
+## [1.10.13](https://github.com/advertikon/mv-admin/compare/v1.10.12...v1.10.13) (2025-08-25)
+
+
+### Bug Fixes
+
+* improve shopify products list table ([3804677](https://github.com/advertikon/mv-admin/commit/3804677eb289a525ca4fc6f907f9572a255df0be))
+
 ## [1.10.12](https://github.com/advertikon/mv-admin/compare/v1.10.11...v1.10.12) (2025-08-15)
 
 
