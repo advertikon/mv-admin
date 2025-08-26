@@ -17,7 +17,10 @@ function Page() {
         queryKey: [Queries.SHOPIFY_GET_CATEGORIES_STAT],
     });
 
-    const { data: products, isLoading: productsLoading } = useQuery<ShopifyProductStat[]>({
+    const { data: products, isLoading: productsLoading } = useQuery<{
+        products: ShopifyProductStat[];
+        totalCount: number;
+    }>({
         queryKey: [Queries.SHOPIFY_GET_PRODUCT_STAT, [category]],
         enabled: Boolean(category),
     });
@@ -48,7 +51,7 @@ function Page() {
                     <CategoriesTable setCategory={setCategory} data={categories} activeCategory={category} />
                 </Box>
                 <Box sx={{ py: 3 }} style={{ border: 'solid 1px green', height: '800px' }}>
-                    {products && <ProductsChart products={products} />}
+                    {products && <ProductsChart products={products.products} />}
                 </Box>
             </Container>
         </>

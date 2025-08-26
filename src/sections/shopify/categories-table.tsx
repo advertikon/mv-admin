@@ -73,9 +73,13 @@ export function CategoriesTable({ data = [], setCategory, activeCategory }: Read
                                 hover
                                 key={row.name}
                                 onClick={() => setCategory(row.name)}
-                                sx={{ backgroundColor: activeCategory === row.name ? '#79b3ff' : 'inherit' }}
+                                sx={{
+                                    backgroundColor: activeCategory === row.name ? '#79b3ff' : 'inherit',
+                                }}
                             >
-                                <TableCell>{row.name}</TableCell>
+                                <TableCell sx={{ fontWeight: activeCategory === row.name ? 'bold' : 'normal' }}>
+                                    {activeCategory === row.name ? `👉 ${row.name}` : row.name}
+                                </TableCell>
                                 <TableCell>{round(row.avgPaid)}</TableCell>
                                 <TableCell>{round(row.paidSum)}</TableCell>
                                 <TableCell>{row.paidCount}</TableCell>
