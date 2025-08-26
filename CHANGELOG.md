@@ -1,3 +1,10 @@
+## [1.10.14](https://github.com/advertikon/mv-admin/compare/v1.10.13...v1.10.14) (2025-08-26)
+
+
+### Bug Fixes
+
+* fix bug when clicking on collection throws an error ([ab644ec](https://github.com/advertikon/mv-admin/commit/ab644ec1c7e839cf4b98e8d24ad0939c76ec78ea))
+
 ## [1.10.13](https://github.com/advertikon/mv-admin/compare/v1.10.12...v1.10.13) (2025-08-25)
 
 
