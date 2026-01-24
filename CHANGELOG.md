@@ -1,3 +1,10 @@
+## [1.10.15](https://github.com/advertikon/mv-admin/compare/v1.10.14...v1.10.15) (2026-01-24)
+
+
+### Bug Fixes
+
+* redo keywords functionallity ([3759fed](https://github.com/advertikon/mv-admin/commit/3759fedaed5ec9e78eb6862ba4e918e7d269ad69))
+
 ## [1.10.14](https://github.com/advertikon/mv-admin/compare/v1.10.13...v1.10.14) (2025-08-26)
 
 
