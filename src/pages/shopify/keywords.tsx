@@ -21,6 +21,9 @@ function Page() {
     const sseEventsListener = useCallback(message => {
         if (isKeywordFetchEvent(message)) {
             const { finished, keyword, progress } = message;
+            if (!refetchKeywordsToastId.current) {
+                refetchKeywordsToastId.current = toast.loading('Refetching keywords...', { type: 'info' });
+            }
             if (finished) {
                 toast.update(refetchKeywordsToastId.current, {
                     render: 'Keywords re-fetched',
@@ -41,6 +44,9 @@ function Page() {
     const sseErrorListener = useCallback(message => {
         if (isKeywordFetchError(message)) {
             const { error } = message;
+            if (!refetchKeywordsToastId.current) {
+                refetchKeywordsToastId.current = toast.loading('Refetching keywords...', { type: 'info' });
+            }
             toast.update(refetchKeywordsToastId.current, {
                 render: `Error: ${error}`,
                 type: 'error',
