@@ -1,3 +1,10 @@
+## [1.10.16](https://github.com/advertikon/mv-admin/compare/v1.10.15...v1.10.16) (2026-01-24)
+
+
+### Bug Fixes
+
+* show keyword status bar after page reload ([eb285d0](https://github.com/advertikon/mv-admin/commit/eb285d0a9ea8f65e3870d4dece327b310c45ed3a))
+
 ## [1.10.15](https://github.com/advertikon/mv-admin/compare/v1.10.14...v1.10.15) (2026-01-24)
 
 
