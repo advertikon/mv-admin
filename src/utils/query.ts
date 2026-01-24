@@ -1,5 +1,5 @@
 export async function processResponse<T>(response: Response, defaultValue?: T): Promise<T | never> {
-    const body = await getBody<T>(response);
+    const body = await getBody<T & { error?: string }>(response);
 
     if (response.ok) {
         return body;
@@ -17,7 +17,7 @@ export async function processResponse<T>(response: Response, defaultValue?: T): 
         return defaultValue;
     }
 
-    throw new Error(response.statusText);
+    throw new Error(body.error || response.statusText);
 }
 
 export async function getBody<T>(response: Response): Promise<T> {
@@ -29,7 +29,7 @@ export async function getBody<T>(response: Response): Promise<T> {
 export function makeQueryString(query: Record<string, any>, asArray = true) {
     return Object.entries(query)
         .filter(([, value]) => value !== undefined && (Array.isArray(value) ? value.length > 0 : true))
-        .map(([key, value]) => {
+        .flatMap(([key, value]) => {
             if (Array.isArray(value)) {
                 if (asArray) {
                     return value.map(v => `${key}[]=${encodeURIComponent(v)}`);
@@ -40,6 +40,5 @@ export function makeQueryString(query: Record<string, any>, asArray = true) {
 
             return `${key}=${value}`;
         })
-        .flat()
         .join('&');
 }

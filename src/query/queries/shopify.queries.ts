@@ -53,14 +53,6 @@ function GetKeywordsList() {
         .catch(console.log);
 }
 
-function GetAppHandlersList() {
-    return fetch(`${HOST}/keyword/handlers`, {
-        method: 'get',
-    })
-        .then(processResponse)
-        .catch(console.log);
-}
-
 function GetLatestKeywordsStats() {
     return fetch(`${HOST}/keyword/latest`, {
         method: 'get',
@@ -102,10 +94,6 @@ export function addShopifyQueries(queryClient: QueryClient) {
 
     queryClient.setQueryDefaults([Queries.SHOPIFY_GET_KEYWORDS_LIST], {
         queryFn: GetKeywordsList,
-    });
-
-    queryClient.setQueryDefaults([Queries.SHOPIFY_GET_APP_HANDLERS_LIST], {
-        queryFn: GetAppHandlersList,
     });
 
     queryClient.setQueryDefaults([Queries.SHOPIFY_GET_KEYWORDS_STATS_LATEST], {

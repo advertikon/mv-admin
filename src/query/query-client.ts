@@ -10,7 +10,7 @@ export enum Queries {
     SHOPIFY_GET_CATEGORIES_STAT = 'shopify/getCategoriesStat',
     SHOPIFY_GET_CATEGORIES_LIST = 'shopify/getCategoriesList',
     SHOPIFY_GET_KEYWORDS_LIST = 'shopify/getKeywordsList',
-    SHOPIFY_GET_APP_HANDLERS_LIST = 'shopify/getAppHandlersList',
+    // SHOPIFY_GET_APP_HANDLERS_LIST = 'shopify/getAppHandlersList',
     SHOPIFY_GET_KEYWORDS_STATS_LATEST = 'shopify/getKeywordsStatsLatest',
     SHOPIFY_GET_KEYWORDS_STATS_HISTORY = 'shopify/getKeywordsStatsHistory',
     SHOPIFY_EXTRACT_KEYWORDS = 'shopify/extractKeywords',
@@ -21,6 +21,7 @@ export enum Queries {
 export enum Mutations {
     SYNC_PRODUCT = 'shopify/syncProduct',
     SHOPIFY_SET_KEYWORDS_LIST = 'shopify/setKeywordsList',
+    SHOPIFY_DELETE_KEYWORD_GROUP = 'shopify/deleteKeywordGroup',
     SHOPIFY_SET_APP_HANDLERS_LIST = 'shopify/setAppHandlersList',
     SHOPIFY_REFETCH_KEYWORDS = 'shopify/refetchKeywords',
     FEED_APP_SEND_MESSAGE = 'feedApp/sendMessage',

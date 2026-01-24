@@ -13,16 +13,22 @@ function syncProduct(productId: string) {
 function setKeywordsList(list: string[]) {
     return fetch(`${HOST}/keyword/keywords`, {
         method: 'post',
-        body: JSON.stringify({ keywords: list }),
+        body: JSON.stringify(list),
     }).then(processResponse);
 }
 
-function setAppHandlersList(list: string[]) {
-    return fetch(`${HOST}/keyword/handlers`, {
-        method: 'post',
-        body: JSON.stringify({ appHandlers: list }),
+function deleteKeywordGroup(groupId: string) {
+    return fetch(`${HOST}/keyword/${groupId}/delete`, {
+        method: 'delete',
     }).then(processResponse);
 }
+
+// function setAppHandlersList(list: string[]) {
+//     return fetch(`${HOST}/keyword/handlers`, {
+//         method: 'post',
+//         body: JSON.stringify({ appHandlers: list }),
+//     }).then(processResponse);
+// }
 
 function RefetchKeywords() {
     return fetch(`${HOST}/keyword/assess`, {
@@ -45,12 +51,19 @@ export function addShopifyMutations(queryClient: QueryClient) {
         },
     });
 
-    queryClient.setMutationDefaults([Mutations.SHOPIFY_SET_APP_HANDLERS_LIST], {
-        mutationFn: setAppHandlersList,
+    queryClient.setMutationDefaults([Mutations.SHOPIFY_DELETE_KEYWORD_GROUP], {
+        mutationFn: deleteKeywordGroup,
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: [Queries.SHOPIFY_GET_APP_HANDLERS_LIST] });
+            queryClient.invalidateQueries({ queryKey: [Queries.SHOPIFY_GET_KEYWORDS_LIST] });
         },
     });
+
+    // queryClient.setMutationDefaults([Mutations.SHOPIFY_SET_APP_HANDLERS_LIST], {
+    //     mutationFn: setAppHandlersList,
+    //     onSuccess: () => {
+    //         queryClient.invalidateQueries({ queryKey: [Queries.SHOPIFY_GET_APP_HANDLERS_LIST] });
+    //     },
+    // });
 
     queryClient.setMutationDefaults([Mutations.SHOPIFY_REFETCH_KEYWORDS], {
         mutationFn: RefetchKeywords,
