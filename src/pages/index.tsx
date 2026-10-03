@@ -1,177 +1,431 @@
 import Head from 'next/head';
-import { subDays, subHours } from 'date-fns';
-import { Box, Container, Grid } from '@mui/material';
+import Link from 'next/link';
+import { format } from 'date-fns';
+import { useQuery } from '@tanstack/react-query';
+import {
+    Box,
+    Button,
+    Card,
+    CardContent,
+    CardHeader,
+    Container,
+    Divider,
+    Grid,
+    Stack,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableRow,
+    Typography,
+} from '@mui/material';
+import { Chart } from '@components/chart';
 import { Layout } from '../layouts/dashboard/layout';
-import { OverviewBudget } from '../sections/overview/overview-budget';
-import { OverviewTotalCustomers } from '../sections/overview/overview-total-customers';
-import { OverviewTotalProfit } from '../sections/overview/overview-total-profit';
-import { OverviewTasksProgress } from '../sections/overview/overview-tasks-progress';
-import { OverviewSales } from '../sections/overview/overview-sales';
-import { OverviewTraffic } from '../sections/overview/overview-traffic';
-import { OverviewLatestProducts } from '../sections/overview/overview-latest-products';
-import { OverviewLatestOrders } from '../sections/overview/overview-latest-orders';
+import { getFitnessOverview } from '../services/fitness-usage.service';
 
-const now = new Date();
+function date(value?: string | null) {
+    return value ? format(new Date(value), 'yyyy-MM-dd HH:mm') : '-';
+}
+
+function number(value: number | undefined) {
+    return (value ?? 0).toLocaleString();
+}
+
+function Metric({ label, value, detail }: { label: string; value: string; detail?: string }) {
+    return (
+        <Card sx={{ height: '100%' }}>
+            <CardContent>
+                <Typography color="text.secondary" variant="overline">
+                    {label}
+                </Typography>
+                <Typography variant="h4">{value}</Typography>
+                {detail && (
+                    <Typography color="text.secondary" variant="body2">
+                        {detail}
+                    </Typography>
+                )}
+            </CardContent>
+        </Card>
+    );
+}
+
+function EmptyRow({ colSpan, text }: { colSpan: number; text: string }) {
+    return (
+        <TableRow>
+            <TableCell colSpan={colSpan}>{text}</TableCell>
+        </TableRow>
+    );
+}
 
 function Page() {
+    const { data, isLoading, isError } = useQuery({
+        queryKey: ['fitness-overview'],
+        queryFn: getFitnessOverview,
+        refetchInterval: 60_000,
+    });
+    const summary = data?.summary;
+    const daily = data?.daily ?? [];
+    const chartOptions = {
+        chart: { background: 'transparent', toolbar: { show: false } },
+        colors: ['#6366f1', '#14b8a6'],
+        dataLabels: { enabled: false },
+        grid: { borderColor: '#e5e7eb', strokeDashArray: 3 },
+        legend: { position: 'top' as const },
+        stroke: { curve: 'smooth' as const, width: 3 },
+        xaxis: { categories: daily.map(item => item.day.slice(5)) },
+        yaxis: { labels: { formatter: value => Math.round(value).toLocaleString() } },
+    };
+
     return (
         <>
             <Head>
-                <title>Overview | Devias Kit</title>
+                <title>Fitness Tracker | Overview</title>
             </Head>
-            <Box
-                component="main"
-                sx={{
-                    flexGrow: 1,
-                    py: 8,
-                }}
-            >
+            <Box component="main" sx={{ flexGrow: 1, py: 8 }}>
                 <Container maxWidth="xl">
-                    <Grid container spacing={3}>
-                        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
-                            <OverviewBudget difference={12} positive sx={{ height: '100%' }} value="$24k" />
-                        </Grid>
-                        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
-                            <OverviewTotalCustomers
-                                difference={16}
-                                positive={false}
-                                sx={{ height: '100%' }}
-                                value="1.6k"
-                            />
-                        </Grid>
-                        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
-                            <OverviewTasksProgress sx={{ height: '100%' }} value={75.5} />
-                        </Grid>
-                        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
-                            <OverviewTotalProfit sx={{ height: '100%' }} value="$15k" />
-                        </Grid>
-                        <Grid size={{ xs: 12, lg: 8 }}>
-                            <OverviewSales
-                                chartSeries={[
-                                    {
-                                        name: 'This year',
-                                        data: [18, 16, 5, 8, 3, 14, 14, 16, 17, 19, 18, 20],
-                                    },
-                                    {
-                                        name: 'Last year',
-                                        data: [12, 11, 4, 6, 2, 9, 9, 10, 11, 12, 13, 13],
-                                    },
-                                ]}
-                                sx={{ height: '100%' }}
-                            />
-                        </Grid>
-                        <Grid size={{ xs: 12, md: 6, lg: 4 }}>
-                            <OverviewTraffic
-                                chartSeries={[63, 15, 22]}
-                                labels={['Desktop', 'Tablet', 'Phone']}
-                                sx={{ height: '100%' }}
-                            />
-                        </Grid>
-                        <Grid size={{ xs: 12, md: 6, lg: 4 }}>
-                            <OverviewLatestProducts
-                                products={[
-                                    {
-                                        id: '5ece2c077e39da27658aa8a9',
-                                        image: '/assets/products/product-1.png',
-                                        name: 'Healthcare Erbology',
-                                        updatedAt: subHours(now, 6).getTime(),
-                                    },
-                                    {
-                                        id: '5ece2c0d16f70bff2cf86cd8',
-                                        image: '/assets/products/product-2.png',
-                                        name: 'Makeup Lancome Rouge',
-                                        updatedAt: subDays(subHours(now, 8), 2).getTime(),
-                                    },
-                                    {
-                                        id: 'b393ce1b09c1254c3a92c827',
-                                        image: '/assets/products/product-5.png',
-                                        name: 'Skincare Soja CO',
-                                        updatedAt: subDays(subHours(now, 1), 1).getTime(),
-                                    },
-                                    {
-                                        id: 'a6ede15670da63f49f752c89',
-                                        image: '/assets/products/product-6.png',
-                                        name: 'Makeup Lipstick',
-                                        updatedAt: subDays(subHours(now, 3), 3).getTime(),
-                                    },
-                                    {
-                                        id: 'bcad5524fe3a2f8f8620ceda',
-                                        image: '/assets/products/product-7.png',
-                                        name: 'Healthcare Ritual',
-                                        updatedAt: subDays(subHours(now, 5), 6).getTime(),
-                                    },
-                                ]}
-                                sx={{ height: '100%' }}
-                            />
-                        </Grid>
-                        <Grid size={{ xs: 12, md: 12, lg: 8 }}>
-                            <OverviewLatestOrders
-                                orders={[
-                                    {
-                                        id: 'f69f88012978187a6c12897f',
-                                        ref: 'DEV1049',
-                                        amount: 30.5,
-                                        customer: {
-                                            name: 'Ekaterina Tankova',
-                                        },
-                                        createdAt: 1555016400000,
-                                        status: 'pending',
-                                    },
-                                    {
-                                        id: '9eaa1c7dd4433f413c308ce2',
-                                        ref: 'DEV1048',
-                                        amount: 25.1,
-                                        customer: {
-                                            name: 'Cao Yu',
-                                        },
-                                        createdAt: 1555016400000,
-                                        status: 'delivered',
-                                    },
-                                    {
-                                        id: '01a5230c811bd04996ce7c13',
-                                        ref: 'DEV1047',
-                                        amount: 10.99,
-                                        customer: {
-                                            name: 'Alexa Richardson',
-                                        },
-                                        createdAt: 1554930000000,
-                                        status: 'refunded',
-                                    },
-                                    {
-                                        id: '1f4e1bd0a87cea23cdb83d18',
-                                        ref: 'DEV1046',
-                                        amount: 96.43,
-                                        customer: {
-                                            name: 'Anje Keizer',
-                                        },
-                                        createdAt: 1554757200000,
-                                        status: 'pending',
-                                    },
-                                    {
-                                        id: '9f974f239d29ede969367103',
-                                        ref: 'DEV1045',
-                                        amount: 32.54,
-                                        customer: {
-                                            name: 'Clarke Gillebert',
-                                        },
-                                        createdAt: 1554670800000,
-                                        status: 'delivered',
-                                    },
-                                    {
-                                        id: 'ffc83c1560ec2f66a1c05596',
-                                        ref: 'DEV1044',
-                                        amount: 16.76,
-                                        customer: {
-                                            name: 'Adam Denisov',
-                                        },
-                                        createdAt: 1554670800000,
-                                        status: 'delivered',
-                                    },
-                                ]}
-                                sx={{ height: '100%' }}
-                            />
-                        </Grid>
-                    </Grid>
+                    <Stack spacing={3}>
+                        <Stack alignItems="center" direction="row" justifyContent="space-between">
+                            <Box>
+                                <Typography variant="h4">Fitness Tracker overview</Typography>
+                                <Typography color="text.secondary" variant="body2">
+                                    Usage, reliability, and AI cost at a glance
+                                </Typography>
+                            </Box>
+                            <Button component={Link} href="/fitness/installations" variant="contained">
+                                Installations
+                            </Button>
+                        </Stack>
+                        {isError && <Typography color="error">Unable to load Fitness Tracker usage.</Typography>}
+                        {isLoading && <Typography color="text.secondary">Loading usage data...</Typography>}
+                        {!isLoading && !isError && (
+                            <>
+                                <Grid container spacing={3}>
+                                    <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                                        <Metric
+                                            label="Active installations"
+                                            value={number(summary?.activeInstallations)}
+                                            detail="Seen in the last 30 days"
+                                        />
+                                    </Grid>
+                                    <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                                        <Metric
+                                            label="New installations"
+                                            value={number(summary?.newInstallations)}
+                                            detail="Added in the last 7 days"
+                                        />
+                                    </Grid>
+                                    <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                                        <Metric label="Requests today" value={number(summary?.requestsToday)} />
+                                    </Grid>
+                                    <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                                        <Metric label="AI calls today" value={number(summary?.aiCallsToday)} />
+                                    </Grid>
+                                    <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                                        <Metric
+                                            label="AI cost today"
+                                            value={`$${(summary?.costToday ?? 0).toFixed(4)}`}
+                                        />
+                                    </Grid>
+                                    <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                                        <Metric
+                                            label="AI cost this month"
+                                            value={`$${(summary?.costMonth ?? 0).toFixed(4)}`}
+                                        />
+                                    </Grid>
+                                    <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                                        <Metric
+                                            label="Cache-hit rate"
+                                            value={`${(summary?.cacheHitRate ?? 0).toFixed(1)}%`}
+                                            detail="Last 30 days"
+                                        />
+                                    </Grid>
+                                    <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                                        <Metric label="Failed requests today" value={number(summary?.failedToday)} />
+                                    </Grid>
+                                    <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                                        <Metric
+                                            label="Rejected requests today"
+                                            value={number(summary?.rejectedToday)}
+                                            detail="Rate or usage limit responses"
+                                        />
+                                    </Grid>
+                                    <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                                        <Metric
+                                            label="Average requests"
+                                            value={number(summary?.avgRequestsPerActive)}
+                                            detail="Per active installation, 30 days"
+                                        />
+                                    </Grid>
+                                </Grid>
+
+                                <Grid container spacing={3}>
+                                    <Grid size={{ xs: 12 }}>
+                                        <Card>
+                                            <CardHeader title="Model usage and cost" subheader="Last 30 days" />
+                                            <Table>
+                                                <TableHead>
+                                                    <TableRow>
+                                                        <TableCell>Model</TableCell>
+                                                        <TableCell>Calls</TableCell>
+                                                        <TableCell>Cost</TableCell>
+                                                    </TableRow>
+                                                </TableHead>
+                                                <TableBody>
+                                                    {data?.models?.length ? (
+                                                        data.models.map(item => (
+                                                            <TableRow key={item.model}>
+                                                                <TableCell>{item.model}</TableCell>
+                                                                <TableCell>{number(item.calls)}</TableCell>
+                                                                <TableCell>${item.costUsd.toFixed(4)}</TableCell>
+                                                            </TableRow>
+                                                        ))
+                                                    ) : (
+                                                        <EmptyRow colSpan={3} text="No model usage" />
+                                                    )}
+                                                </TableBody>
+                                            </Table>
+                                        </Card>
+                                    </Grid>
+                                </Grid>
+
+                                <Grid container spacing={3}>
+                                    <Grid size={{ xs: 12, lg: 8 }}>
+                                        <Card>
+                                            <CardHeader title="Requests and AI calls" subheader="Last 30 days" />
+                                            <CardContent>
+                                                <Chart
+                                                    height={320}
+                                                    options={chartOptions}
+                                                    series={[
+                                                        { name: 'Requests', data: daily.map(item => item.requests) },
+                                                        { name: 'AI calls', data: daily.map(item => item.aiCalls) },
+                                                        {
+                                                            name: 'Failed',
+                                                            data: daily.map(item => item.failedRequests),
+                                                        },
+                                                    ]}
+                                                    type="line"
+                                                    width="100%"
+                                                />
+                                            </CardContent>
+                                        </Card>
+                                    </Grid>
+                                    <Grid size={{ xs: 12, lg: 8 }}>
+                                        <Card>
+                                            <CardHeader
+                                                title="Cost and active installations"
+                                                subheader="Last 30 days"
+                                            />
+                                            <CardContent>
+                                                <Chart
+                                                    height={320}
+                                                    options={{
+                                                        ...chartOptions,
+                                                        colors: ['#f59e0b', '#8b5cf6'],
+                                                        yaxis: { labels: { formatter: value => value.toFixed(2) } },
+                                                    }}
+                                                    series={[
+                                                        { name: 'Cost (USD)', data: daily.map(item => item.costUsd) },
+                                                        {
+                                                            name: 'Active installations',
+                                                            data: daily.map(item => item.activeInstallations),
+                                                        },
+                                                    ]}
+                                                    type="line"
+                                                    width="100%"
+                                                />
+                                            </CardContent>
+                                        </Card>
+                                    </Grid>
+                                    <Grid size={{ xs: 12, lg: 4 }}>
+                                        <Card sx={{ height: '100%' }}>
+                                            <CardHeader
+                                                title="Platform usage"
+                                                subheader="Active installations and requests"
+                                            />
+                                            <Table>
+                                                <TableHead>
+                                                    <TableRow>
+                                                        <TableCell>Platform</TableCell>
+                                                        <TableCell>Installations</TableCell>
+                                                        <TableCell>Requests</TableCell>
+                                                    </TableRow>
+                                                </TableHead>
+                                                <TableBody>
+                                                    {data?.platforms?.length ? (
+                                                        data.platforms.map(item => (
+                                                            <TableRow key={item.platform}>
+                                                                <TableCell>{item.platform}</TableCell>
+                                                                <TableCell>{number(item.installations)}</TableCell>
+                                                                <TableCell>{number(item.requests)}</TableCell>
+                                                            </TableRow>
+                                                        ))
+                                                    ) : (
+                                                        <EmptyRow colSpan={3} text="No platform data" />
+                                                    )}
+                                                </TableBody>
+                                            </Table>
+                                        </Card>
+                                    </Grid>
+                                </Grid>
+
+                                <Grid container spacing={3}>
+                                    <Grid size={{ xs: 12, md: 6 }}>
+                                        <Card>
+                                            <CardHeader
+                                                title="App versions"
+                                                subheader="Most active versions in the last 30 days"
+                                            />
+                                            <Table>
+                                                <TableHead>
+                                                    <TableRow>
+                                                        <TableCell>Version</TableCell>
+                                                        <TableCell>Installations</TableCell>
+                                                        <TableCell>Requests</TableCell>
+                                                    </TableRow>
+                                                </TableHead>
+                                                <TableBody>
+                                                    {data?.versions?.length ? (
+                                                        data.versions.map(item => (
+                                                            <TableRow key={item.appVersion}>
+                                                                <TableCell>{item.appVersion}</TableCell>
+                                                                <TableCell>{number(item.installations)}</TableCell>
+                                                                <TableCell>{number(item.requests)}</TableCell>
+                                                            </TableRow>
+                                                        ))
+                                                    ) : (
+                                                        <EmptyRow colSpan={3} text="No version data" />
+                                                    )}
+                                                </TableBody>
+                                            </Table>
+                                        </Card>
+                                    </Grid>
+                                    <Grid size={{ xs: 12, md: 6 }}>
+                                        <Card>
+                                            <CardHeader title="Most active installations" subheader="Last 30 days" />
+                                            <Table>
+                                                <TableHead>
+                                                    <TableRow>
+                                                        <TableCell>Installation</TableCell>
+                                                        <TableCell>Requests</TableCell>
+                                                        <TableCell>AI cost</TableCell>
+                                                    </TableRow>
+                                                </TableHead>
+                                                <TableBody>
+                                                    {data?.topInstallations?.length ? (
+                                                        data.topInstallations.map(item => (
+                                                            <TableRow key={item.installationId}>
+                                                                <TableCell>
+                                                                    <Typography
+                                                                        sx={{ fontFamily: 'monospace' }}
+                                                                        variant="body2"
+                                                                    >
+                                                                        {item.installationId}
+                                                                    </Typography>
+                                                                </TableCell>
+                                                                <TableCell>{number(item.requests)}</TableCell>
+                                                                <TableCell>${item.costUsd.toFixed(4)}</TableCell>
+                                                            </TableRow>
+                                                        ))
+                                                    ) : (
+                                                        <EmptyRow colSpan={3} text="No installation data" />
+                                                    )}
+                                                </TableBody>
+                                            </Table>
+                                        </Card>
+                                    </Grid>
+                                </Grid>
+
+                                <Grid container spacing={3}>
+                                    <Grid size={{ xs: 12, md: 6 }}>
+                                        <Card>
+                                            <CardHeader
+                                                title="Recent model calls"
+                                                action={
+                                                    <Button component={Link} href="/fitness/model-calls" size="small">
+                                                        View all
+                                                    </Button>
+                                                }
+                                            />
+                                            <Table>
+                                                <TableHead>
+                                                    <TableRow>
+                                                        <TableCell>Date</TableCell>
+                                                        <TableCell>Model</TableCell>
+                                                        <TableCell>Status</TableCell>
+                                                        <TableCell>Cost</TableCell>
+                                                    </TableRow>
+                                                </TableHead>
+                                                <TableBody>
+                                                    {data?.recentCalls?.length ? (
+                                                        data.recentCalls.map(item => (
+                                                            <TableRow key={item.id}>
+                                                                <TableCell>{date(item.createdAt)}</TableCell>
+                                                                <TableCell>{item.model || '-'}</TableCell>
+                                                                <TableCell>{item.status}</TableCell>
+                                                                <TableCell>${item.costUsd.toFixed(4)}</TableCell>
+                                                            </TableRow>
+                                                        ))
+                                                    ) : (
+                                                        <EmptyRow colSpan={4} text="No model calls" />
+                                                    )}
+                                                </TableBody>
+                                            </Table>
+                                        </Card>
+                                    </Grid>
+                                    <Grid size={{ xs: 12, md: 6 }}>
+                                        <Card>
+                                            <CardHeader
+                                                title="Recent failures"
+                                                action={
+                                                    <Button
+                                                        component={Link}
+                                                        href="/fitness/model-calls?status=failed"
+                                                        size="small"
+                                                    >
+                                                        View all
+                                                    </Button>
+                                                }
+                                            />
+                                            <Table>
+                                                <TableHead>
+                                                    <TableRow>
+                                                        <TableCell>Date</TableCell>
+                                                        <TableCell>Request</TableCell>
+                                                        <TableCell>Installation</TableCell>
+                                                        <TableCell>Cost</TableCell>
+                                                    </TableRow>
+                                                </TableHead>
+                                                <TableBody>
+                                                    {data?.failures?.length ? (
+                                                        data.failures.map(item => (
+                                                            <TableRow key={item.id}>
+                                                                <TableCell>{date(item.createdAt)}</TableCell>
+                                                                <TableCell sx={{ fontFamily: 'monospace' }}>
+                                                                    {item.requestId}
+                                                                </TableCell>
+                                                                <TableCell sx={{ fontFamily: 'monospace' }}>
+                                                                    {item.installationId || '-'}
+                                                                </TableCell>
+                                                                <TableCell>${item.costUsd.toFixed(4)}</TableCell>
+                                                            </TableRow>
+                                                        ))
+                                                    ) : (
+                                                        <EmptyRow colSpan={4} text="No recent failures" />
+                                                    )}
+                                                </TableBody>
+                                            </Table>
+                                        </Card>
+                                    </Grid>
+                                </Grid>
+                                <Divider />
+                                <Typography color="text.secondary" variant="caption">
+                                    Costs and activity are based on settled usage records. Cache-hit rate covers the
+                                    last 30 days.
+                                </Typography>
+                            </>
+                        )}
+                    </Stack>
                 </Container>
             </Box>
         </>

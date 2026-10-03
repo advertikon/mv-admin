@@ -8,14 +8,6 @@ export type Auth = {
     roles: string[];
 };
 
-export type WebhookTopic =
-    | 'products/update'
-    | 'products/create'
-    | 'products/delete'
-    | 'collections/create'
-    | 'collections/update'
-    | 'collections/delete';
-
 export type ProductIndexStatus = {
     isActive: boolean;
     isStuck: boolean;

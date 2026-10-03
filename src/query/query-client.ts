@@ -2,8 +2,6 @@ import { QueryClient } from '@tanstack/react-query';
 import { addShopifyMutations } from './mutations/shopify.mutation';
 import { addShopifyQueries } from './queries/shopify.queries';
 import { processResponse } from '../utils/query';
-import { addFeedAppMutations } from './mutations/feed-app.mutations';
-import { addFeeAppQueries } from './queries/feed-app.query';
 
 export enum Queries {
     SHOPIFY_GET_PRODUCT_STAT = 'shopify/getProductStat',
@@ -14,8 +12,6 @@ export enum Queries {
     SHOPIFY_GET_KEYWORDS_STATS_LATEST = 'shopify/getKeywordsStatsLatest',
     SHOPIFY_GET_KEYWORDS_STATS_HISTORY = 'shopify/getKeywordsStatsHistory',
     SHOPIFY_EXTRACT_KEYWORDS = 'shopify/extractKeywords',
-    FEED_APP_GET_COMPANIES = 'feedApp/getCompanies',
-    FEED_APP_SEARCH_SHOP = 'feedApp/searchShop',
 }
 
 export enum Mutations {
@@ -24,7 +20,6 @@ export enum Mutations {
     SHOPIFY_DELETE_KEYWORD_GROUP = 'shopify/deleteKeywordGroup',
     SHOPIFY_SET_APP_HANDLERS_LIST = 'shopify/setAppHandlersList',
     SHOPIFY_REFETCH_KEYWORDS = 'shopify/refetchKeywords',
-    FEED_APP_SEND_MESSAGE = 'feedApp/sendMessage',
 }
 
 const defaultQueryFn = async ({ queryKey }: { queryKey: string[] }) => {
@@ -45,7 +40,5 @@ export const queryClient = new QueryClient({
 });
 
 addShopifyMutations(queryClient);
-addFeedAppMutations(queryClient);
 
 addShopifyQueries(queryClient);
-addFeeAppQueries(queryClient);

@@ -13,6 +13,7 @@
     "export": "next export",
     "lint": "next lint",
     "lint-fix": "next lint --fix",
+    "import-env": "./scripts/import-env.sh",
     "deploy": "./scripts/build.sh && ./scripts/deploy.sh && scripts/deploy-remote.sh"
   },
   "dependencies": {
