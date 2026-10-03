@@ -1,3 +1,10 @@
+## [1.10.17](https://github.com/advertikon/mv-admin/compare/v1.10.16...v1.10.17) (2026-10-03)
+
+
+### Bug Fixes
+
+* update UI, deploy on self-host ([91b63b8](https://github.com/advertikon/mv-admin/commit/91b63b8ee601c019adefde4a092f237e35caaee7))
+
 ## [1.10.16](https://github.com/advertikon/mv-admin/compare/v1.10.15...v1.10.16) (2026-01-24)
 
 
